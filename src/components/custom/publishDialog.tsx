@@ -1,4 +1,4 @@
-import { AlertDialogCancel } from "../ui/alert-dialog";
+// import { AlertDialogCancel } from "../ui/alert-dialog";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 interface detailProps {
