@@ -8,7 +8,7 @@ import {
 } from "react-router-dom";
 import Blog from './pages/Blog.tsx';
 import BlogCustom from './components/custom/CustomBlog.tsx';
-import Write from './components/custom/write.tsx';
+import Write from './pages/write.tsx';
 import SignUp from './pages/SignUp.tsx';
 import About from './pages/About.tsx';
 import Events from './pages/Events.tsx';

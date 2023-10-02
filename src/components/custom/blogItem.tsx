@@ -11,7 +11,7 @@ const BlogItem: React.FC<BlogItemProps> = ({ item, handlers }) => {
       return (
         <>
           <p
-            className="outline-none text-5xl font-extrabold py-6 capitalize border-none focus:outline-none w-full pl-2 focus:border-2"
+            className="outline-none text-5xl text-gray-800 font-extrabold py-6 capitalize border-none focus:outline-none w-full pl-2 focus:border-2"
             placeholder="Enter title . . ."
             contentEditable={true}
             onBlur={(e) => handlers?.onChangeHandler(e.target.innerText)}
@@ -88,17 +88,15 @@ const BlogItem: React.FC<BlogItemProps> = ({ item, handlers }) => {
         <div className="w-full flex justify-center py-6">
           <div className="flex flex-col gap-3 justify-between">
             <iframe
-              width="853"
-              height="480"
               src={item.content.videoUrl || ""}
               title="Embedded Video"
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               allowFullScreen
-              className="bg-black"
+              className="bg-gray-700 w-full h-auto"
             />
-            <input className="outline-none text-sm py-2 text-center border-none focus:outline-none w-full pl-2 focus:border-2" placeholder="Enter a valid video url" value={item.content.videoUrl} onChange={(e)=>{handlers?.onChangeVideoUrl && handlers.onChangeVideoUrl(e.target.value)}}></input>
-            <p className="text-sm text-gray-600 hover:underline text-center py-2 underline-offset-2 focus:outline-none" contentEditable={true}
+            <input className="outline-none text-sm  text-center border-none focus:outline-none w-full focus:border-2" placeholder="Enter a valid video url" value={item.content.videoUrl} onChange={(e)=>{handlers?.onChangeVideoUrl && handlers.onChangeVideoUrl(e.target.value)}}></input>
+            <p className="text-sm text-gray-600 hover:underline text-center  underline-offset-2 focus:outline-none" contentEditable={true}
             onBlur={(e) => handlers?.onChangeHandler(e.target.innerText)}
             >
               {item.content.videoCaption || "Enter video caption"}

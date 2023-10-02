@@ -80,11 +80,11 @@ const Blog = () => {
       <MainNav className="bg-white" />
       <div className="w-screen h-screen flex flex-col box-border">
         <div className="w-full justify-between flex max-h-11">
-          <h1 className="w-full text-5xl font-extrabold">Blogs</h1>
+          <h1 className="w-full text-3xl pl-4 py-4 font-extrabold sm:text-5xl">Blogs</h1>
         </div>
-        <div className="grid grid-cols-4 w-max-full">
-          <div className="w-full justify-start col-span-3">
-            <div className="w-full h-full grid grid-cols-3 gap-3 p-4">
+        <div className="flex flex-col-reverse md:grid md:grid-cols-4 w-max-full">
+          <div className="w-full flex flex-col-reverse md:justify-start   md:col-span-3">
+            <div className="w-full h-full grid md:grid-cols-3 gap-3 p-4 ">
               {filteredblogs &&
                 filteredblogs.map((post, index) => {
                   return (
@@ -159,7 +159,7 @@ const Blog = () => {
                 })}
             </div>
           </div>
-          <div className="h-full col-span-1 p-4  border-gray-300 border-l-[1px] flex flex-col">
+          <div className="h-full col-span-1 p-4 py-6  border-gray-300 border-l-[1px] flex flex-col">
           <Input
             className="w-[90%] mx-auto shadow-none rounded-full bg-gray-100 border-none "
             placeholder="Search by category ...."

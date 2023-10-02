@@ -80,14 +80,13 @@ const BlogItem: React.FC<BlogItemProps> = ({ item }) => {
         <div className="w-full flex justify-center py-6">
           <div className="flex flex-col gap-3 justify-between">
             <iframe
-              width="853"
-              height="480"
+              
               src={item.content.videoUrl || ""}
               title="Embedded Video"
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               allowFullScreen
-              className="bg-black"
+              className="bg-black w-full h-auto"
             />
             <p className="text-sm text-gray-600 hover:underline text-center py-2 underline-offset-2 focus:outline-none" contentEditable={true}
             >

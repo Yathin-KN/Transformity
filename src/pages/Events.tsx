@@ -12,11 +12,15 @@ import { DatePickerWithPresets } from "@/components/custom/datePicker";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { MapPin } from "lucide-react";
-const limitWords = (text:string, limit:number) => {
+const limitWords = (text: string, limit: number) => {
   const words = text.split(' ');
 
-  if (words.length > limit) {
-    return words.slice(0, limit).join(' ') + '  . . .';
+  const screenSize = window.innerWidth;
+
+  const newLimit = screenSize < 968 ? 20 : limit;
+
+  if (words.length > newLimit) {
+    return words.slice(0, newLimit).join(' ') + '  . . .';
   }
 
   return text;
@@ -34,39 +38,39 @@ const Events = () => {
     <>
       <MainNav />
 
-      <div className="flex flex-col gap-4 justify-center items-center py-4">
+      <div className="flex flex-col gap-4 justify-center items-center py-4 px-4">
 
-        <div className="w-full px-10 py-6 justify-evenly flex gap-6 sticky items-end">
-      <h1 className="w-72 text-5xl font-bold">Events</h1>
-
+        <div className="w-full px-0 py-6 flex gap-4 flex-col justify-center md:gap-6 sticky md:items-end md:flex-row md:px-10 md:justify-evenly">
+      <h1 className="w-72 text-3xl font-bold  md:text-5xl">Events</h1>
           <div>
             <Label htmlFor="keywords">Keywords</Label>
-            <Input className="w-72" id="keywords" />
+            <Input className="w-full md:w-72" id="keywords" />
           </div>
           <div>
             <Label htmlFor="location">Location</Label>
-            <Input className="w-72" id="location" />
+            <Input className="w-full md:w-72" id="location" />
           </div>
-
-          <DatePickerWithPresets />
+          <div className="w-full md:w-auto">
+          <DatePickerWithPresets/>
+          </div>
         </div>
         {events.map((event, index) => {
           return (
             <Link to={`/events/${index}`}>
             <Card
               key={index.toString()}
-              className="overflow-hidden cursor-pointer shadow-sm rounded-md flex w-[90vw]"
+              className="overflow-hidden flex cursor-pointer shadow-sm rounded-md flex-col w-[90vw] md:flex-row"
             >
               <div className="relative">
                 <img
-                  className="brightness-100 hover:brightness-50 max-w-[450px] max-h-[400px] mr-6"
+                  className="brightness-100 hover:brightness-50  md:max-w-[450px] md:max-h-[400px] mr-6"
                   src={
                     event.photo ||
                     "https://2.bp.blogspot.com/-Nc9YO_-F8yI/TcSIAB-nR-I/AAAAAAAAAGI/hPkuxqkqVcU/s1600/music-clipartMUSIC1.jpg"
                   }
                   alt={`Event ${index}`}
                 />
-                <Button className="absolute top-4 right-10 text-gray-950 text-sm bg-gray-300 opacity-90 px-2 py-1 rounded-md border-gray-800" variant='outline'>
+                <Button className="absolute top-4 right-4  text-gray-950 text-sm bg-gray-300 opacity-90 px-2 py-1 rounded-md border-gray-800 md:top-4 md:right-10" variant='outline'>
                   {event.eventDate.toDateString()} at {event.eventTime}
                 </Button>
               </div>
@@ -96,7 +100,7 @@ const Events = () => {
                         );
                       })}
                   </p>
-                  <animated.div className="flex gap-2 items-center bg-black">
+                  <animated.div className="md:flex gap-2 items-center hidden">
                     <Link to={`/blog/${index}`}>
                       <ArrowTopRightIcon className="text-3xl font-semibold w-6 h-6 cursor-pointer hover:bg-gray-100 m-2 rounded-md" />
                     </Link>
