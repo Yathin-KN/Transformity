@@ -109,7 +109,7 @@ const Write = () => {
             </AlertDialogTrigger>
             <AlertDialogContent>
               <div className="flex justify-end">
-                <AlertDialogCancel className="w-6 h-6 rounded-full border-none shadow-none p-2 bg-slate-200 float-right">
+                <AlertDialogCancel>
                   X
                 </AlertDialogCancel>
               </div>
