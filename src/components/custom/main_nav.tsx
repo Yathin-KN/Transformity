@@ -20,7 +20,7 @@ export function MainNav({
         Home
       </Link>
       <a
-        href="/examples/dashboard"
+        href="/about"
         className="text-md font-medium text-muted-foreground transition-colors hover:text-primary"
       >
         About
@@ -32,13 +32,13 @@ export function MainNav({
         Blog
       </Link>
       <a
-        href="/examples/dashboard"
+        href="/blog/write"
         className="text-md font-medium text-muted-foreground transition-colors hover:text-primary"
       >
-        Team
+        Write
       </a>
       <a
-        href="/examples/dashboard"
+        href="/events"
         className="text-md font-medium text-muted-foreground transition-colors hover:text-primary"
       >
         Events
@@ -50,7 +50,7 @@ export function MainNav({
       </h1>
       <div className="flex gap-6 pl-10 md:visible">
       <Button variant="outline" className="float-right font-poppins border-b-[0.2rem] border-gray-600">
-        Login
+        <Link to="/signup">Sign up</Link>
       </Button>
       <Button variant="outline" className="float-right font-poppins border-b-[0.2rem] border-gray-600">
         Login

@@ -9,6 +9,10 @@ import {
 import Blog from './pages/Blog.tsx';
 import BlogCustom from './components/custom/CustomBlog.tsx';
 import Write from './components/custom/write.tsx';
+import SignUp from './pages/SignUp.tsx';
+import About from './pages/About.tsx';
+import Events from './pages/Events.tsx';
+import Event from './pages/Event.tsx';
 
 const router = createBrowserRouter([
   {
@@ -23,6 +27,18 @@ const router = createBrowserRouter([
   },{
     path:"/blog/write",
     element:<Write/>
+  },{
+    path:"/signup",
+    element:<SignUp/>
+  },{
+    path:"/about",
+    element:<About/>
+  },{
+    path:"/events",
+    element:<Events/>
+  },{
+    path:"/events/:id",
+    element:<Event/>
   }
 ]);
 

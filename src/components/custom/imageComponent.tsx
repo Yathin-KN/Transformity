@@ -18,12 +18,12 @@ const ImageComponent = ({index}:{index:number}) => {
         setImageJson((prev:any)=>{
           updateBlogItem(index,{
             type: 'Image',
-            content: {...prev,imageCaption:caption}
+            content: {...prev.content,imageCaption:caption}
           })
 
             return{
                 type: 'Image',
-                content: {...prev,imageCaption:caption}
+                content: {...prev.content,imageCaption:caption}
               }
         })   
     }

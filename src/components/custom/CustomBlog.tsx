@@ -2,7 +2,8 @@ import { useParams } from "react-router-dom"
 import { MainNav } from "./main_nav";
 import { useEffect, useState } from "react";
 import { generateBlogArray } from "@/lib/blogData";
-import BlogItem from "./blogItem";
+import BlogItemDisplay from "./blogItemDisplay";
+// import BlogItem from "./blogItem";
 const BlogCustom = () => {
   const {blogId}=useParams();
   const [blog,setBlog]=useState<any[]>([])
@@ -18,7 +19,7 @@ const BlogCustom = () => {
       <div className="w-full lg:w-[80%]  mx-auto">
         {
           blog && blog.map((blogItem,index)=>{
-            return <BlogItem item={blogItem} key={index.toString()}/>
+            return <BlogItemDisplay item={blogItem} key={index.toString()}/>
           })
         }
       </div>

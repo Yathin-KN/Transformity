@@ -1,4 +1,14 @@
-
+export interface Event  {
+  title: string;
+  desc: string;
+  photo?: string;
+  username: string;
+  categories?: string[];
+  eventDate: Date;
+  eventTime: string;
+  eventLocation: string;
+  eventDescription: string;
+}
 
 export interface Post {
   title: string;

@@ -18,12 +18,12 @@ const VideoComponent = ({index}:{index:number}) => {
         setVideoJson((prev:any)=>{
           updateBlogItem(index,{
             type: 'Video',
-            content: {...prev,videoCaption:caption}
+            content: {...prev.content,videoCaption:caption}
           })
 
             return{
                 type: 'Video',
-                content: {...prev,videoCaption:caption}
+                content: {...prev.content,videoCaption:caption}
               }
         })   
     }
