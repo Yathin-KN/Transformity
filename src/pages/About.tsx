@@ -26,7 +26,10 @@ const About = () => {
   return (
     <>
       <MainNav />
-      <div className="w-full h-auto flex">
+      <div className="w-full h-auto flex flex-col md:flex-row">
+      <div className="brightness-125 flex justify-center items-center bg-blue-200 w-full">
+             <img src={Img} alt="" />
+        </div>
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -69,9 +72,7 @@ const About = () => {
             that.
           </p>
         </motion.div>
-        <div className="brightness-125 flex justify-center items-center bg-blue-200 w-full">
-             <img src={Img} alt="" />
-        </div>
+        
       </div>
     </>
   );

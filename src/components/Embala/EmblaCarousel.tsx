@@ -17,8 +17,8 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
   const [emblaRef] = useEmblaCarousel(options, [Autoplay()]);
 
   return (
-    <div className="embla" dir="ltr">
-      <div className="embla__viewport relative" ref={emblaRef}>
+    <div className="embla bg-black p-0 " dir="ltr">
+      <div className="embla__viewport relative bg-black" ref={emblaRef}>
         <div className="embla__container">
           {slides.map((index) => (
             <div className="embla__slide" key={index}>

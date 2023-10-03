@@ -14,6 +14,7 @@ import About from './pages/About.tsx';
 import Events from './pages/Events.tsx';
 import Event from './pages/Event.tsx';
 import SignIn from './pages/signIn.tsx';
+import Team from './pages/Team.tsx';
 
 const router = createBrowserRouter([
   {
@@ -43,6 +44,9 @@ const router = createBrowserRouter([
   },{
     path:"/events/:id",
     element:<Event/>
+  },{
+    path:"/team",
+    element:<Team/>
   }
 ]);
 

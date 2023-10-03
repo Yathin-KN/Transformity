@@ -10,7 +10,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Menu } from "lucide-react";
-
+import Img from "./../../assets/favicon.png"
 export function MainNav({
   className,
   ...props
@@ -42,6 +42,12 @@ export function MainNav({
         >
           Blog
         </Link>
+        <Link
+          to="/team"
+          className="text-md font-medium text-muted-foreground transition-colors hover:text-primary"
+        >
+          Team
+        </Link>
         <a
           href="/blog/write"
           className="text-md font-medium text-muted-foreground transition-colors hover:text-primary"
@@ -55,9 +61,13 @@ export function MainNav({
           Events
         </a>
       </div>
-      <h1 className="font-chivo text-3xl md:text-4xl font-extrabold tracking-widest pr-4 md:pr-6 text-gray-800">
+      <div className="flex justify-center items-center">
+      <h1 className="font-chivo text-3xl md:text-4xl font-extrabold tracking-widest text-gray-800">
         Transformity
       </h1>
+      <img src={Img} className="w-16 h-16 brightness-125">
+      </img>
+      </div>
       <div className="flex items-center space-x-2 sm:space-x-6 pl-2 sm:pl-10">
         <div className="sm:hidden">
           <DropdownMenu>
@@ -81,6 +91,14 @@ export function MainNav({
                   className="text-md font-medium text-muted-foreground transition-colors hover:text-primary"
                 >
                   About
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem>
+                <Link
+                  to="/team"
+                  className="text-md font-medium text-muted-foreground transition-colors hover:text-primary"
+                >
+                  Team
                 </Link>
               </DropdownMenuItem>
               <DropdownMenuItem>
