@@ -3,7 +3,7 @@ import axios from "axios";
 import useUserStore from "@/store/authStore";
 import { MainNav } from "@/components/custom/main_nav";
 import { motion } from "framer-motion";
-import Img from "./favicon.png"
+import Img from "./../assets/favicon.png"
 const About = () => {
   const getAccessToken = useUserStore((state) => state.getAccessToken);
 
