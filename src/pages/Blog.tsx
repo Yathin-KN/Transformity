@@ -102,7 +102,7 @@ const Blog = () => {
                       className="overflow-hidden cursor-pointer shadow-lg  col-span-1 rounded-md"
                     >
                       <img
-                        className="brightness-100 hover:brightness-50"
+                        className="brightness-100 hover:brightness-50 h-[200px]  w-full object-cover"
                         src={
                           post.postImage
                         }
@@ -146,10 +146,6 @@ const Blog = () => {
                                 key={index.toString()}
                                 variant="outline"
                                 className="rounded-full font-chivo my-3 text-black capitalize bg-gray-200 shadow-inner font-light"
-                                // style={{
-                                //   backgroundColor:
-                                //     colour[randomInteger().toString()],
-                                // }}
                               >
                                 {category}
                               </Badge>

@@ -10,7 +10,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Menu } from "lucide-react";
-import Img from "./../../assets/favicon.png"
+import Img from "./../../assets/favicon.png";
 export function MainNav({
   className,
   ...props
@@ -62,17 +62,16 @@ export function MainNav({
         </a>
       </div>
       <div className="flex justify-center items-center">
-      <h1 className="font-chivo text-3xl md:text-4xl font-extrabold tracking-widest text-gray-800">
-        Transformity
-      </h1>
-      <img src={Img} className="w-16 h-16 brightness-125">
-      </img>
+        <h1 className="font-chivo text-3xl md:text-4xl font-extrabold tracking-widest text-gray-800">
+          Transformity
+        </h1>
+        <img src={Img} className="w-16 h-16 brightness-125"></img>
       </div>
       <div className="flex items-center space-x-2 sm:space-x-6 pl-2 sm:pl-10">
         <div className="sm:hidden">
           <DropdownMenu>
             <DropdownMenuTrigger className="focus:border-none focus:outline-none">
-            <Menu />
+              <Menu />
             </DropdownMenuTrigger>
             <DropdownMenuContent className="mt-6">
               <DropdownMenuLabel>My Account</DropdownMenuLabel>
@@ -106,7 +105,7 @@ export function MainNav({
                   to="/blog/write"
                   className="text-md font-medium text-muted-foreground transition-colors hover:text-primary"
                 >
-                  write
+                  Write
                 </Link>
               </DropdownMenuItem>
               <DropdownMenuItem>
@@ -128,7 +127,6 @@ export function MainNav({
             </DropdownMenuContent>
           </DropdownMenu>
         </div>
-        {/* Show login and sign up buttons on larger screens */}
         <div className="hidden sm:flex space-x-2">
           <Button
             variant="outline"

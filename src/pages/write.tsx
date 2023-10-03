@@ -99,8 +99,8 @@ const Write = () => {
   return (
     <>
       <MainNav />
-      <div className="w-full h-screen bg-slate-200 flex justify-center">
-        <div className="md:w-[80%] w-[95%] h-full bg-white md:px-10 py-10 pb-20 flex flex-col relative">
+      <div className="w-full h-auto bg-slate-200 flex justify-center">
+        <div className="md:w-[80%] w-[95%] h-auto min-h-[100vh] bg-white md:px-10 py-10 mt-[50px] mb-[100px] flex flex-col relative">
           <AlertDialog>
             <AlertDialogTrigger>
               <Badge
@@ -129,6 +129,7 @@ const Write = () => {
             compoenent.map((comp: any) => {
               return comp;
             })}
+            
           </div>
           
           <div className="sm:hidden fixed bottom-0 left-0 w-full py-3 bg-white flex justify-evenly md:flex md:justify-around items-center">
