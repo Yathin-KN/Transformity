@@ -1,4 +1,4 @@
-import favicon from "./favicon.png";
+import favicon from "./../assets/favicon.png";
 import React from "react";
 import Carousel from "@/components/custom/Carousel";
 import { Button } from "@/components/ui/button";
