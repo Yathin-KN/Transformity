@@ -3,6 +3,7 @@ import "react-alice-carousel/lib/alice-carousel.css";
 import { Card } from "../ui/card";
 import {  useEffect, useState } from "react";
 import getAllPosts from "@/apis/POST/getAllPosts";
+import { Link } from "react-router-dom";
 
 // const handleDragStart = (e: any) => e.preventDefault();
 const responsive = {
@@ -20,9 +21,10 @@ const Gallery = () => {
       console.log(resp);
 
       resp.map((blogItem)=>{
-        return cards1.push(<Card className="overflow-hidden cursor-pointer shadow-lg  col-span-1 rounded-md pb-4 max-w-[25vw]">
+        return cards1.push(<Link to={`/blog/${blogItem.post_id}`} className="w-full px-6">
+          <Card className="overflow-hidden cursor-pointer shadow-lg  col-span-1 rounded-md pb-4 mx-6">
           <img
-            className="brightness-100 hover:brightness-50"
+            className="brightness-100 hover:brightness-50 h-[200px]  w-full object-cover"
             src={blogItem.postImage}
           ></img>
           <div className="p-3">
@@ -43,7 +45,8 @@ const Gallery = () => {
               <p className="space-x-2"></p>
             </div>
           </div>
-        </Card>);
+        </Card>
+        </Link>);
       })
       setCards(cards1)
     } catch (err) {
