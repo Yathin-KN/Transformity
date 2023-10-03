@@ -2,7 +2,7 @@ import { MainNav } from "@/components/custom/main_nav";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { generateDummyPosts } from "@/lib/data";
+// import { generateDummyPosts } from "@/lib/data";
 import { Post } from "@/lib/types";
 import { useEffect, useState } from "react";
 import { ArrowTopRightIcon } from "@radix-ui/react-icons";
@@ -11,6 +11,7 @@ import { animated } from "@react-spring/web";
 import { Link } from "react-router-dom";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { faker } from "@faker-js/faker";
+import getAllPosts from "@/apis/POST/getAllPosts";
 // type ColourMap = {
 //   [key: string]: string;
 // };
@@ -43,9 +44,19 @@ const Blog = () => {
   const [filteredblogs, setFilteredBlogs] = useState<Post[]>();
   const [category, setCategory] = useState<string>("");
   const [categories,setCategories]=useState<string[]>([])
+
+  const fetch=async()=>{
+    try{ 
+       const resp=await getAllPosts();
+       console.log(resp)
+       setBlog(resp)
+       setFilteredBlogs(resp)
+    }catch(err){
+      console.log(err)
+    }
+  }
   useEffect(() => {
-    const blogs: Post[] = generateDummyPosts(10);
-    setBlog(blogs);
+    fetch();
     setCategories(()=>{
       return randomCategories();
     })
@@ -57,9 +68,10 @@ const Blog = () => {
 
   const filter = (category: string) => {
     if (category.trim() !== "") {
-      // Filter blogs by category
-      const filteredBlogs = blog?.filter((post) =>
-        post.title.startsWith(category.toLocaleLowerCase())
+      const filteredBlogs = blog?.filter((post) =>{
+        console.log(post.postDetails.postTitle,category,post.postDetails.postTitle.startsWith(category))
+        return post.postDetails.postTitle.toLowerCase().startsWith(category.toLowerCase())
+      }
       );
       setFilteredBlogs(filteredBlogs);
     } else {
@@ -79,9 +91,6 @@ const Blog = () => {
     <>
       <MainNav className="bg-white" />
       <div className="w-screen h-screen flex flex-col box-border">
-        <div className="w-full justify-between flex max-h-11">
-          <h1 className="w-full text-3xl pl-4 py-4 font-extrabold sm:text-5xl">Blogs</h1>
-        </div>
         <div className="flex flex-col-reverse md:grid md:grid-cols-4 w-max-full">
           <div className="w-full flex flex-col-reverse md:justify-start   md:col-span-3">
             <div className="w-full h-full grid md:grid-cols-3 gap-3 p-4 ">
@@ -95,8 +104,7 @@ const Blog = () => {
                       <img
                         className="brightness-100 hover:brightness-50"
                         src={
-                          post.photo ||
-                          "https://2.bp.blogspot.com/-Nc9YO_-F8yI/TcSIAB-nR-I/AAAAAAAAAGI/hPkuxqkqVcU/s1600/music-clipartMUSIC1.jpg"
+                          post.postImage
                         }
                       ></img>
 
@@ -104,31 +112,35 @@ const Blog = () => {
                         
                         <div className="flex flex-nowrap pt-2">
                           <Avatar className="h-6 w-6 mr-3">
-                            <AvatarImage src={post.avatar} />
+                          {/* <AvatarImage src={post.user_info.profilePic || faker.image.avatar()} /> */}
+                          <AvatarImage src={faker.image.avatar()} />
                           </Avatar>
                           <p className="flex items-center gap-2 w-full justify-between">
                             <p className="flex gap-2 flex-nowrap justify-between">
                               <p className="text-sm text-blue-700 font-light">
-                                {post.username}
+                                {post.user_info.username}
                               </p>
                             </p>
 
                             <p className="flex gap-2">
                               <p className="text-xs text-gray-700">
-                                {post.date}
+                                {post.postDate.substring(0,10)}
+                              </p>
+                              <p className="text-xs text-gray-700">
+                                {post.postTime}
                               </p>
                             </p>
                           </p>
                         </div>
                         <p className="font-bold text-lg capitalize py-2">
-                          {post.title}
+                          {post.postDetails.postTitle}
                         </p>
                         <div className="flex flex-col justify-between h-full">
                           <p className="h-[6rem] text-sm overflow-hidden font-sans text-muted-foreground">
-                            {post.desc}
+                            {post.postDetails.postDescription}
                           </p>
                           <p className="space-x-2">
-                          {post.categories.map((category, index) => {
+                          {post.postDetails.categories.map((category, index) => {
                             return (
                               <Badge
                                 key={index.toString()}
@@ -145,7 +157,7 @@ const Blog = () => {
                           })}
                         </p>
                           <animated.div className="flex gap-2 items-center">
-                            <Link to={`/blog/${index}`}>
+                            <Link to={`/blog/${post.post_id}`}>
                               <ArrowTopRightIcon className="text-3xl font-semibold w-6 h-6 cursor-pointer hover:bg-gray-100 m-2 rounded-md" />
                             </Link>
                             <p className="text-muted-foreground text-sm text-black ">

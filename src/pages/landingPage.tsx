@@ -3,10 +3,11 @@ import favicon from "./favicon.png";
 import React from "react";
 import Carousel from "@/components/custom/Carousel";
 import { Button } from "@/components/ui/button";
+import Gallery from "@/components/ReactSlick/landingSlides";
 
 const LandingPage: React.FC = () => {
   return (
-    <div className="w-full h-auto p-4 pb-10 bg-slate-50">
+    <div className="w-full h-auto p-4 pb-10 bg-white">
       <Carousel />
       <div className="w-full h-auto grid grid-cols-2 py-10">
         <div className="col-span-1  flex flex-col justify-center px-10 relative ml-10">
@@ -32,7 +33,7 @@ const LandingPage: React.FC = () => {
         </div>
       </div>
       <div className="w-full h-auto grid grid-cols-4 px-6 py-6 mb-11">
-        <div className="flex flex-col gap-4 col-span-3">
+        <div className="flex flex-col gap-4 col-span-3  p-3">
           <h1 className="text-4xl text-blue-950 font-semibold">Leading with Empathy</h1>
           <p>
             My book launched on December 9, 2021 in both hardcover and eBook
@@ -59,6 +60,7 @@ const LandingPage: React.FC = () => {
           <img src="https://i0.wp.com/transformity.info/wp-content/uploads/2021/12/pallapa_3D_01.png?resize=229%2C300&ssl=1" alt="" />
         </div>
       </div>
+      <Gallery/>
     </div>
   );
 };

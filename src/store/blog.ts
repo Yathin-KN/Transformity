@@ -1,5 +1,5 @@
 // blogStore.ts
-import create from 'zustand';
+import {create} from 'zustand';
 import { BlogItem } from './../lib/types';
 
 interface BlogStore {

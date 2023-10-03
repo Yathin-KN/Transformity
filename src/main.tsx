@@ -13,6 +13,7 @@ import SignUp from './pages/SignUp.tsx';
 import About from './pages/About.tsx';
 import Events from './pages/Events.tsx';
 import Event from './pages/Event.tsx';
+import SignIn from './pages/signIn.tsx';
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,9 @@ const router = createBrowserRouter([
   },{
     path:"/signup",
     element:<SignUp/>
+  },{
+    path:"/signin",
+    element:<SignIn/>
   },{
     path:"/about",
     element:<About/>

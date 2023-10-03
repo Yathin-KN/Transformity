@@ -3,8 +3,6 @@ import { Separator } from "../ui/separator";
 import { Avatar, AvatarImage } from "@radix-ui/react-avatar";
 import { BlogItemProps } from "@/lib/types";
 
-
-
 const BlogItem: React.FC<BlogItemProps> = ({ item }) => {
   switch (item.type) {
     case "Title":
@@ -13,7 +11,9 @@ const BlogItem: React.FC<BlogItemProps> = ({ item }) => {
           <p
             className="outline-none text-5xl font-extrabold py-6 capitalize border-none focus:outline-none w-full pl-2 focus:border-2"
             placeholder="Enter title . . ."
-          >{item.content}</p>
+          >
+            {item.content}
+          </p>
         </>
       );
     case "Subtitle":
@@ -41,11 +41,14 @@ const BlogItem: React.FC<BlogItemProps> = ({ item }) => {
     case "Blog Info":
       return (
         <>
+          <Separator className="mb-4" />
           <div className="py-3 w-full">
             <div className="flex gap-6">
               <Avatar>
                 <AvatarImage
-                  src={(item.content.author && item.content.author.avatarUrl) || ""}
+                  src={
+                    (item.content.author && item.content.author.avatarUrl) || ""
+                  }
                   className="w-10 h-10 rounded-full"
                 />
               </Avatar>
@@ -80,7 +83,6 @@ const BlogItem: React.FC<BlogItemProps> = ({ item }) => {
         <div className="w-full flex justify-center py-6">
           <div className="flex flex-col gap-3 justify-between">
             <iframe
-              
               src={item.content.videoUrl || ""}
               title="Embedded Video"
               frameBorder="0"
@@ -88,13 +90,17 @@ const BlogItem: React.FC<BlogItemProps> = ({ item }) => {
               allowFullScreen
               className="bg-black w-full h-auto"
             />
-            <p className="text-sm text-gray-600 hover:underline text-center py-2 underline-offset-2 focus:outline-none" contentEditable={true}
+            <p
+              className="text-sm text-gray-600 hover:underline text-center py-2 underline-offset-2 focus:outline-none"
+              contentEditable={true}
             >
-              {item.content.videoCaption }
+              {item.content.videoCaption}
             </p>
           </div>
         </div>
       );
+    case "Event_Info":
+      return <div></div>;
     default:
       return null; // Handle unknown type
   }

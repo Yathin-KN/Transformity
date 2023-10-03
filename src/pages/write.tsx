@@ -27,11 +27,14 @@ import {
   Type,
   XSquare,
 } from "lucide-react";
+import useUserStore from "@/store/authStore";
 
 const Write = () => {
   const [compoenent, setComponenet] = useState<any[]>([]);
   const [length, setLength] = useState<number>(0);
   const { blogItems, removeLastBlogItem } = useBlogStore();
+  const getUserInfo = useUserStore((state) => state.getUserInfo);
+  const {user_id}=getUserInfo();
   const [post, setPost] = useState({
     postTitle: "",
     postDescription: "",
@@ -79,7 +82,7 @@ const Write = () => {
     try {
       const response = await PTSetPost({
         postDetails: post,
-        user_id: faker.string.uuid(),
+        user_id: user_id,
         content: blogItems,
       });
       console.log(response);
@@ -97,7 +100,7 @@ const Write = () => {
     <>
       <MainNav />
       <div className="w-full h-screen bg-slate-200 flex justify-center">
-        <div className="md:w-[80%] w-[95%] h-full bg-white md:px-10 py-10 flex flex-col relative">
+        <div className="md:w-[80%] w-[95%] h-full bg-white md:px-10 py-10 pb-20 flex flex-col relative">
           <AlertDialog>
             <AlertDialogTrigger>
               <Badge
@@ -121,11 +124,13 @@ const Write = () => {
               </AlertDialogFooter>
             </AlertDialogContent>
           </AlertDialog>
-
+          <div>
           {compoenent &&
             compoenent.map((comp: any) => {
               return comp;
             })}
+          </div>
+          
           <div className="sm:hidden fixed bottom-0 left-0 w-full py-3 bg-white flex justify-evenly md:flex md:justify-around items-center">
             <Button
               onClick={() => handleClick("title")}

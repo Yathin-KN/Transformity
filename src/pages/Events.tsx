@@ -3,9 +3,6 @@ import { MainNav } from "../components/custom/main_nav";
 import { Event } from "@/lib/types";
 import generateRandomEvents from "@/lib/eventsData";
 import { Card } from "@/components/ui/card";
-import { ArrowTopRightIcon  } from "@radix-ui/react-icons";
-import { Link } from "react-router-dom";
-import { animated } from "@react-spring/web";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { DatePickerWithPresets } from "@/components/custom/datePicker";
@@ -56,7 +53,7 @@ const Events = () => {
         </div>
         {events.map((event, index) => {
           return (
-            <Link to={`/events/${index}`}>
+            
             <Card
               key={index.toString()}
               className="overflow-hidden flex cursor-pointer shadow-sm rounded-md flex-col w-[90vw] md:flex-row"
@@ -100,18 +97,17 @@ const Events = () => {
                         );
                       })}
                   </p>
-                  <animated.div className="md:flex gap-2 items-center hidden">
+                  {/* <animated.div className="md:flex gap-2 items-center hidden">
                     <Link to={`/blog/${index}`}>
                       <ArrowTopRightIcon className="text-3xl font-semibold w-6 h-6 cursor-pointer hover:bg-gray-100 m-2 rounded-md" />
                     </Link>
                     <p className="text-muted-foreground text-sm text-black ">
                       Read more ...
                     </p>
-                  </animated.div>
+                  </animated.div> */}
                 </div>
               </div>
             </Card>
-            </Link>
           );
         })}
       </div>

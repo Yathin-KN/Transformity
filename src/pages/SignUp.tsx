@@ -1,7 +1,7 @@
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
-
+import { useNavigate } from 'react-router-dom'
 interface FormValues {
     username: string;
     email: string;
@@ -22,28 +22,29 @@ const UserSchema = Yup.object().shape({
 });
 
 export const SignUp = () => {
-  const handleSubmit = async (values:FormValues) => {
-    try {
-       console.log(values.email)
-       const formData=new FormData();
-       formData.append('username', values.username);
-       formData.append('email', values.email);
-       formData.append('password', values.password);
-       formData.append('profilePic', values.profilePic);
-       console.log(formData)
+  const navigate= useNavigate();
 
-      const response = await axios.post('http://localhost:2000/api/client/createUser',formData, {
+  const handleSubmit = async (values: FormValues) => {
+    try {
+      const formData = new FormData();
+      formData.append('username', values.username);
+      formData.append('email', values.email);
+      formData.append('password', values.password);
+      formData.append('profilePic', values.profilePic);
+
+      const response = await axios.post('http://localhost:2000/api/client/createUser', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
       });
+
+      navigate('/signin');
 
       console.log('User created successfully:', response.data);
     } catch (error) {
       console.error('Error creating user:', error);
     }
   };
-
   return (
     <div className="max-w-md mx-auto bg-white p-6 rounded-md shadow-md m-10">
       <h1 className="text-2xl font-bold mb-6">User Registration</h1>

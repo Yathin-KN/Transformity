@@ -105,7 +105,7 @@ const BlogItem: React.FC<BlogItemProps> = ({ item, handlers }) => {
         </div>
       );
     default:
-      return null; // Handle unknown type
+      return null; 
   }
 };
 

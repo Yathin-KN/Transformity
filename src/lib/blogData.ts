@@ -61,7 +61,6 @@ function generateVideo() {
 }
 
 export function generateBlogArray() {
-  // Generate between 4 to 8 additional items in a random order
   const additionalItems = [
     generateDescription(),
     generateImage(),
@@ -72,5 +71,8 @@ export function generateBlogArray() {
     generateDescription(),
   ].sort(() => Math.random() - 0.5).slice(0, Math.floor(Math.random() * 5) + 4);
 
-  return [generateTitle(),  generateBlogInfo(),, generateImage(), generateSubtitle()  ,  ...additionalItems];
+  return {
+    blogInfo:generateBlogInfo(),
+    content:[generateTitle(), generateImage(), generateSubtitle()  ,  ...additionalItems]
+  };
 }
