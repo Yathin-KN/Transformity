@@ -28,6 +28,7 @@ import {
   XSquare,
 } from "lucide-react";
 import useUserStore from "@/store/authStore";
+import { ToastContainer, toast } from "react-toastify";
 
 const Write = () => {
   const [compoenent, setComponenet] = useState<any[]>([]);
@@ -85,9 +86,11 @@ const Write = () => {
         user_id: user_id,
         content: blogItems,
       });
+      toast.success("Successfully posted !!!")
       console.log(response);
     } catch (error) {
       console.log("error : ", error);
+      toast.error("Error posting !!!")
     }
   };
   useEffect(() => {
@@ -99,6 +102,7 @@ const Write = () => {
   return (
     <>
       <MainNav />
+      <ToastContainer/>
       <div className="w-full h-auto bg-slate-200 flex justify-center">
         <div className="md:w-[80%] w-[95%] h-auto min-h-[100vh] bg-white md:px-10 py-10 mt-[50px] mb-[100px] flex flex-col relative">
           <AlertDialog>

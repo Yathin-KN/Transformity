@@ -81,19 +81,15 @@ const BlogItem: React.FC<BlogItemProps> = ({ item }) => {
     case "Video":
       return (
         <div className="w-full flex justify-center py-6">
-          <div className="flex flex-col gap-3 justify-between">
-            <iframe
-              src={item.content.videoUrl || ""}
-              title="Embedded Video"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              allowFullScreen
-              className="bg-black w-full h-auto"
-            />
-            <p
-              className="text-sm text-gray-600 hover:underline text-center py-2 underline-offset-2 focus:outline-none"
-              contentEditable={true}
-            >
+          <div className="flex flex-col gap-3 justify-between items-center">
+            <video controls className="bg-gray-700 w-[80%] h-auto">
+              <source
+                src={item.content.videoUrl || ""}
+                type="video/mp4"
+              />
+              Your browser does not support the video tag.
+            </video>
+            <p className="text-sm text-gray-600 hover:underline text-center py-2 underline-offset-2 focus:outline-none">
               {item.content.videoCaption}
             </p>
           </div>

@@ -3,8 +3,6 @@ import { Separator } from "../ui/separator";
 import { Avatar, AvatarImage } from "@radix-ui/react-avatar";
 import { BlogItemProps } from "@/lib/types";
 
-
-
 const BlogItem: React.FC<BlogItemProps> = ({ item, handlers }) => {
   switch (item.type) {
     case "Title":
@@ -15,7 +13,9 @@ const BlogItem: React.FC<BlogItemProps> = ({ item, handlers }) => {
             placeholder="Enter title . . ."
             contentEditable={true}
             onBlur={(e) => handlers?.onChangeHandler(e.target.innerText)}
-          >{item.content}</p>
+          >
+            {item.content}
+          </p>
         </>
       );
     case "Subtitle":
@@ -51,7 +51,9 @@ const BlogItem: React.FC<BlogItemProps> = ({ item, handlers }) => {
             <div className="flex gap-6">
               <Avatar>
                 <AvatarImage
-                  src={(item.content.author && item.content.author.avatarUrl) || ""}
+                  src={
+                    (item.content.author && item.content.author.avatarUrl) || ""
+                  }
                   className="w-10 h-10 rounded-full"
                 />
               </Avatar>
@@ -75,9 +77,21 @@ const BlogItem: React.FC<BlogItemProps> = ({ item, handlers }) => {
               alt={item.content.imageCaption}
               className="object-fit max-w-[70%] mx-auto"
             />
-           <input className="outline-none text-sm py-2 text-center border-none focus:outline-none w-full pl-2 focus:border-2" placeholder="Enter a valid image url" value={item.content.imageUrl} onChange={(e)=>{handlers?.onChangeImageUrl && handlers.onChangeImageUrl(e.target.value)}}></input>
+            <input
+              className="outline-none text-sm py-2 text-center border-none focus:outline-none w-full pl-2 focus:border-2"
+              accept="image/*"
+              type="file"
+              placeholder="Enter a valid image url"
+              onChange={(e) => {
+                handlers?.onFileUpload && handlers.onFileUpload(e);
+              }}
+            ></input>
 
-            <p className="text-sm text-gray-600 hover:underline text-center py-2 underline-offset-2 focus:outline-none" contentEditable={true} onBlur={(e) => handlers?.onChangeHandler(e.target.innerText)}>
+            <p
+              className="text-sm text-gray-600 hover:underline text-center py-2 underline-offset-2 focus:outline-none"
+              contentEditable={true}
+              onBlur={(e) => handlers?.onChangeHandler(e.target.innerText)}
+            >
               {item.content.imageCaption || "Enter image caption"}
             </p>
           </div>
@@ -86,18 +100,26 @@ const BlogItem: React.FC<BlogItemProps> = ({ item, handlers }) => {
     case "Video":
       return (
         <div className="w-full flex justify-center py-6">
-          <div className="flex flex-col gap-3 justify-between">
-            <iframe
-              src={item.content.videoUrl || ""}
-              title="Embedded Video"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              allowFullScreen
-              className="bg-gray-700 w-full h-auto"
-            />
-            <input className="outline-none text-sm  text-center border-none focus:outline-none w-full focus:border-2" placeholder="Enter a valid video url" value={item.content.videoUrl} onChange={(e)=>{handlers?.onChangeVideoUrl && handlers.onChangeVideoUrl(e.target.value)}}></input>
-            <p className="text-sm text-gray-600 hover:underline text-center  underline-offset-2 focus:outline-none" contentEditable={true}
-            onBlur={(e) => handlers?.onChangeHandler(e.target.innerText)}
+          <div className="flex flex-col gap-3 justify-between items-center">
+            <video controls className="bg-gray-700 w-[80%] h-auto">
+              <source
+                src={`${item.content.videoUrl}` || ""}
+                type="video/mp4"
+              />
+              Your browser does not support the video tag.
+            </video>
+            <input
+              className="outline-none text-sm  text-center border-none focus:outline-none w-full focus:border-2"
+              type="file"
+              accept="video/*"
+              onChange={(e) => {
+                handlers?.onFileUpload && handlers.onFileUpload(e);
+              }}
+            ></input>
+            <p
+              className="text-sm text-gray-600 hover:underline text-center  underline-offset-2 focus:outline-none"
+              contentEditable={true}
+              onBlur={(e) => handlers?.onChangeHandler(e.target.innerText)}
             >
               {item.content.videoCaption || "Enter video caption"}
             </p>
@@ -105,7 +127,7 @@ const BlogItem: React.FC<BlogItemProps> = ({ item, handlers }) => {
         </div>
       );
     default:
-      return null; 
+      return null;
   }
 };
 

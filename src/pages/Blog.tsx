@@ -12,6 +12,11 @@ import { Link } from "react-router-dom";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { faker } from "@faker-js/faker";
 import getAllPosts from "@/apis/POST/getAllPosts";
+import 'react-toastify/dist/ReactToastify.css';
+import { Trash2 } from "lucide-react";
+import useUserStore from "@/store/authStore";
+import PTDeletePost from "@/apis/POST/deletePost";
+import { ToastContainer, toast } from "react-toastify";
 // type ColourMap = {
 //   [key: string]: string;
 // };
@@ -44,6 +49,10 @@ const Blog = () => {
   const [filteredblogs, setFilteredBlogs] = useState<Post[]>();
   const [category, setCategory] = useState<string>("");
   const [categories,setCategories]=useState<string[]>([])
+  const user_info = useUserStore(state=>state.getUserInfo)
+  const {user_id} = user_info();
+
+
 
   const fetch=async()=>{
     try{ 
@@ -83,6 +92,23 @@ const Blog = () => {
     setCategory(value);
   };
 
+  const handleRemovePost=async(post_id:string)=>{
+     console.log({
+      user_id,
+      post_id
+     })
+     try{
+       const resp=await PTDeletePost({
+        user_id,
+        post_id
+       })
+       console.log(resp)
+       toast.success(resp.message)
+       fetch()
+     }catch(error){
+        toast.error("post wasn't deleted")
+     }
+  }
   useEffect(() => {
     filter(category);
   }, [category]);
@@ -90,6 +116,7 @@ const Blog = () => {
   return (
     <>
       <MainNav className="bg-white" />
+      <ToastContainer/>
       <div className="w-screen h-screen flex flex-col box-border">
         <div className="flex flex-col-reverse md:grid md:grid-cols-4 w-max-full">
           <div className="w-full flex flex-col-reverse md:justify-start   md:col-span-3">
@@ -101,19 +128,20 @@ const Blog = () => {
                       key={index.toString()}
                       className="overflow-hidden cursor-pointer shadow-lg  col-span-1 rounded-md"
                     >
+                      <div>
                       <img
                         className="brightness-100 hover:brightness-50 h-[200px]  w-full object-cover"
                         src={
                           post.postImage
                         }
                       ></img>
+                      </div>
 
                       <div className="p-3">
                         
                         <div className="flex flex-nowrap pt-2">
                           <Avatar className="h-6 w-6 mr-3">
-                          {/* <AvatarImage src={post.user_info.profilePic || faker.image.avatar()} /> */}
-                          <AvatarImage src={faker.image.avatar()} />
+                          <AvatarImage src={post.user_info.profilePic || faker.image.avatar()} />
                           </Avatar>
                           <p className="flex items-center gap-2 w-full justify-between">
                             <p className="flex gap-2 flex-nowrap justify-between">
@@ -156,10 +184,14 @@ const Blog = () => {
                             <Link to={`/blog/${post.post_id}`}>
                               <ArrowTopRightIcon className="text-3xl font-semibold w-6 h-6 cursor-pointer hover:bg-gray-100 m-2 rounded-md" />
                             </Link>
+                            <div className="flex justify-between w-full">
                             <p className="text-muted-foreground text-sm text-black ">
                               Read more ...
                             </p>
+                            {(user_id === post.user_id) && <Trash2 strokeWidth={1} onClick={()=>handleRemovePost(post.post_id)} />}
+                            </div>
                           </animated.div>
+                          
                         </div>
                       </div>
                     </Card>

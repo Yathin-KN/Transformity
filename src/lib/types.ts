@@ -100,6 +100,7 @@ export interface BlogItemProps {
     onChangeHandler: (title: string) => void;
     onChangeImageUrl?:(imgUrl:string) =>void;
     onChangeVideoUrl?:(videoUrl:string)=>void;
+    onFileUpload?:(e:any)=>void;
   };
 }
 export interface UserStore {
@@ -109,6 +110,10 @@ export interface UserStore {
     setUser: (user_id: string, email: string, access_token: string) => void;
     getUserInfo: () => { user_id: string; email: string; };
     getAccessToken: () => string;
+}
+export interface deletePostProps {
+    user_id: string;
+    post_id: string;
 }
 
 

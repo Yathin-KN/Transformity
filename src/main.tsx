@@ -12,9 +12,9 @@ import Write from './pages/write.tsx';
 import SignUp from './pages/SignUp.tsx';
 import About from './pages/About.tsx';
 import Events from './pages/Events.tsx';
-import Event from './pages/Event.tsx';
 import SignIn from './pages/signIn.tsx';
 import Team from './pages/Team.tsx';
+import EventForm from './pages/CreateEvent.tsx';
 
 const router = createBrowserRouter([
   {
@@ -42,11 +42,11 @@ const router = createBrowserRouter([
     path:"/events",
     element:<Events/>
   },{
-    path:"/events/:id",
-    element:<Event/>
-  },{
     path:"/team",
     element:<Team/>
+  },{
+    path:"/createForm",
+    element:<EventForm/>
   }
 ]);
 
