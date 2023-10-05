@@ -55,6 +55,12 @@ export function MainNav({
           Write
         </a>
         <a
+          href="/eventCompose"
+          className="text-md font-medium text-muted-foreground transition-colors hover:text-primary"
+        >
+          Event Compose
+        </a>
+        <a
           href="/events"
           className="text-md font-medium text-muted-foreground transition-colors hover:text-primary"
         >
@@ -90,6 +96,14 @@ export function MainNav({
                   className="text-md font-medium text-muted-foreground transition-colors hover:text-primary"
                 >
                   About
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem>
+                <Link
+                  to="/eventCompose"
+                  className="text-md font-medium text-muted-foreground transition-colors hover:text-primary"
+                >
+                  Event Compose
                 </Link>
               </DropdownMenuItem>
               <DropdownMenuItem>

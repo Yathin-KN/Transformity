@@ -9,7 +9,7 @@ const BlogItem: React.FC<BlogItemProps> = ({ item, handlers }) => {
       return (
         <>
           <p
-            className="outline-none text-5xl text-gray-800 font-extrabold py-6 capitalize border-none focus:outline-none w-full pl-2 focus:border-2"
+            className="outline-none text-4xl text-gray-800 font-extrabold  capitalize border-none focus:outline-none w-full pl-2 focus:border-2 hover:bg-gray-100 py-4"
             placeholder="Enter title . . ."
             contentEditable={true}
             onBlur={(e) => handlers?.onChangeHandler(e.target.innerText)}
@@ -21,7 +21,7 @@ const BlogItem: React.FC<BlogItemProps> = ({ item, handlers }) => {
     case "Subtitle":
       return (
         <h2
-          className="w-full text-2xl text-gray-800 font-extrabold py-2 focus:outline-none pl-2 focus:border-l-2 border-gray-400"
+          className="w-full text-2xl text-gray-800 font-extrabold focus:outline-none pl-2 focus:border-l-2 border-gray-400 hover:bg-gray-100 py-4"
           placeholder="Enter heading"
           contentEditable={true}
           onBlur={(e) => handlers?.onChangeHandler(e.target.innerText)}
@@ -32,9 +32,9 @@ const BlogItem: React.FC<BlogItemProps> = ({ item, handlers }) => {
     case "Description":
       return (
         <>
-          <div className="flex w-full">
+          <div className="flex w-full hover:bg-gray-100 py-4">
             <p
-              className="text-md w-full border-transparent border-l-2 focus:outline-none resize-none focus:border-l-2 focus:border-gray-400 pl-2 h-auto py-4"
+              className="text-md w-full border-transparent border-l-2 focus:outline-none resize-none focus:border-l-2 focus:border-gray-400 pl-2 h-auto"
               draggable={false}
               contentEditable={true}
               onBlur={(e) => handlers?.onChangeHandler(e.target.innerText)}
@@ -70,7 +70,7 @@ const BlogItem: React.FC<BlogItemProps> = ({ item, handlers }) => {
       );
     case "Image":
       return (
-        <div className="w-full flex  flex-col justify-center">
+        <div className="w-full flex  flex-col justify-center hover:bg-gray-100 py-4">
           <div className="flex flex-col w-full">
             <img
               src={item.content.imageUrl || ""}
@@ -99,7 +99,7 @@ const BlogItem: React.FC<BlogItemProps> = ({ item, handlers }) => {
       );
     case "Video":
       return (
-        <div className="w-full flex justify-center py-6">
+        <div className="w-full flex justify-center py-6 hover:bg-gray-100">
           <div className="flex flex-col gap-3 justify-between items-center">
             <video controls className="bg-gray-700 w-[80%] h-auto">
               <source

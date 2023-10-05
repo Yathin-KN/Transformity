@@ -115,5 +115,18 @@ export interface deletePostProps {
     user_id: string;
     post_id: string;
 }
+export interface EventData {
+    title: string;
+    desc: string;
+    photo: string;
+    username: string | null;
+    startDate: Date;
+    endDate: Date | null;
+    eventTime: string;
+    eventLocation: string;
+    eventDescription: string;
+    eventId: string;
+    user_id: string;
+}
 
 

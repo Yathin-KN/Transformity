@@ -10,7 +10,7 @@ const About = () => {
   const accessToken = getAccessToken();
   const fetch = async () => {
     try {
-      const resp = await axios.get("http://localhost:2000/api/client/show", {
+      const resp = await axios.get("https://vcw4zbgl-2000.inc1.devtunnels.ms/api/client/show", {
         headers: {
           Authorization: accessToken,
         },

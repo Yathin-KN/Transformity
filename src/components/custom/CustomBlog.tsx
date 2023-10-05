@@ -5,7 +5,7 @@ import BlogItemDisplay from "./blogItemDisplay";
 // import getAllPosts from "@/apis/POST/getAllPosts";
 import getPostById from "@/apis/POST/getPostByPostId";
 import { BlogItem } from "@/lib/types";
-import { faker } from "@faker-js/faker";
+import DummyPic from "./../../assets/dummy.png"
 // import BlogItem from "./blogItem";
 interface PostDetail {
   type: "Blog Info";
@@ -33,7 +33,7 @@ const BlogCustom = () => {
           time: resp.postTime,
           author: {
             name: resp.user_info.username,
-            avatarUrl: faker.image.avatar(),
+            avatarUrl: resp.user_info.profilePic || DummyPic,
           },
         },
       });
@@ -51,7 +51,7 @@ const BlogCustom = () => {
     <>
       <MainNav />
       {console.log(blogId)}
-      <div className="w-full lg:w-[80%]  mx-auto">
+      <div className="w-[94%] lg:w-[80%] mx-auto">
         {content &&
           content.map((blogItem, index) => {
             if (blogItem !== null)

@@ -16,12 +16,12 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import PublishDialog from "../components/custom/publishDialog";
-import { faker } from "@faker-js/faker";
 import PTSetPost from "../apis/POST/addPost";
 import {
   AlignJustify,
   HeadingIcon,
   ImageIcon,
+  Loader2,
   PlaySquare,
   Save,
   Type,
@@ -29,27 +29,78 @@ import {
 } from "lucide-react";
 import useUserStore from "@/store/authStore";
 import { ToastContainer, toast } from "react-toastify";
+import CategorySelector from "@/components/custom/CategorySeelector";
+import { Input } from "@/components/ui/input";
+import getAllCategories from "@/apis/POST/getAllCategories";
+
+
 
 const Write = () => {
   const [compoenent, setComponenet] = useState<any[]>([]);
   const [length, setLength] = useState<number>(0);
   const { blogItems, removeLastBlogItem } = useBlogStore();
   const getUserInfo = useUserStore((state) => state.getUserInfo);
-  const {user_id}=getUserInfo();
+  const { user_id } = getUserInfo();
+  const [newCategory,setNewCategory]=useState<string>("");
+  const [categories, setCategories] = useState([
+    { categoryId: "1", categoryName: "Category 1" , postCount:0 },
+  ]);
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+  const [isLoading,setIsLoading]=useState<boolean>(false)
+
+  // const [categoryArray,setCategoryArray]=useState<String[]>([]);
+
+  const fetchCategories=async()=>{
+    try{
+      const resp=await getAllCategories();
+      setCategories(()=>{
+        return [...resp]
+      })
+      console.log(resp)
+    }catch(error){
+
+    }
+  }
+  useEffect(()=>{
+    fetchCategories();
+  }, []);
+
+  const handleCategoryToggle = (categoryId: string) => {
+    setSelectedCategories((prevSelected) =>
+      prevSelected.includes(categoryId)
+        ? prevSelected.filter((id) => id !== categoryId)
+        : [...prevSelected, categoryId]
+    );
+
+  };
+
+
   const [post, setPost] = useState({
     postTitle: "",
     postDescription: "",
-    categories: faker.word.words().split(" "),
+    categories:[],
   });
+
+ 
+  const handleNewCategoryChange=(e:any)=>{
+     setNewCategory(e.target.value)
+  }
+  const handelCategoryChange = () => {
+    setPost((prev:any) => {
+      return { ...prev, categories: categories };
+    });
+  };
+
+  useEffect(()=>{
+    handelCategoryChange();
+  },[selectedCategories])
 
   const handlePostChange = (key: string, value: string) => {
     setPost((prev: any) => {
       return { ...prev, [key]: value };
     });
   };
-  useEffect(() => {
-    console.log(blogItems);
-  }, [blogItems]);
+  
   const handleClick = (name: string) => {
     if (name === "title") {
       setComponenet((prev: any) => {
@@ -80,17 +131,21 @@ const Write = () => {
   };
 
   const handleSubmit = async () => {
+   
     try {
       const response = await PTSetPost({
         postDetails: post,
         user_id: user_id,
         content: blogItems,
       });
-      toast.success("Successfully posted !!!")
+      setIsLoading(true)
+      toast.success("Successfully posted !!!");
       console.log(response);
     } catch (error) {
       console.log("error : ", error);
-      toast.error("Error posting !!!")
+      toast.error("Error posting !!!");
+    }finally{
+      setIsLoading(false)
     }
   };
   useEffect(() => {
@@ -99,16 +154,27 @@ const Write = () => {
       return len;
     });
   }, [compoenent]);
+
+  function handleAddCategory(): void {
+    setCategories((prev:any)=>{
+        return [...prev,{
+          categoryId:categories.length,
+          categoryName:newCategory
+        }]
+    })
+    setNewCategory("")
+  }
+
   return (
     <>
       <MainNav />
-      <ToastContainer/>
-      <div className="w-full h-auto bg-slate-200 flex justify-center">
-        <div className="md:w-[80%] w-[95%] h-auto min-h-[100vh] bg-white md:px-10 py-10 mt-[50px] mb-[100px] flex flex-col relative">
+      <ToastContainer />
+      <div className="w-full h-auto bg-slate-200  flex justify-center">
+        <div className="md:w-[80%] w-[95%] h-auto min-h-[100vh] bg-white md:px-10 py-10 mt-[50px] mb-[100px] flex flex-col relative rounded-md px-2">
           <AlertDialog>
             <AlertDialogTrigger>
               <Badge
-                className="absolute top-4 right-4 text-sm"
+                className="absolute text-xs top-4 right-4 md:text-sm"
                 variant="publish"
               >
                 Publish
@@ -116,26 +182,39 @@ const Write = () => {
             </AlertDialogTrigger>
             <AlertDialogContent>
               <div className="flex justify-end">
-                <AlertDialogCancel>
-                  X
-                </AlertDialogCancel>
+                <AlertDialogCancel>X</AlertDialogCancel>
               </div>
               <PublishDialog handler={handlePostChange} details={post} />
               <AlertDialogFooter>
+                <div className="flex flex-col gap-4 w-full">
                 <Button onClick={handleSubmit} type="submit">
-                  Publish
+                {isLoading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null} Publish
                 </Button>
+                <div className="w-full">
+                <CategorySelector
+                  categories={categories}
+                  selectedCategories={selectedCategories}
+                  onCategoryToggle={handleCategoryToggle}
+                />
+                </div>
+                <div className="flex justify-center">
+                  <Input value={newCategory} onChange={(e)=>handleNewCategoryChange(e)} />
+                  <Button onClick={()=>handleAddCategory()} value='outline' className="text-xs ml-4">Add Category</Button>
+                </div>
+                
+                </div>
+               
+               
               </AlertDialogFooter>
             </AlertDialogContent>
           </AlertDialog>
-          <div>
-          {compoenent &&
-            compoenent.map((comp: any) => {
-              return comp;
-            })}
-            
+          <div className="py-4">
+            {compoenent &&
+              compoenent.map((comp: any) => {
+                return comp;
+              })}
           </div>
-          
+
           <div className="sm:hidden fixed bottom-0 left-0 w-full py-3 bg-white flex justify-evenly md:flex md:justify-around items-center">
             <Button
               onClick={() => handleClick("title")}
@@ -143,10 +222,7 @@ const Write = () => {
               name="title"
               variant="outline"
             >
-              <Type
-                size={28}
-                strokeWidth={1}
-              />
+              <Type size={28} strokeWidth={1} />
             </Button>
             <Button
               onClick={() => handleClick("paragraph")}

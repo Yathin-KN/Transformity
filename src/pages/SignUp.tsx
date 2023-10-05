@@ -32,7 +32,7 @@ export const SignUp = () => {
       formData.append('password', values.password);
       formData.append('profilePic', values.profilePic);
 
-      const response = await axios.post('http://localhost:2000/api/client/createUser', formData, {
+      const response = await axios.post('https://vcw4zbgl-2000.inc1.devtunnels.ms/api/client/createUser', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },

@@ -5,6 +5,8 @@ interface detailProps {
   postTitle: string;
   postDescription: string;
 }
+
+
 const PublishDialog = ({
   handler,
   details,
@@ -12,6 +14,7 @@ const PublishDialog = ({
   handler: (key: string, value: string) => void;
   details: detailProps;
 }) => {
+  
   return (
     <>
       <div className="flex flex-col gap-4 w-full">
@@ -31,6 +34,7 @@ const PublishDialog = ({
             value={details.postDescription}
             onChange={(e) => handler("postDescription", e.target.value)}
           ></textarea>
+          
         </form>
       </div>
     </>

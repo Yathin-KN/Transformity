@@ -1,14 +1,18 @@
 import { useEffect, useState } from "react";
 import { MainNav } from "../components/custom/main_nav";
-import { Event } from "@/lib/types";
-import generateRandomEvents from "@/lib/eventsData";
+import {  EventData } from "@/lib/types";
+// import generateRandomEvents from "@/lib/eventsData";
 import { Card } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
+// import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { DatePickerWithPresets } from "@/components/custom/datePicker";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
-import { MapPin } from "lucide-react";
+import { MapPin, Trash } from "lucide-react";
+import getAllEvents from "@/apis/POST/getAllEvents";
+import useUserStore from "@/store/authStore";
+import { toast } from "react-toastify";
+import deleteEventById from "@/apis/POST/deletEvent";
 const limitWords = (text: string, limit: number) => {
   const words = text.split(" ");
 
@@ -24,16 +28,30 @@ const limitWords = (text: string, limit: number) => {
 };
 
 const Events = () => {
-  const [events, setEvents] = useState<Event[]>([]);
+  const [events, setEvents] = useState<EventData[]>([]);
   const [keywords, setKeywords] = useState("");
   const [location, setLocation] = useState("");
+ const info=useUserStore(state=>state.getUserInfo)
+ const {user_id }=info();
+  // useEffect(() => {
+  //   const events = generateRandomEvents(10);
+  //   setEvents(events);
+  // }, []);
 
-  useEffect(() => {
-    const events = generateRandomEvents(10);
-    setEvents(events);
-  }, []);
-
-  const filteredEvents = events.filter((event) => {
+  const fetch=async()=>{
+     try{
+      const resp=await getAllEvents();
+      setEvents(resp)
+     }catch(err){
+      console.log(err)
+     }
+  }
+  useEffect(()=>{
+     fetch();
+  },[])
+  var filteredEvents: any[] =[];
+ if(events.length>0){
+    filteredEvents = events.filter((event) => {
     const titleMatch = event.title
       .toLowerCase()
       .includes(keywords.toLowerCase());
@@ -41,8 +59,23 @@ const Events = () => {
       .toLowerCase()
       .includes(location.toLowerCase());
     return titleMatch && locationMatch;
-  });
+  });}
 
+  const deleteEvent=async(event_id:string,user_id:string)=>{
+    try{
+      const resp=await deleteEventById(event_id,user_id)
+      toast.success("Sucessfully deleted !")
+      console.log(resp)
+      fetch();
+    }catch(err:any){
+      console.log(err)
+      toast.error(err)
+    }
+  }
+  const handleClick=(event_id:string)=>{
+     console.log(event_id)
+     deleteEvent(event_id,user_id)
+  }
   return (
     <>
       <MainNav />
@@ -67,13 +100,18 @@ const Events = () => {
             <DatePickerWithPresets />
           </div>
         </div>
+
+
         {filteredEvents.length > 0 ? (
           filteredEvents.map((event, index) => {
             return (
               <Card
                 key={index.toString()}
-                className="overflow-hidden flex cursor-pointer shadow-sm rounded-md flex-col w-[90vw] md:flex-row"
+                className="overflow-hidden relative flex cursor-pointer shadow-sm rounded-md flex-col w-[90vw] md:flex-row"
               >
+               {(user_id == event.user_id) && <div className="absolute top-4 right-4">
+               <Trash strokeWidth={1}  onClick={()=>handleClick(event.eventId)}/>
+                </div>}
                 <div className="relative">
                   <img
                     className="brightness-100 hover:brightness-50  md:max-w-[450px] md:max-h-[400px] mr-6"
@@ -87,7 +125,7 @@ const Events = () => {
                     className="absolute top-4 right-4  text-gray-950 text-sm bg-gray-300 opacity-90 px-2 py-1 rounded-md border-gray-800 md:top-4 md:right-10"
                     variant="outline"
                   >
-                    {event.eventDate.toDateString()} at {event.eventTime}
+                    {event.startDate.toString().substring(0,10)} to {event.endDate?.toString().substring(0,10)}
                   </Button>
                 </div>
 
@@ -103,7 +141,7 @@ const Events = () => {
                     <p className="h-[6rem] text-sm  font-sans text-muted-foreground">
                       {limitWords(event.desc, 100)}
                     </p>
-                    <p className="space-x-2">
+                    {/* <p className="space-x-2">
                       {event.categories &&
                         event.categories.map((category, index) => {
                           return (
@@ -116,7 +154,7 @@ const Events = () => {
                             </Badge>
                           );
                         })}
-                    </p>
+                    </p> */}
                     {/* <animated.div className="md:flex gap-2 items-center hidden">
                     <Link to={`/blog/${index}`}>
                       <ArrowTopRightIcon className="text-3xl font-semibold w-6 h-6 cursor-pointer hover:bg-gray-100 m-2 rounded-md" />

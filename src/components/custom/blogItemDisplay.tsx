@@ -9,7 +9,7 @@ const BlogItem: React.FC<BlogItemProps> = ({ item }) => {
       return (
         <>
           <p
-            className="outline-none text-5xl font-extrabold py-6 capitalize border-none focus:outline-none w-full pl-2 focus:border-2"
+            className="outline-none text-4xl font-extrabold py-6 capitalize border-none focus:outline-none w-full pl-2 focus:border-2"
             placeholder="Enter title . . ."
           >
             {item.content}
@@ -41,8 +41,8 @@ const BlogItem: React.FC<BlogItemProps> = ({ item }) => {
     case "Blog Info":
       return (
         <>
-          <Separator className="mb-4" />
-          <div className="py-3 w-full">
+          <Separator className="md:mb-4" />
+          <div className="py-3 w-full px-4 md:px-0">
             <div className="flex gap-6">
               <Avatar>
                 <AvatarImage
@@ -60,17 +60,17 @@ const BlogItem: React.FC<BlogItemProps> = ({ item }) => {
               </div>
             </div>
           </div>
-          <Separator className="my-4" />
+          <Separator className="md:my-4" />
         </>
       );
     case "Image":
       return (
-        <div className="w-full flex  flex-col justify-center">
+        <div className="w-full flex flex-col justify-center py-3">
           <div className="flex flex-col w-full">
             <img
               src={item.content.imageUrl || ""}
               alt={item.content.imageCaption}
-              className="object-fit max-w-[70%] mx-auto"
+              className="object-fit w-full md:max-w-[70%] mx-auto px-2"
             />
             <p className="text-sm text-gray-600 hover:underline text-center py-2 underline-offset-2 focus:outline-none">
               {item.content.imageCaption || "Enter image caption"}

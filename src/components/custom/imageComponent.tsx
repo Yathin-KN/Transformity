@@ -40,7 +40,7 @@ const ImageComponent = ({ index }: { index: number }) => {
       try {
         setIsLoading(true)
         const response = await axios.post(
-          "http://localhost:2000/api/admin/createUrl",
+          "https://vcw4zbgl-2000.inc1.devtunnels.ms/api/admin/createUrl",
           formData,
           {
             headers: {
@@ -81,7 +81,7 @@ const ImageComponent = ({ index }: { index: number }) => {
       <span className="absolute top-4 right-4">{index}</span>
 
       <ToastContainer />
-      <Button className="absolute top-10 right-4" variant='outline' onClick={()=>handleButtonClick()} disabled={isLoading}>
+      <Button className="absolute text-xs bg-gray-100 p-2 bottom-10 right-5 md:top-10 md:right-4" variant='outline' onClick={()=>handleButtonClick()} disabled={isLoading}>
          {isLoading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null} save
          </Button>
       <BlogItem

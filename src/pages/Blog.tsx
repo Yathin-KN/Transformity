@@ -17,6 +17,7 @@ import { Trash2 } from "lucide-react";
 import useUserStore from "@/store/authStore";
 import PTDeletePost from "@/apis/POST/deletePost";
 import { ToastContainer, toast } from "react-toastify";
+import DummyPic from "./../assets/dummy.png"
 // type ColourMap = {
 //   [key: string]: string;
 // };
@@ -141,7 +142,7 @@ const Blog = () => {
                         
                         <div className="flex flex-nowrap pt-2">
                           <Avatar className="h-6 w-6 mr-3">
-                          <AvatarImage src={post.user_info.profilePic || faker.image.avatar()} />
+                          <AvatarImage src={post.user_info.profilePic || DummyPic} />
                           </Avatar>
                           <p className="flex items-center gap-2 w-full justify-between">
                             <p className="flex gap-2 flex-nowrap justify-between">
@@ -167,13 +168,13 @@ const Blog = () => {
                           <p className="h-[6rem] text-sm overflow-hidden font-sans text-muted-foreground">
                             {post.postDetails.postDescription}
                           </p>
-                          <p className="space-x-2">
+                          <p className=" py-3">
                           {post.postDetails.categories.map((category, index) => {
                             return (
                               <Badge
                                 key={index.toString()}
                                 variant="outline"
-                                className="rounded-full font-chivo my-3 text-black capitalize bg-gray-200 shadow-inner font-light"
+                                className="rounded-full font-chivo my-1 mx-1 text-black capitalize bg-gray-200 shadow-inner font-light"
                               >
                                 {category}
                               </Badge>
@@ -201,12 +202,13 @@ const Blog = () => {
           </div>
           <div className="h-full col-span-1 p-4 py-6  border-gray-300 border-l-[1px] flex flex-col">
           <Input
-            className="w-[90%] mx-auto shadow-none rounded-full bg-gray-100 border-none "
+            className="w-full px-4 mx-auto  text-md py-4 shadow-none rounded-sm bg-gray-100 border-none "
             placeholder="Search by category ...."
             onChange={(event) => {
               handleChange(event.target.value);
             }}
             value={category}
+            
           />
           <Separator className="my-6"/>
           <h3 className="text-gray-800 font-semibold font-sans">Recommended Topics</h3>
@@ -216,7 +218,7 @@ const Blog = () => {
                 return  <Badge
                 key={index.toString()}
                 variant="outline"
-                className="rounded-full font-poppins my-1 text-black capitalize bg-gray-100  border-none font-light py-3 px-6 mx-2"
+                className="rounded-full text-sm font-poppins my-1  text-black capitalize bg-gray-100  border-none font-light py-1 px-2 mx-1"
               >
                 {category}
               </Badge>
