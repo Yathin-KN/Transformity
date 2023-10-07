@@ -1,28 +1,7 @@
-import { useEffect } from "react";
-import axios from "axios";
-import useUserStore from "@/store/authStore";
 import { MainNav } from "@/components/custom/main_nav";
 import { motion } from "framer-motion";
 import Img from "./../assets/favicon.png"
 const About = () => {
-  const getAccessToken = useUserStore((state) => state.getAccessToken);
-
-  const accessToken = getAccessToken();
-  const fetch = async () => {
-    try {
-      const resp = await axios.get("https://vcw4zbgl-2000.inc1.devtunnels.ms/api/client/show", {
-        headers: {
-          Authorization: accessToken,
-        },
-      });
-      console.log(resp);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-  useEffect(() => {
-    fetch();
-  }, []);
   return (
     <>
       <MainNav />

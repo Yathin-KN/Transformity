@@ -1,6 +1,6 @@
-import axios from "axios";
+// import axios from "axios";
 import useUserStore from './../../store/authStore'; 
-
+import axiosClient from "../axios";
 const getAccessToken = () => {
   const access_token = useUserStore.getState().getAccessToken();
   return access_token;
@@ -8,7 +8,7 @@ const getAccessToken = () => {
 
 const authorize = async (): Promise<any[]> => {
   try {
-    const response = await axios.get<any>(`https://vcw4zbgl-2000.inc1.devtunnels.ms/api/client/show`,{
+    const response = await axiosClient.get<any>(`/client/show`,{
       headers:{
         Authorization:getAccessToken()
       }

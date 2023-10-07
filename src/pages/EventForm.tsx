@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import axios from "axios";
 import useUserStore from "@/store/authStore";
 import { MainNav } from "@/components/custom/main_nav";
 import { ToastContainer, toast } from "react-toastify";
 import { Loader2 } from "lucide-react";
 import "react-toastify/ReactToastify.css"
+import axiosClient from "@/apis/axios";
 interface EventFormProps {}
 interface EventFormData {
   title: string;
@@ -47,8 +47,8 @@ const EventForm: React.FC<EventFormProps> = () => {
   const postEvent=async(formData: any)=>{
     try{
       setIsLoading(true)
-      const response = await axios.post(
-        "https://vcw4zbgl-2000.inc1.devtunnels.ms/api/admin/addEvent",
+      const response = await axiosClient.post(
+        "/admin/addEvent",
         formData,
         {
           headers: {

@@ -78,12 +78,16 @@ const Events = () => {
     try{
       setIsDeleteLoading(true)
       const resp=await deleteEventById(event_id,user_id)
-      toast.success("Sucessfully deleted !")
+      toast.success("Sucessfully deleted !",{
+        delay:1500
+      })
       console.log(resp)
       fetch();
     }catch(err:any){
       console.log(err)
-      toast.error(err)
+      toast.error(err,{
+        delay:1500
+      })
     }finally{
       setIsDeleteLoading(false)
     }
@@ -96,7 +100,9 @@ const Events = () => {
   return (
     <>
       <MainNav />
-      <ToastContainer/>
+      <ToastContainer toastClassName={() => 
+        " relative flex p-1 min-h-10 rounded-md justify-between overflow-hidden cursor-pointer bg-white text-gray-800 text-sm p-4 m-4"
+      }/>
       <div className="flex flex-col gap-4 justify-center items-center py-4 px-4">
         <div className="w-full px-0 py-6 flex gap-4 flex-col justify-center md:gap-6 sticky md:items-end md:flex-row md:px-10 md:justify-evenly">
           <h1 className="w-72 text-3xl font-bold  md:text-5xl">Events</h1>

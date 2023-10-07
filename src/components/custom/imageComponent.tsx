@@ -49,7 +49,9 @@ const ImageComponent = ({ index }: { index: number }) => {
           }
         );
         console.log("Image uploaded successfully!", response.data);
-        toast.success("Image uploaded successfully!")
+        toast.success("Image uploaded successfully!",{
+          delay:1500
+        })
         handleImageUrlChange(response.data.url);
       } catch (error) {
         console.error("Error uploading image:", error);
@@ -80,7 +82,9 @@ const ImageComponent = ({ index }: { index: number }) => {
     <div className="w-full relative">
       <span className="absolute top-4 right-4">{index}</span>
 
-      <ToastContainer />
+      <ToastContainer toastClassName={() => 
+        " relative flex p-1 min-h-10 rounded-md justify-between overflow-hidden cursor-pointer bg-white text-gray-800 text-sm p-4 m-4"
+      }/>
       <Button className="absolute text-xs bg-gray-100 p-2 bottom-10 right-5 md:top-10 md:right-4" variant='outline' onClick={()=>handleButtonClick()} disabled={isLoading}>
          {isLoading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null} save
          </Button>

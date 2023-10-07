@@ -120,11 +120,15 @@ const Write = () => {
         user_id: user_id,
         content: blogItems,
       });
-      toast.success("Successfully posted !!!");
+      toast.success("Successfully posted !!!",{
+        delay:1500
+      });
       console.log(response);
     } catch (error) {
       console.log("error : ", error);
-      toast.error("Error posting !!!");
+      toast.error("Error posting !!!",{
+        delay:1500
+      });
     } finally {
       setIsLoading(false);
     }
@@ -165,7 +169,9 @@ const Write = () => {
   return (
     <>
       <MainNav />
-      <ToastContainer />
+      <ToastContainer toastClassName={() => 
+        " relative flex p-1 min-h-10 rounded-md justify-between overflow-hidden cursor-pointer bg-white text-gray-800 text-sm p-4 m-4"
+      }/>
       <div className="w-full h-auto bg-slate-200  flex justify-center">
         <div className="md:w-[80%] w-[95%] h-auto min-h-[100vh] bg-white md:px-10 py-10 mt-[50px] mb-[100px] flex flex-col relative rounded-md px-2">
           <AlertDialog>

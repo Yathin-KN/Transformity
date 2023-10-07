@@ -92,10 +92,14 @@ const Blog = () => {
         post_id
        })
        console.log(resp)
-       toast.success(resp.message)
+       toast.success(resp.message,{
+        delay:1500
+       })
        fetch()
      }catch(error){
-        toast.error("post wasn't deleted")
+        toast.error("post wasn't deleted",{
+          delay:1500
+        })
      }finally{
       setIsDeleteLoading(false)
      }
@@ -107,7 +111,9 @@ const Blog = () => {
   return (
     <>
       <MainNav className="bg-white" />
-      <ToastContainer/>
+      <ToastContainer toastClassName={() => 
+        " relative flex p-1 min-h-10 rounded-md justify-between overflow-hidden cursor-pointer bg-white text-gray-800 text-sm p-4 m-4"
+      }/>
       <div className="w-screen h-screen flex flex-col box-border">
         <div className="flex flex-col-reverse md:grid md:grid-cols-4 w-max-full">
           <div className="w-full flex flex-col-reverse md:justify-start   md:col-span-3">
