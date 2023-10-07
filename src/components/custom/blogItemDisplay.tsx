@@ -32,6 +32,7 @@ const BlogItem: React.FC<BlogItemProps> = ({ item }) => {
             <p
               className="text-md w-full border-transparent border-l-2 focus:outline-none resize-none focus:border-l-2 focus:border-gray-400 pl-2 h-auto py-4"
               draggable={false}
+              style={{ whiteSpace: 'pre-wrap' }}
             >
               {item.content}
             </p>

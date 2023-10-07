@@ -29,9 +29,9 @@ import {
 } from "lucide-react";
 import useUserStore from "@/store/authStore";
 import { ToastContainer, toast } from "react-toastify";
-import CategorySelector from "@/components/custom/CategorySeelector";
 import { Input } from "@/components/ui/input";
 import getAllCategories from "@/apis/POST/getAllCategories";
+import { Category } from "@/lib/types";
 
 
 
@@ -42,10 +42,9 @@ const Write = () => {
   const getUserInfo = useUserStore((state) => state.getUserInfo);
   const { user_id } = getUserInfo();
   const [newCategory,setNewCategory]=useState<string>("");
-  const [categories, setCategories] = useState([
-    { categoryId: "1", categoryName: "Category 1" , postCount:0 },
+  const [categories, setCategories] = useState<Category[]>([
   ]);
-  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+  const [selectedCategories, setSelectedCategories] = useState<Category[]>([]);
   const [isLoading,setIsLoading]=useState<boolean>(false)
 
   // const [categoryArray,setCategoryArray]=useState<String[]>([]);
@@ -65,14 +64,7 @@ const Write = () => {
     fetchCategories();
   }, []);
 
-  const handleCategoryToggle = (categoryId: string) => {
-    setSelectedCategories((prevSelected) =>
-      prevSelected.includes(categoryId)
-        ? prevSelected.filter((id) => id !== categoryId)
-        : [...prevSelected, categoryId]
-    );
-
-  };
+  
 
 
   const [post, setPost] = useState({
@@ -87,9 +79,10 @@ const Write = () => {
   }
   const handelCategoryChange = () => {
     setPost((prev:any) => {
-      return { ...prev, categories: categories };
+      return { ...prev, categories: selectedCategories};
     });
   };
+
 
   useEffect(()=>{
     handelCategoryChange();
@@ -133,12 +126,12 @@ const Write = () => {
   const handleSubmit = async () => {
    
     try {
+      setIsLoading(true)
       const response = await PTSetPost({
         postDetails: post,
         user_id: user_id,
         content: blogItems,
       });
-      setIsLoading(true)
       toast.success("Successfully posted !!!");
       console.log(response);
     } catch (error) {
@@ -165,6 +158,17 @@ const Write = () => {
     setNewCategory("")
   }
 
+  const handelCategoryClick = (category: Category) => {
+    setSelectedCategories(prev => {
+      const isCategorySelected = prev.some(cat => cat.categoryId === category.categoryId);
+  
+      if (isCategorySelected) {
+        return prev.filter(cat => cat.categoryId !== category.categoryId);
+      } else {
+        return [...prev, category];
+      }
+    });
+  };
   return (
     <>
       <MainNav />
@@ -187,15 +191,24 @@ const Write = () => {
               <PublishDialog handler={handlePostChange} details={post} />
               <AlertDialogFooter>
                 <div className="flex flex-col gap-4 w-full">
-                <Button onClick={handleSubmit} type="submit">
-                {isLoading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null} Publish
+                <Button onClick={handleSubmit} type="submit" variant="outline_custom" disabled={isLoading}>
+                {isLoading? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null} Publish 
                 </Button>
+                <div className="flex flex-col">
+                  {selectedCategories && <p className="text-md">Selected Categories :</p>}
+                 <div className="flex gap-2">
+                 {selectedCategories&& selectedCategories.map((category)=>{
+                    return <Badge className="text-sm">{category.categoryName}</Badge>
+                  })}
+                 </div>
+                </div>
                 <div className="w-full">
-                <CategorySelector
-                  categories={categories}
-                  selectedCategories={selectedCategories}
-                  onCategoryToggle={handleCategoryToggle}
-                />
+                {
+                  categories && categories.map((category)=>{
+                    return <Badge className="text-xs font-light mx-1 my-1 cursor-pointer" variant="outline" onClick={()=>handelCategoryClick(category)}>{category.categoryName} <span className="ml-1 p-2 max-h-4 max-w-4 text-center flex items-center rounded-full bg-gray-400 text-white text-xs"><>{category.postCount}</></span></Badge>
+                  })
+                }
+                
                 </div>
                 <div className="flex justify-center">
                   <Input value={newCategory} onChange={(e)=>handleNewCategoryChange(e)} />

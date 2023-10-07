@@ -8,15 +8,15 @@ const Paragraph = ({ index }: { index: number }) => {
     content: "",
   });
   const { updateBlogItem } = useBlogStore();
-  const handleChange = (title: string) => {
+  const handleChange = (e: any) => {
     updateBlogItem(index,{
         type: "Description",
-        content: title, 
+        content: e.target.innerText, 
     })
     setParagraphJson(() => {
       return {
         type: "Description",
-        content: title,
+        content: e.target.innerText,
       };
     });
   };

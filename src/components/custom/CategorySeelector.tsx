@@ -1,16 +1,5 @@
+import { CategorySelectorProps } from '@/lib/types';
 import React from 'react';
-
-interface Category {
-  categoryId: string;
-  categoryName: string;
-  postCount:number;
-}
-
-interface CategorySelectorProps {
-  categories: Category[];
-  selectedCategories: string[];
-  onCategoryToggle: (categoryId: string) => void;
-}
 
 const CategorySelector: React.FC<CategorySelectorProps> = ({
   categories,
@@ -20,22 +9,23 @@ const CategorySelector: React.FC<CategorySelectorProps> = ({
   return (
     <div>
       <h2>Categories</h2>
+      <div className='flex'>
       {categories && categories.map((category) => {
-        console.log("-----\n",category)
-        return <div key={category.categoryId}>
+        return <div key={category.categoryId} className='flex flex-wrap'>
           <input
             type="checkbox"
-            checked={selectedCategories.includes(category.categoryId)}
-            onChange={() => onCategoryToggle(category.categoryId)}
+            checked={selectedCategories.includes(category)}
+            onChange={() => onCategoryToggle(category)}
           />
           {category.categoryName}
         </div>
 })}
+      </div>
       <h3>Selected Categories</h3>
-      <ul>
-        {selectedCategories && selectedCategories.map((id) => (
-          <li key={id}>
-            {categories.find((category) => category.categoryId === id)?.categoryName}
+      <ul className='flex flex-wrap'>
+        {selectedCategories && selectedCategories.map((scategory) => (
+          <li key={scategory.categoryId}>
+            {categories.find((category) => category.categoryId === scategory.categoryId)?.categoryName}
           </li>
         ))}
       </ul>

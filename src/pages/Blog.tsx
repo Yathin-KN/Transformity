@@ -2,7 +2,6 @@ import { MainNav } from "@/components/custom/main_nav";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-// import { generateDummyPosts } from "@/lib/data";
 import { Post } from "@/lib/types";
 import { useEffect, useState } from "react";
 import { ArrowTopRightIcon } from "@radix-ui/react-icons";
@@ -13,25 +12,12 @@ import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { faker } from "@faker-js/faker";
 import getAllPosts from "@/apis/POST/getAllPosts";
 import 'react-toastify/dist/ReactToastify.css';
-import { Trash2 } from "lucide-react";
+import { Loader2, Trash2 } from "lucide-react";
 import useUserStore from "@/store/authStore";
 import PTDeletePost from "@/apis/POST/deletePost";
 import { ToastContainer, toast } from "react-toastify";
 import DummyPic from "./../assets/dummy.png"
-// type ColourMap = {
-//   [key: string]: string;
-// };
 
-// const colour: ColourMap = {
-//   "1": "#f24933",
-//   "2": "#fa902d",
-//   "3": "#fae034",
-//   "4": "#66ed51",
-// };
-
-// function randomInteger(): number {
-//   return Math.floor(Math.random() * 4) + 1;
-// }
 
 function randomCategories():string[]{
   const categories:string[]=[]
@@ -53,6 +39,7 @@ const Blog = () => {
   const user_info = useUserStore(state=>state.getUserInfo)
   const {user_id} = user_info();
 
+  const [isDeleteLoading,setIsDeleteLoading]=useState(false);
 
 
   const fetch=async()=>{
@@ -99,6 +86,7 @@ const Blog = () => {
       post_id
      })
      try{
+      setIsDeleteLoading(true)
        const resp=await PTDeletePost({
         user_id,
         post_id
@@ -108,6 +96,8 @@ const Blog = () => {
        fetch()
      }catch(error){
         toast.error("post wasn't deleted")
+     }finally{
+      setIsDeleteLoading(false)
      }
   }
   useEffect(() => {
@@ -189,7 +179,7 @@ const Blog = () => {
                             <p className="text-muted-foreground text-sm text-black ">
                               Read more ...
                             </p>
-                            {(user_id === post.user_id) && <Trash2 strokeWidth={1} onClick={()=>handleRemovePost(post.post_id)} />}
+                            {(user_id === post.user_id)?<Trash2 strokeWidth={1} onClick={()=>handleRemovePost(post.post_id)} />:<Loader2 visibility={!isDeleteLoading?"hidden":"visible"} strokeWidth={1} className="mr-2 h-4 w-4 animate-spin text-red-500"/>}
                             </div>
                           </animated.div>
                           

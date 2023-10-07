@@ -1,3 +1,4 @@
+
 export interface Event  {
   title: string;
   desc: string;
@@ -97,7 +98,7 @@ export type BlogItem =
 export interface BlogItemProps {
   item: BlogItem;
   handlers?: {
-    onChangeHandler: (title: string) => void;
+    onChangeHandler: (e: any) => void;
     onChangeImageUrl?:(imgUrl:string) =>void;
     onChangeVideoUrl?:(videoUrl:string)=>void;
     onFileUpload?:(e:any)=>void;
@@ -127,6 +128,16 @@ export interface EventData {
     eventDescription: string;
     eventId: string;
     user_id: string;
+}
+export interface CategorySelectorProps {
+  categories: Category[];
+  selectedCategories: Category[];
+  onCategoryToggle: (category: Category) => void;
+}
+export interface Category {
+  categoryId: string;
+  categoryName: string;
+  postCount: number;
 }
 
 

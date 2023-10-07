@@ -8,14 +8,14 @@ const BlogItem: React.FC<BlogItemProps> = ({ item, handlers }) => {
     case "Title":
       return (
         <>
+          {console.log("---",item.content)}
           <p
             className="outline-none text-4xl text-gray-800 font-extrabold  capitalize border-none focus:outline-none w-full pl-2 focus:border-2 hover:bg-gray-100 py-4"
             placeholder="Enter title . . ."
             contentEditable={true}
-            onBlur={(e) => handlers?.onChangeHandler(e.target.innerText)}
-          >
-            {item.content}
-          </p>
+            onBlur={(e) => handlers?.onChangeHandler(e)}
+            dangerouslySetInnerHTML={{ __html: item.content }}
+          />
         </>
       );
     case "Subtitle":
@@ -37,10 +37,10 @@ const BlogItem: React.FC<BlogItemProps> = ({ item, handlers }) => {
               className="text-md w-full border-transparent border-l-2 focus:outline-none resize-none focus:border-l-2 focus:border-gray-400 pl-2 h-auto"
               draggable={false}
               contentEditable={true}
-              onBlur={(e) => handlers?.onChangeHandler(e.target.innerText)}
-            >
-              {item.content}
-            </p>
+              onBlur={(e) => handlers?.onChangeHandler(e)}
+              dangerouslySetInnerHTML={{ __html: item.content }}
+              style={{ whiteSpace: 'pre-wrap' }}
+            />
           </div>
         </>
       );

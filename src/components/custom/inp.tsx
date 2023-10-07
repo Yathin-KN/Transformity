@@ -9,16 +9,16 @@ export const Inp = ({index}:{index:number}) => {
         content: ""
     });
     const { updateBlogItem } = useBlogStore();
-    const handleChange = (title: string) => {
+    const handleChange = (e: any) => {
         setTitleJson(() => {
             updateBlogItem(index, {
                 type: "Title",
-                content: title
+                content: e.target.innerText
             });
             
             return {
                 type: "Title",
-                content: title
+                content: e.target.innerText
             };
         });
     };

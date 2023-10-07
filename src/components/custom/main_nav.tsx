@@ -1,6 +1,5 @@
 import { cn } from "@/lib/utils";
 import { Link } from "react-router-dom";
-import { Button } from "../ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -36,36 +35,38 @@ export function MainNav({
         >
           About
         </a>
-        <Link
-          to="/blog"
-          className="text-md font-medium text-muted-foreground transition-colors hover:text-primary"
-        >
-          Blog
-        </Link>
+        <div className="group relative">
+          <Link
+            to="/blog"
+            className="text-md font-medium text-muted-foreground transition-colors hover:text-primary relative"
+          >
+            Blog
+            <div className="absolute hidden group-hover:block h-auto py-3 bg-white">
+              <Link to="/blog/write" className="hover:underline">
+                compose blog
+              </Link>
+            </div>
+          </Link>
+        </div>
         <Link
           to="/team"
           className="text-md font-medium text-muted-foreground transition-colors hover:text-primary"
         >
           Team
         </Link>
-        <a
-          href="/blog/write"
-          className="text-md font-medium text-muted-foreground transition-colors hover:text-primary"
-        >
-          Write
-        </a>
-        <a
-          href="/eventCompose"
-          className="text-md font-medium text-muted-foreground transition-colors hover:text-primary"
-        >
-          Event Compose
-        </a>
-        <a
-          href="/events"
-          className="text-md font-medium text-muted-foreground transition-colors hover:text-primary"
-        >
-          Events
-        </a>
+        <div className="group relative">
+          <Link
+            to="/events"
+            className="text-md font-medium text-muted-foreground transition-colors hover:text-primary"
+          >
+            Events
+            <div className="absolute hidden group-hover:block h-auto py-3 bg-white">
+              <Link to="/eventCompose" className="hover:underline">
+                compose event
+              </Link>
+            </div>
+          </Link>
+        </div>
       </div>
       <div className="flex justify-center items-center">
         <h1 className="font-chivo text-3xl md:text-4xl font-extrabold tracking-widest text-gray-800">
@@ -141,7 +142,7 @@ export function MainNav({
             </DropdownMenuContent>
           </DropdownMenu>
         </div>
-        <div className="hidden sm:flex space-x-2">
+        {/* <div className="hidden sm:flex space-x-2">
           <Button
             variant="outline"
             className="font-poppins border-b-[0.2rem] border-gray-600"
@@ -154,7 +155,7 @@ export function MainNav({
           >
             Login
           </Button>
-        </div>
+        </div> */}
       </div>
     </nav>
   );

@@ -6,16 +6,18 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
+import VerifyWrite from './pages/Verify.tsx';
 import Blog from './pages/Blog.tsx';
 import BlogCustom from './components/custom/CustomBlog.tsx';
-import Write from './pages/write.tsx';
 import SignUp from './pages/SignUp.tsx';
 import About from './pages/About.tsx';
 import Events from './pages/Events.tsx';
 import SignIn from './pages/signIn.tsx';
 import Team from './pages/Team.tsx';
-import EventForm from './pages/EventForm.tsx';
+// import EventForm from './pages/EventForm.tsx';
 // import EventForm from './pages/CreateEvent.tsx';
+
+
 
 const router = createBrowserRouter([
   {
@@ -23,13 +25,13 @@ const router = createBrowserRouter([
     element: <App/>,
   },{
     path:"/blog/:blogId",
-    element:<BlogCustom/>
+    element:<BlogCustom />
   },{
     path:"/blog",
     element:<Blog/>
   },{
     path:"/blog/write",
-    element:<Write/>
+    element:<VerifyWrite type={'write'}/>,
   },{
     path:"/signup",
     element:<SignUp/>
@@ -47,7 +49,7 @@ const router = createBrowserRouter([
     element:<Team/>
   },{
     path:"/eventCompose",
-    element:<EventForm/>
+    element:<VerifyWrite type={'EventCompose'}/>
   }
 ]);
 
