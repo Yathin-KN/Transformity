@@ -23,7 +23,6 @@ import {
   ImageIcon,
   Loader2,
   PlaySquare,
-  Save,
   Type,
   XSquare,
 } from "lucide-react";
@@ -33,67 +32,57 @@ import { Input } from "@/components/ui/input";
 import getAllCategories from "@/apis/POST/getAllCategories";
 import { Category } from "@/lib/types";
 
-
-
 const Write = () => {
   const [compoenent, setComponenet] = useState<any[]>([]);
   const [length, setLength] = useState<number>(0);
   const { blogItems, removeLastBlogItem } = useBlogStore();
   const getUserInfo = useUserStore((state) => state.getUserInfo);
   const { user_id } = getUserInfo();
-  const [newCategory,setNewCategory]=useState<string>("");
-  const [categories, setCategories] = useState<Category[]>([
-  ]);
+  const [newCategory, setNewCategory] = useState<string>("");
+  const [categories, setCategories] = useState<Category[]>([]);
   const [selectedCategories, setSelectedCategories] = useState<Category[]>([]);
-  const [isLoading,setIsLoading]=useState<boolean>(false)
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   // const [categoryArray,setCategoryArray]=useState<String[]>([]);
 
-  const fetchCategories=async()=>{
-    try{
-      const resp=await getAllCategories();
-      setCategories(()=>{
-        return [...resp]
-      })
-      console.log(resp)
-    }catch(error){
-
-    }
-  }
-  useEffect(()=>{
+  const fetchCategories = async () => {
+    try {
+      const resp = await getAllCategories();
+      setCategories(() => {
+        return [...resp];
+      });
+      console.log(resp);
+    } catch (error) {}
+  };
+  useEffect(() => {
     fetchCategories();
   }, []);
-
-  
-
 
   const [post, setPost] = useState({
     postTitle: "",
     postDescription: "",
-    categories:[],
+    categories: [],
   });
 
- 
-  const handleNewCategoryChange=(e:any)=>{
-     setNewCategory(e.target.value)
-  }
+  const handleNewCategoryChange = (e: any) => {
+    setNewCategory(e.target.value);
+  };
   const handelCategoryChange = () => {
-    setPost((prev:any) => {
-      return { ...prev, categories: selectedCategories};
+    setPost((prev: any) => {
+      return { ...prev, categories: selectedCategories };
     });
   };
 
-
-  useEffect(()=>{
+  useEffect(() => {
     handelCategoryChange();
-  },[selectedCategories])
+  }, [selectedCategories]);
 
   const handlePostChange = (key: string, value: string) => {
     setPost((prev: any) => {
       return { ...prev, [key]: value };
     });
   };
-  
+
   const handleClick = (name: string) => {
     if (name === "title") {
       setComponenet((prev: any) => {
@@ -124,9 +113,8 @@ const Write = () => {
   };
 
   const handleSubmit = async () => {
-   
     try {
-      setIsLoading(true)
+      setIsLoading(true);
       const response = await PTSetPost({
         postDetails: post,
         user_id: user_id,
@@ -137,8 +125,8 @@ const Write = () => {
     } catch (error) {
       console.log("error : ", error);
       toast.error("Error posting !!!");
-    }finally{
-      setIsLoading(false)
+    } finally {
+      setIsLoading(false);
     }
   };
   useEffect(() => {
@@ -149,21 +137,26 @@ const Write = () => {
   }, [compoenent]);
 
   function handleAddCategory(): void {
-    setCategories((prev:any)=>{
-        return [...prev,{
-          categoryId:categories.length,
-          categoryName:newCategory
-        }]
-    })
-    setNewCategory("")
+    setCategories((prev: any) => {
+      return [
+        ...prev,
+        {
+          categoryId: categories.length,
+          categoryName: newCategory,
+        },
+      ];
+    });
+    setNewCategory("");
   }
 
   const handelCategoryClick = (category: Category) => {
-    setSelectedCategories(prev => {
-      const isCategorySelected = prev.some(cat => cat.categoryId === category.categoryId);
-  
+    setSelectedCategories((prev) => {
+      const isCategorySelected = prev.some(
+        (cat) => cat.categoryId === category.categoryId
+      );
+
       if (isCategorySelected) {
-        return prev.filter(cat => cat.categoryId !== category.categoryId);
+        return prev.filter((cat) => cat.categoryId !== category.categoryId);
       } else {
         return [...prev, category];
       }
@@ -191,33 +184,63 @@ const Write = () => {
               <PublishDialog handler={handlePostChange} details={post} />
               <AlertDialogFooter>
                 <div className="flex flex-col gap-4 w-full">
-                <Button onClick={handleSubmit} type="submit" variant="outline_custom" disabled={isLoading}>
-                {isLoading? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null} Publish 
-                </Button>
-                <div className="flex flex-col">
-                  {selectedCategories && <p className="text-md">Selected Categories :</p>}
-                 <div className="flex gap-2">
-                 {selectedCategories&& selectedCategories.map((category)=>{
-                    return <Badge className="text-sm">{category.categoryName}</Badge>
-                  })}
-                 </div>
+                  <Button
+                    onClick={handleSubmit}
+                    type="submit"
+                    variant="outline_custom"
+                    disabled={isLoading}
+                  >
+                    {isLoading ? (
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    ) : null}{" "}
+                    Publish
+                  </Button>
+                  <div className="flex flex-col">
+                    {selectedCategories && (
+                      <p className="text-sm">Selected Categories :</p>
+                    )}
+                    <div className="flex gap-2">
+                      {selectedCategories &&
+                        selectedCategories.map((category) => {
+                          return (
+                            <Badge className="text-ms text-white">
+                              {category.categoryName}
+                            </Badge>
+                          );
+                        })}
+                    </div>
+                  </div>
+                  <div className="w-full h-max-[20%] overflow-y-scroll">
+                    {categories &&
+                      categories.map((category) => {
+                        return (
+                          <Badge
+                            className="text-xs font-light mx-1 my-1 py-1 cursor-pointer"
+                            variant="outline"
+                            onClick={() => handelCategoryClick(category)}
+                          >
+                            {category.categoryName}{" "}
+                            <span className="ml-1 p-2 max-h-4 max-w-4 text-center flex items-center rounded-full bg-gray-400 text-white text-xs">
+                              <>{category.postCount}</>
+                            </span>
+                          </Badge>
+                        );
+                      })}
+                  </div>
+                  <div className="flex justify-center">
+                    <Input
+                      value={newCategory}
+                      onChange={(e) => handleNewCategoryChange(e)}
+                    />
+                    <Button
+                      onClick={() => handleAddCategory()}
+                      value="outline"
+                      className="text-xs ml-4"
+                    >
+                      <span className="flex">Category +</span>
+                    </Button>
+                  </div>
                 </div>
-                <div className="w-full">
-                {
-                  categories && categories.map((category)=>{
-                    return <Badge className="text-xs font-light mx-1 my-1 cursor-pointer" variant="outline" onClick={()=>handelCategoryClick(category)}>{category.categoryName} <span className="ml-1 p-2 max-h-4 max-w-4 text-center flex items-center rounded-full bg-gray-400 text-white text-xs"><>{category.postCount}</></span></Badge>
-                  })
-                }
-                
-                </div>
-                <div className="flex justify-center">
-                  <Input value={newCategory} onChange={(e)=>handleNewCategoryChange(e)} />
-                  <Button onClick={()=>handleAddCategory()} value='outline' className="text-xs ml-4">Add Category</Button>
-                </div>
-                
-                </div>
-               
-               
               </AlertDialogFooter>
             </AlertDialogContent>
           </AlertDialog>
@@ -238,14 +261,6 @@ const Write = () => {
               <Type size={28} strokeWidth={1} />
             </Button>
             <Button
-              onClick={() => handleClick("paragraph")}
-              className="border-none shadow-none p-2"
-              name="paragraph"
-              variant="outline"
-            >
-              <AlignJustify size={28} strokeWidth={1} />
-            </Button>
-            <Button
               onClick={() => handleClick("subtitle")}
               name="subtitle"
               className="border-none shadow-none p-2"
@@ -253,6 +268,15 @@ const Write = () => {
             >
               <HeadingIcon size={28} strokeWidth={1} />
             </Button>
+            <Button
+              onClick={() => handleClick("paragraph")}
+              className="border-none shadow-none p-2"
+              name="paragraph"
+              variant="outline"
+            >
+              <AlignJustify size={28} strokeWidth={1} />
+            </Button>
+
             <Button
               onClick={() => handleClick("image")}
               className="border-none shadow-none m-0 w-auto h-auto p-2"
@@ -269,14 +293,14 @@ const Write = () => {
             >
               <PlaySquare size={28} strokeWidth={1} />
             </Button>
-            <Button
+            {/* <Button
               onClick={() => handleClick("save")}
               className="border-none shadow-none p-2"
               name="save"
               variant="outline"
             >
               <Save size={28} strokeWidth={1} />
-            </Button>
+            </Button> */}
             <Button
               onClick={() => handleClick("subtitl")}
               name="ttle"

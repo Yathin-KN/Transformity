@@ -17,7 +17,7 @@ export function MainNav({
   return (
     <nav
       className={cn(
-        "flex items-center z-50 justify-between space-x-4 lg:space-x-6 py-6 px-6 md:px-10 sticky top-0 shadow-inner border-b-[0.1rem] font-chivo h-full w-full bg-slate-100 rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-60 border",
+        "flex items-center z-50 justify-between space-x-4 lg:space-x-6 py-3 md:py-6 px-6 md:px-10 sticky top-0 shadow-inner border-b-[0.1rem] font-chivo h-full w-full bg-slate-100 rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-60 border",
         className
       )}
       {...props}
@@ -41,7 +41,7 @@ export function MainNav({
             className="text-md font-medium text-muted-foreground transition-colors hover:text-primary relative"
           >
             Blog
-            <div className="absolute hidden group-hover:block h-auto py-3 bg-white">
+            <div className="absolute hidden group-hover:block h-auto py-3 bg-white px-2 border rounded-md">
               <Link to="/blog/write" className="hover:underline">
                 compose blog
               </Link>
@@ -60,7 +60,7 @@ export function MainNav({
             className="text-md font-medium text-muted-foreground transition-colors hover:text-primary"
           >
             Events
-            <div className="absolute hidden group-hover:block h-auto py-3 bg-white">
+            <div className="absolute hidden group-hover:block h-auto py-3 bg-white px-2 border rounded-md">
               <Link to="/eventCompose" className="hover:underline">
                 compose event
               </Link>
@@ -69,7 +69,7 @@ export function MainNav({
         </div>
       </div>
       <div className="flex justify-center items-center">
-        <h1 className="font-chivo text-3xl md:text-4xl font-extrabold tracking-widest text-gray-800">
+        <h1 className="font-chivo text-2xl md:text-4xl font-extrabold tracking-widest text-gray-800">
           Transformity
         </h1>
         <img src={Img} className="w-16 h-16 brightness-125"></img>
@@ -80,9 +80,9 @@ export function MainNav({
             <DropdownMenuTrigger className="focus:border-none focus:outline-none">
               <Menu />
             </DropdownMenuTrigger>
-            <DropdownMenuContent className="mt-6">
-              <DropdownMenuLabel>My Account</DropdownMenuLabel>
-              <DropdownMenuSeparator />
+            <DropdownMenuContent className="mt-6 mr-2">
+              {/* <DropdownMenuLabel>My Account</DropdownMenuLabel> */}
+              {/* <DropdownMenuSeparator /> */}
               <DropdownMenuItem>
                 <Link
                   to="/"
@@ -99,14 +99,7 @@ export function MainNav({
                   About
                 </Link>
               </DropdownMenuItem>
-              <DropdownMenuItem>
-                <Link
-                  to="/eventCompose"
-                  className="text-md font-medium text-muted-foreground transition-colors hover:text-primary"
-                >
-                  Event Compose
-                </Link>
-              </DropdownMenuItem>
+              
               <DropdownMenuItem>
                 <Link
                   to="/team"
@@ -115,6 +108,8 @@ export function MainNav({
                   Team
                 </Link>
               </DropdownMenuItem>
+              <DropdownMenuLabel>Blog</DropdownMenuLabel>
+              <DropdownMenuSeparator />
               <DropdownMenuItem>
                 <Link
                   to="/blog/write"
@@ -123,6 +118,18 @@ export function MainNav({
                   Write
                 </Link>
               </DropdownMenuItem>
+              
+              <DropdownMenuItem>
+                <Link
+                  to="/blog"
+                  className="text-md font-medium text-muted-foreground transition-colors hover:text-primary"
+                >
+                  Blog
+                </Link>
+                
+              </DropdownMenuItem>
+              <DropdownMenuLabel>Events</DropdownMenuLabel>
+              <DropdownMenuSeparator />
               <DropdownMenuItem>
                 <Link
                   to="/events"
@@ -133,10 +140,10 @@ export function MainNav({
               </DropdownMenuItem>
               <DropdownMenuItem>
                 <Link
-                  to="/blog"
+                  to="/eventCompose"
                   className="text-md font-medium text-muted-foreground transition-colors hover:text-primary"
                 >
-                  Blog
+                  Event Compose
                 </Link>
               </DropdownMenuItem>
             </DropdownMenuContent>

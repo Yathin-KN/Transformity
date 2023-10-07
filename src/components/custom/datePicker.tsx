@@ -18,9 +18,23 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 
-export function DatePickerWithPresets() {
+function convertDateFormat(inputDate: string): string {
+  const dateObject = new Date(inputDate);
+  const year = dateObject.getFullYear();
+  const month = String(dateObject.getMonth() + 1).padStart(2, '0'); // Adding 1 because months are 0-based
+  const day = String(dateObject.getDate()).padStart(2, '0');
+  
+  return `${year}-${month}-${day}`;
+}
+
+export function DatePickerWithPresets({setEventDate}:{setEventDate:any}) {
   const [date, setDate] = React.useState<Date>()
 
+  React.useEffect(()=>{
+    // setEventDate(date)
+    if(date)
+    setEventDate(convertDateFormat(date.toDateString()))
+  },[date])
   return (
     <Popover>
       <PopoverTrigger asChild>

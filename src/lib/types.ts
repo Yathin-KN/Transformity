@@ -7,6 +7,8 @@ export interface Event  {
   categories?:string[];
   eventDate: Date;
   eventTime: string;
+  startDate:string;
+  endDate:string;
   eventLocation: string;
   eventDescription: string;
   eventId?:string;

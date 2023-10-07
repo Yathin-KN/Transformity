@@ -1,12 +1,6 @@
 import { EventData } from "@/lib/types";
 import axios from "axios";
 
-// import useUserStore from './../../store/authStore'; 
-
-// const getAccessToken = () => {
-//   const access_token = useUserStore.getState().getAccessToken();
-//   return access_token+"9";
-// };
 
 const getAllEvents = async (): Promise<EventData[]> => {
 

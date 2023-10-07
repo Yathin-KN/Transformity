@@ -8,11 +8,16 @@ import { Input } from "@/components/ui/input";
 import { DatePickerWithPresets } from "@/components/custom/datePicker";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
-import { MapPin, Trash } from "lucide-react";
+import {  ListX, MapPin, Trash } from "lucide-react";
 import getAllEvents from "@/apis/POST/getAllEvents";
 import useUserStore from "@/store/authStore";
-import { toast } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import deleteEventById from "@/apis/POST/deletEvent";
+import React from "react";
+import { useNavigate } from "react-router-dom";
+
+
+
 const limitWords = (text: string, limit: number) => {
   const words = text.split(" ");
 
@@ -32,6 +37,15 @@ const Events = () => {
   const [keywords, setKeywords] = useState("");
   const [location, setLocation] = useState("");
  const info=useUserStore(state=>state.getUserInfo)
+ const [dateEvent, setDateEvent] = React.useState<string>()
+ const [isDeleteLoading,setIsDeleteLoading]=useState<boolean>(false)
+
+ useEffect(()=>{
+   console.log("000000000 ",dateEvent)
+   if(dateEvent){
+    console.log(dateEvent)
+   }
+ },[dateEvent])
  const {user_id }=info();
   // useEffect(() => {
   //   const events = generateRandomEvents(10);
@@ -50,19 +64,19 @@ const Events = () => {
      fetch();
   },[])
   var filteredEvents: any[] =[];
- if(events.length>0){
+  if (events.length > 0) {
     filteredEvents = events.filter((event) => {
-    const titleMatch = event.title
-      .toLowerCase()
-      .includes(keywords.toLowerCase());
-    const locationMatch = event.eventLocation
-      .toLowerCase()
-      .includes(location.toLowerCase());
-    return titleMatch && locationMatch;
-  });}
+      const titleMatch = event.title.toLowerCase().includes(keywords.toLowerCase());
+      const locationMatch = event.eventLocation.toLowerCase().includes(location.toLowerCase());
+      const dateMatch = !dateEvent || event.startDate.toString().substring(0, 10) === dateEvent; // Check if event is on the selected date
+
+      return titleMatch && locationMatch && dateMatch;
+    });
+  }
 
   const deleteEvent=async(event_id:string,user_id:string)=>{
     try{
+      setIsDeleteLoading(true)
       const resp=await deleteEventById(event_id,user_id)
       toast.success("Sucessfully deleted !")
       console.log(resp)
@@ -70,19 +84,23 @@ const Events = () => {
     }catch(err:any){
       console.log(err)
       toast.error(err)
+    }finally{
+      setIsDeleteLoading(false)
     }
   }
   const handleClick=(event_id:string)=>{
      console.log(event_id)
      deleteEvent(event_id,user_id)
   }
+  const navigate=useNavigate();
   return (
     <>
       <MainNav />
-
+      <ToastContainer/>
       <div className="flex flex-col gap-4 justify-center items-center py-4 px-4">
         <div className="w-full px-0 py-6 flex gap-4 flex-col justify-center md:gap-6 sticky md:items-end md:flex-row md:px-10 md:justify-evenly">
           <h1 className="w-72 text-3xl font-bold  md:text-5xl">Events</h1>
+          <p className="text-black">{dateEvent}</p>
           <div>
             <Label htmlFor="keywords">Keywords</Label>
             <Input
@@ -96,21 +114,23 @@ const Events = () => {
             <Label htmlFor="location">Location</Label>
             <Input className="w-full md:w-72" id="location" value={location} onChange={(e) => setLocation(e.target.value)}/>
           </div>
-          <div className="w-full md:w-auto">
-            <DatePickerWithPresets />
+          <div className="w-full md:w-auto flex justify-between gap-3">
+            <DatePickerWithPresets setEventDate={setDateEvent}/>
+            <Button variant='outline' onClick={()=>setDateEvent(undefined)}><ListX strokeWidth={1} /></Button>
           </div>
         </div>
 
-
+       
         {filteredEvents.length > 0 ? (
           filteredEvents.map((event, index) => {
             return (
               <Card
+                onClick={()=>navigate(`/events/${event.eventId}`)}
                 key={index.toString()}
-                className="overflow-hidden relative flex cursor-pointer shadow-sm rounded-md flex-col w-[90vw] md:flex-row"
+                className=" relative flex cursor-pointer shadow-sm rounded-md flex-col w-[90vw] md:flex-row"
               >
-               {(user_id == event.user_id) && <div className="absolute top-4 right-4">
-               <Trash strokeWidth={1}  onClick={()=>handleClick(event.eventId)}/>
+               {(user_id == event.user_id) && <div className="absolute  bottom-4 right-4 ">
+               <Trash strokeWidth={1}  onClick={()=>!isDeleteLoading && handleClick(event.eventId)}  />
                 </div>}
                 <div className="relative">
                   <img
