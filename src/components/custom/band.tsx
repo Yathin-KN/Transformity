@@ -35,7 +35,7 @@ const band = () => {
   return (
     <div className="w-full flex justify-between p-4">
       {
-        podcastStats.map((item,index)=>{
+        podcastStats.map((_item,index)=>{
           return <Item index={index}/>
         })
       }
