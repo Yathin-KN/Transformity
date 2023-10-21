@@ -15,6 +15,8 @@ import Events from './pages/Events.tsx';
 import SignIn from './pages/signIn.tsx';
 import Team from './pages/Team.tsx';
 import Event from "./pages/Event.tsx"
+import Podcast from './pages/podcast.tsx';
+
 // import EventForm from './pages/EventForm.tsx';
 // import EventForm from './pages/CreateEvent.tsx';
 
@@ -54,6 +56,9 @@ const router = createBrowserRouter([
   },{
     path:"/eventCompose",
     element:<VerifyWrite type={'EventCompose'}/>
+  },{
+    path:"/podcast",
+    element:<Podcast/>
   }
 ]);
 

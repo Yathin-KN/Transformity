@@ -3,9 +3,15 @@ import Layout from "./Layout";
 const App = () => {
   return (
     <>
-    <Layout>
+    
+    <div className="w-full h-auto">
+      <div className="w-full h-full rounded-md bg-cover filter backdrop-opacity-60">
+      <Layout>
        <LandingPage/>
     </Layout>
+      </div>
+      
+    </div>
     </>
   )
 }

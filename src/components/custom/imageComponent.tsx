@@ -2,10 +2,10 @@ import { BlogItem as BlogItemProps } from "@/lib/types";
 import { useState } from "react";
 import BlogItem from "./blogItem";
 import useBlogStore from "@/store/blog";
-import axios from "axios";
 import { Button } from "../ui/button";
 import { ToastContainer, toast } from "react-toastify";
 import { Loader2 } from "lucide-react";
+import axiosClient from "@/apis/axios";
 
 const ImageComponent = ({ index }: { index: number }) => {
   const [imageJson, setImageJson] = useState<BlogItemProps>({
@@ -39,8 +39,8 @@ const ImageComponent = ({ index }: { index: number }) => {
       formData.append("media", fileData);
       try {
         setIsLoading(true)
-        const response = await axios.post(
-          "https://vcw4zbgl-2000.inc1.devtunnels.ms/api/admin/createUrl",
+        const response = await axiosClient.post(
+          "admin/createUrl",
           formData,
           {
             headers: {

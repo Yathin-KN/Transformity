@@ -1,33 +1,100 @@
 import { MainNav } from "@/components/custom/main_nav";
-import { Linkedin, Twitter } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import { useInView } from "@react-spring/web";
+import { motion } from "framer-motion";
+import { Linkedin } from "lucide-react";
+import { FaXTwitter } from "react-icons/fa6";
+
+const OpacityParagraphs = ({
+  numParagraphs,
+  name,
+}: {
+  numParagraphs: number;
+  name: string;
+}) => {
+  const [ref, inView] = useInView({
+ 
+  });
+
+  const paragraphs = [];
+
+  for (let i = 0; i < numParagraphs; i++) {
+    const opacity = 1 - i * 0.2; 
+    const scale = 1.05; 
+
+    paragraphs.push(
+      <motion.div
+        ref={ref}
+        key={i}
+        initial={{ opacity: 0, scale }} 
+        animate={{ opacity: inView ? 1 : 0, scale: inView ? 1 : scale }} 
+        transition={{ duration: 0.5, delay: i * 0.2, ease: "easeInOut" }}
+      >
+        <p
+          className="tracking-[0.5rem] md:tracking-[1rem] font-semibold uppercase text-sm md:text-3xl bg-red-500 px-2 py-1 text-center"
+          style={{ opacity }}
+        >
+          {name}
+        </p>
+      </motion.div>
+    );
+  }
+
+  return (
+    <div className="absolute z-10 text-5xl flex flex-col gap-6 w-full">
+      {paragraphs}
+    </div>
+  );
+};
+
 
 const Team = () => {
   return (
     <>
       <MainNav />
-      <div className="w-full h-auto p-6 md:p-8 grid md:grid-cols-2">
-        <div className="grid  w-full md:grid-cols-3">
-          <div className="w-full  flex flex-col col-span-3 md:col-span-1">
-          <img
-            className="md:mb-0 col-span-1 object-cover w-44 h-44 rounded-full mx-auto"
-            src="https://i0.wp.com/transformity.info/wp-content/uploads/2021/04/asanka-2018-scaled.jpg?w=1200&ssl=1"
-            alt="Asanka Abeysinghe"
-          />
-           <div className="flex w-full gap-6 py-6 md:pl-4">
-           <a href="/https://www.linkedin.com/in/asankaabeysinghe/">
-            <Linkedin size={32} />
-            </a>
-            <a href="/https://twitter.com/">
-            <Twitter size={32} />
-            </a>
-            </div>
-          </div>
+      <div className="w-full flex justify-center bg-black text-white  ">
+        <motion.p
+          className="text-xl md:text-[9rem] flex justify-center relative items-center w-full h-auto py-10 uppercase"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          <p className="opacity-30 md:opacity-10 tracking-[1.3rem] text-center py-3 mx-4">Transformity</p>
+          <motion.p
+            className="text-3xl md:text-7xl absolute uppercase tracking-[0.5rem]  md:tracking-[1.5rem] font-extrabold"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.5 }}
+          >
+            Leading team
+          </motion.p>
+        </motion.p>
+      </div>
 
-          <div className="col-span-2">
-            <h2 className="text-2xl font-bold mb-2 my-3">Asanka Abeysinghe</h2>
-            <div className="text-gray-700 mb-8">
-              <p className="mb-4">
+      <div className="w-full h-auto px-6 md:px-8 grid md:grid-rows-2 text-white bg-black">
+        <div className="flex flex-col">
+        <div className="w-full  flex flex-col col-span-3 md:col-span-1 justify-center p-6">
+      <motion.div
+        className="relative flex justify-center items-center"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+      >
+        <img
+          className="md:mb-0 col-span-1 object-cover mx-auto w-[80%] md:w-[30%] aspect-square relative z-20 py-1"
+          src="https://i0.wp.com/transformity.info/wp-content/uploads/2021/04/asanka-2018-scaled.jpg?w=1200&ssl=1"
+          alt="Asanka Abeysinghe"
+        />
+        <OpacityParagraphs numParagraphs={5} name={"Asanka Abeysinghe"} />
+      </motion.div>
+           
+          </div>
+          <div className="col-span-2 py-3">
+            <h2 className="text-3xl font-bold mb-2 my-3 text-center">
+              Asanka Abeysinghe
+            </h2>
+            <div className="text-gray-400 mb-8">
+              <p className="mb-4 ">
                 Asanka’s goal is to connect humans and technology by helping
                 organizations implement digital transformation programs that
                 result in consumer-driven digital applications. In his current
@@ -54,30 +121,35 @@ const Team = () => {
                 tech meetups in San Francisco Bay Area.
               </p>
             </div>
-          </div>
-        </div>
-        <div className="grid w-full  md:grid-cols-3 ">
-          <div className="w-full  col-span-3 md:col-span-1">
-          <img
-            className="md:mb-0 col-span-1 object-cover rounded-full  w-44 h-44 mx-auto"
-            src="https://i0.wp.com/transformity.info/wp-content/uploads/2021/04/Gautham.jpg?w=1200&ssl=1"
-            alt="Dr. Gautham Pallapa"
-          />
-          <div className="flex w-full gap-6 py-6 md:pl-4">
-            <Link to="/">
-            <Linkedin size={32} />
-            </Link>
-            <Link to="/">
-            <Twitter size={32} />
-            </Link>
-              
+            <div className="w-full flex justify-around">
+              <Button variant="outline_custom_team" className="flex gap-3">
+                <Linkedin size={18} />
+                Linkedln
+              </Button>
+              <Button variant="outline_custom_team" className="flex gap-3">
+                <FaXTwitter />
+                Twitter
+              </Button>
             </div>
           </div>
-          <div className="md:ml-8 col-span-2">
-            <h2 className="text-2xl font-bold mb-2 my-3">Dr. Gautham Pallapa</h2>
-
-            <div className=" text-gray-700 mb-8">
-              <p className="mb-4 ">
+        </div>
+        <div className="flex flex-col">
+          <div className="w-full  flex flex-col col-span-3 md:col-span-1 justify-center p-6">
+            <div className="relative flex justify-center items-center">
+              <img
+                className="md:mb-0 col-span-1 object-cover mx-auto w-[80%] md:w-[30%] aspect-square relative z-20 py-1"
+                src="https://i0.wp.com/transformity.info/wp-content/uploads/2021/04/Gautham.jpg?w=1200&ssl=1"
+                alt="Dr. Gautham Pallapa"
+              />
+              <OpacityParagraphs numParagraphs={5} name={"Gautham Pallapa"} />
+            </div>
+          </div>
+          <div className="col-span-2 py-3">
+            <h2 className="text-3xl font-bold mb-2 my-3 text-center">
+              Dr. Gautham Pallapa
+            </h2>
+            <div className="text-gray-400 mb-8">
+              <p className="mb-4 py-3">
                 Dr. Gautham Pallapa is an Executive Advisor for VMware. He works
                 with C-Suite and executives at Global 2000 enterprise customers
                 in transforming their strategy, processes, technologies,
@@ -99,7 +171,15 @@ const Team = () => {
                 Gautham has an upcoming book called “Lead with Empathy” which
                 explores these topics in detail.
               </p>
-              <div className="flex w-full gap-6">
+              <div className="w-full flex justify-around">
+                <Button variant="outline_custom_team" className="flex gap-3">
+                  <Linkedin size={18} />
+                  Linkedln
+                </Button>
+                <Button variant="outline_custom_team" className="flex gap-3">
+                  <FaXTwitter />
+                  Twitter
+                </Button>
               </div>
             </div>
           </div>

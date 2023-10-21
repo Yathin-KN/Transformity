@@ -5,7 +5,7 @@ const About = () => {
   return (
     <>
       <MainNav />
-      <div className="w-full h-auto flex flex-col md:flex-row">
+      <div className="w-full h-auto flex flex-col md:flex-row bg-black">
       <div className="brightness-125 flex justify-center items-center bg-blue-200 w-full">
              <img src={Img} alt="" />
         </div>

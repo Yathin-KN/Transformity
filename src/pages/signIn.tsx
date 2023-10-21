@@ -1,10 +1,10 @@
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import useUserStore from '@/store/authStore';
 import { MainNav } from '@/components/custom/main_nav';
 import { ToastContainer, toast } from 'react-toastify';
+import axiosClient from '@/apis/axios';
 
 const SignInSchema = Yup.object().shape({
   email: Yup.string().email('Invalid email').required('Required'),
@@ -17,7 +17,7 @@ const SignIn = () => {
   const setUser = useUserStore((state) => state.setUser);
   const handleSubmit = async (values:any) => {
     try {
-      const response = await axios.post('https://vcw4zbgl-2000.inc1.devtunnels.ms/api/client/signin', {
+      const response = await axiosClient.post('client/signin', {
         email: values.email,
         password: values.password,
       });

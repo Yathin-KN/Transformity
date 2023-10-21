@@ -110,7 +110,7 @@ const Blog = () => {
 
   return (
     <>
-      <MainNav className="bg-white" />
+      <MainNav />
       <ToastContainer toastClassName={() => 
         " relative flex p-1 min-h-10 rounded-md justify-between overflow-hidden cursor-pointer bg-white text-gray-800 text-sm p-4 m-4"
       }/>

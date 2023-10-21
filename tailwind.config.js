@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+// import img from './public/background.jpg'
 module.exports = {
   darkMode: ["class"],
   content: [
@@ -23,6 +24,9 @@ module.exports = {
       },
     },
     extend: {
+      backgroundImage:{
+       baseImg:"url('./background.jpg')"
+      },
       keyframes: {
         "accordion-down": {
           from: { height: 0 },
