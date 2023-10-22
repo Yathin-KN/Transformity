@@ -31,7 +31,7 @@ const OpacityParagraphs = ({
         transition={{ duration: 0.5, delay: i * 0.2, ease: "easeInOut" }}
       >
         <p
-          className="tracking-[0.5rem] md:tracking-[1rem] font-semibold uppercase text-sm md:text-3xl bg-red-500 px-2 py-1 text-center"
+          className="tracking-[0.5rem] md:tracking-[1rem] font-semibold uppercase text-sm md:text-3xl bg-red-500 px-2 py-1 text-center rounded-sm"
           style={{ opacity }}
         >
           {name}
@@ -51,7 +51,7 @@ const OpacityParagraphs = ({
 const Team = () => {
   return (
     <>
-      <MainNav />
+      <MainNav style={{backgroundColor:'black'}}/>
       <div className="w-full flex justify-center bg-black text-white  ">
         <motion.p
           className="text-xl md:text-[9rem] flex justify-center relative items-center w-full h-auto py-10 uppercase"
@@ -63,7 +63,7 @@ const Team = () => {
           <motion.p
             className="text-3xl md:text-7xl absolute uppercase tracking-[0.5rem]  md:tracking-[1.5rem] font-extrabold"
             initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
+            animate={{ opacity: 1, y: 0 , spacing:2 }}
             transition={{ duration: 0.5, delay: 0.5 }}
           >
             Leading team
@@ -90,7 +90,7 @@ const Team = () => {
            
           </div>
           <div className="col-span-2 py-3">
-            <h2 className="text-3xl font-bold mb-2 my-3 text-center">
+            <h2 className="text-3xl font-bold mb-2 my-3 text-center underline underline-offset-4 decoration-wavy decoration-slate-700 decoration-slice">
               Asanka Abeysinghe
             </h2>
             <div className="text-gray-400 mb-8">
@@ -145,7 +145,7 @@ const Team = () => {
             </div>
           </div>
           <div className="col-span-2 py-3">
-            <h2 className="text-3xl font-bold mb-2 my-3 text-center">
+            <h2 className="text-3xl font-bold mb-2 my-3 text-center underline underline-offset-4 decoration-wavy decoration-slate-700 decoration-slice">
               Dr. Gautham Pallapa
             </h2>
             <div className="text-gray-400 mb-8">

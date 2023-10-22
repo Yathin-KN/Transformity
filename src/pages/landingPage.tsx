@@ -1,33 +1,94 @@
-import favicon from "./../assets/favicon.png";
+// import favicon from "./../assets/favicon.png";
 import React from "react";
 import Carousel from "@/components/custom/Carousel";
 import { Button } from "@/components/ui/button";
-import Gallery from "@/components/ReactSlick/landingSlides";
-import { Background, Parallax } from "react-parallax";
-import Band from "@/components/custom/band";
-const HorizontalBlockWithParallax = () => {
+import { motion } from "framer-motion";
+
+// import { Button } from "@/components/ui/button";
+// import Gallery from "@/components/ReactSlick/landingSlides";
+// import { Background, Parallax } from "react-parallax";
+// import Band from "@/components/custom/band";
+// const HorizontalBlockWithParallax = () => {
+//   return (
+//     <div className="w-[80%] h-full">
+//         <Parallax strength={-250} blur={{ min: -15, max: 15 }}>
+//           <Background className="custom-bg">
+//             <img
+//               src={
+//                 "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+//               }
+//               alt="fill murray"
+//             />
+//           </Background>
+//         </Parallax>
+//       </div>
+//   );
+// };
+
+const slides = [
+  {
+    image:
+      "https://technicaeditorial.com/wordpress/wp-content/uploads/2021/02/iStock-1245226116-small-600x600.jpg",
+    text: "Slide 1 Text",
+  },
+  {
+    image:
+      "https://humanity-summit.com/assets/images/post-photos-square-humanity-summit-ai06.jpeg",
+    text: "Slide 2 Text",
+  },
+ 
+];
+
+const Modal = () => {
   return (
-    <div className="w-[80%] h-full">
-        <Parallax strength={-250} blur={{ min: -15, max: 15 }}>
-          <Background className="custom-bg">
-            <img
-              src={
-                "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
-              }
-              alt="fill murray"
-            />
-          </Background>
-        </Parallax>
+    <div className="w-full grid grid-cols-2 gap-10 p-4 min-h-[50vh] h-auto px-10">
+      <div className="col-span-1 w-full h-full bg-red-500 rounded-lg  shadow-inner flex justify-center items-center">
+        <motion.div
+          whileHover={{ scale: 1.1 }}
+        >
+          <motion.img
+            src="https://i0.wp.com/transformity.info/wp-content/uploads/2021/12/pallapa_3D_01.png?resize=229%2C300&ssl=1"
+            alt="Your Image"
+            className="mt-6"
+          />
+        </motion.div>
       </div>
+      <div className="col-span-1 w-full h-full bg-transparent flex flex-col gap-10 px-10 justify-between">
+        <h1 className="font-saira uppercase text-5xl font-semibold border-l-4 px-4 border-red-600">
+          How did we get started <br /> in this buisness
+        </h1>
+        <p className="font-kanit  text-white">
+          My book launched on December 9, 2021 in both hardcover and eBook
+          format, and is now available anywhere books can be purchased! Click
+          the button below to purchase it. The audiobook should come out
+          sometime in January 2022.
+          <br />
+          A large portion of royalties received from this book will be donated
+          to nonprofit organizations supporting the underprivileged,
+          underrepresented minorities, and the homeless.
+          <br />
+          By purchasing this book, you will make a difference in someone’s life,
+          perform a randtom act of kindness, and positively impact humanity.
+          Thank you for helping.
+        </p>
+        <Button className="rounded-full py-1 px-6 border bg-red-600 border-white text-lg font-saira font-semibold uppercase hover:bg-white hover:text-red-500 hover-border-red-500 w-72">
+          Buy now
+        </Button>
+      </div>
+    </div>
   );
 };
 
 const LandingPage: React.FC = () => {
   return (
-    <div className="w-full p-4 pb-10" >
-      <Carousel />
-      <div className="w-full grid grid-cols-1 md:grid-cols-2 py-10">
-        <div className="flex flex-col justify-center md:px-10 md:relative md:ml-10">
+    <div className="w-full pb-10 h-auto bg-black text-white">
+      <div className="fixed top-0 left-0 w-full bg-black">
+        <Carousel slides={slides} />
+        <Modal />
+      </div>
+
+      {/* <div className="w-full grid grid-cols-1 md:grid-cols-2 py-10">
+        <div className="flex-col justify-center md:px-10 md:relative md:ml-10 hidden">
           <h1 className="text-3xl md:text-6xl font-semibold py-6 text-gray-900">
             Transformity
           </h1>
@@ -39,7 +100,7 @@ const LandingPage: React.FC = () => {
             vel quisquam minima?
           </p>
         </div>
-        <div className="justify-center md:justify-end relative">
+        <div className="justify-center md:justify-end relative hidden">
           <img
             src={favicon}
             className="m-auto z-20 relative brightness-125"
@@ -87,7 +148,7 @@ const LandingPage: React.FC = () => {
           />
         </div>
       </div>
-      <Gallery />
+      <Gallery /> */}
     </div>
   );
 };

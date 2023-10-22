@@ -1,6 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 // import img from './public/background.jpg'
 module.exports = {
+  mode: 'jit',
   darkMode: ["class"],
   content: [
     './pages/**/*.{ts,tsx}',
@@ -14,7 +15,8 @@ module.exports = {
       serif: ['Merriweather', 'serif'],
       poppins :['Poppins', 'serif'],
       chivo:['Chivo Mono','serif'],
-      kanit:['Kanit', 'sans-serif']
+      kanit:['Kanit', 'sans-serif'],
+      saira:['Saira Condensed', 'sans-serif']
     },
     container: {
       center: true,
