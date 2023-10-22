@@ -1,11 +1,8 @@
 import { MainNav } from "@/components/custom/main_nav";
 import { Badge } from "@/components/ui/badge";
-import { Card } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
 import { Post } from "@/lib/types";
 import { useEffect, useState } from "react";
 import { ArrowTopRightIcon } from "@radix-ui/react-icons";
-import { Separator } from "@/components/ui/separator";
 import { animated } from "@react-spring/web";
 import { Link } from "react-router-dom";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
@@ -35,8 +32,8 @@ function randomCategories():string[]{
 const Blog = () => {
   const [blog, setBlog] = useState<Post[]>();
   const [filteredblogs, setFilteredBlogs] = useState<Post[]>();
-  const [category, setCategory] = useState<string>("");
-  const [categories,setCategories]=useState<string[]>([])
+  const [category] = useState<string>("");
+  const [,setCategories]=useState<string[]>([])
   const user_info = useUserStore(state=>state.getUserInfo)
   const {user_id} = user_info();
 
@@ -77,9 +74,6 @@ const Blog = () => {
     }
   };
 
-  const handleChange = (value: string) => {
-    setCategory(value);
-  };
 
   const handleRemovePost=async(post_id:string)=>{
      console.log({
