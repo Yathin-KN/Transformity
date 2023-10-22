@@ -16,7 +16,8 @@ module.exports = {
       poppins :['Poppins', 'serif'],
       chivo:['Chivo Mono','serif'],
       kanit:['Kanit', 'sans-serif'],
-      saira:['Saira Condensed', 'sans-serif']
+      saira:['Saira Condensed', 'sans-serif'],
+      island:['Island Moments', 'cursive']
     },
     container: {
       center: true,

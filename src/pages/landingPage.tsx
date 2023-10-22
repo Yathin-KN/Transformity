@@ -1,29 +1,36 @@
-// import favicon from "./../assets/favicon.png";
 import React from "react";
 import Carousel from "@/components/custom/Carousel";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
+import { Eye, Heart, Hourglass, Plus } from "lucide-react";
+import Footer from "@/components/custom/footer";
+import Gallery from "@/components/ReactSlick/landingSlides";
 
-// import { Button } from "@/components/ui/button";
-// import Gallery from "@/components/ReactSlick/landingSlides";
-// import { Background, Parallax } from "react-parallax";
-// import Band from "@/components/custom/band";
-// const HorizontalBlockWithParallax = () => {
-//   return (
-//     <div className="w-[80%] h-full">
-//         <Parallax strength={-250} blur={{ min: -15, max: 15 }}>
-//           <Background className="custom-bg">
-//             <img
-//               src={
-//                 "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
-//               }
-//               alt="fill murray"
-//             />
-//           </Background>
-//         </Parallax>
-//       </div>
-//   );
-// };
+const bandData=[
+  {
+    "title": <motion.div whileHover={{scale:1.2}} className="flex flex-nowrap font-saira items-center relative text-red-400 md:w-fit">500 <Plus size={42} strokeWidth={3} /> <div className="flex flex-nowrap font-saira items-center absolute top-1 left-1 text-white">500 <Plus size={42} strokeWidth={3} /> </div></motion.div>,
+    "subtitle": "Episodes"
+  },
+  {
+    "title": <motion.div whileHover={{scale:1.2}} className="flex flex-nowrap font-saira items-center relative text-red-400">3000 <Hourglass size={36} strokeWidth={3} /> <div className="flex flex-nowrap font-saira items-center absolute top-1 left-1 text-white">3000 <Hourglass size={36} strokeWidth={3} /> </div></motion.div>,
+    "subtitle": "Minutes"
+  },
+  {
+    "title": <motion.div whileHover={{scale:1.2}} className="flex flex-nowrap font-saira items-center relative text-red-400">1500 <Eye size={36} strokeWidth={3} className="ml-1"/> <div className="flex flex-nowrap font-saira items-center absolute top-1 left-1 text-white">1500 <Eye size={36} strokeWidth={3} className="ml-1"/> </div></motion.div>,
+    "subtitle": "Views"
+  },
+  {
+    "title": <motion.div whileHover={{scale:1.2}} className="flex flex-nowrap font-saira items-center relative text-red-400 w-fit">2.2 K<div className="flex flex-nowrap font-saira items-center absolute top-1 left-1 text-white">2.2K</div></motion.div>,
+    "subtitle": "Downloads"
+  },
+  {
+    "title": <motion.div whileHover={{scale:1.2}} className="flex flex-nowrap font-saira items-center relative text-red-400">1500 <Heart size={36} strokeWidth={3} className="ml-1" fill="white" /> <div className="flex flex-nowrap font-saira items-center absolute top-1 left-1 text-white">1500 <Heart size={36} strokeWidth={3} className="ml-1" fill="white" /> </div></motion.div>,
+    "subtitle": "Likes"
+  }
+]
+
+
+
 
 const slides = [
   {
@@ -84,12 +91,32 @@ const Modal = () => {
   );
 };
 
+const Band=()=>{
+  return (<div className="w-full h-auto py-10 bg-orange-400 md:bg-orange-500 my-10 flex flex-col md:flex-row justify-around items-center relative">
+    {/* <div className="w-[80%] h-full inset-0 absolute bg-orange-300 opacity-40 z-20"></div> */}
+
+    {
+      bandData.map((data,index)=>{
+        return (
+          <div key={index.toString()} className="justify center items-center z-30">
+             <h2 className="text-7xl font-semibold font-saira">{data.title}</h2>
+             <p className="text-center font-saira text-lg tracking-wider text-gray-950">{data.subtitle}</p>
+            </div>
+        )
+      })
+    }
+
+  </div>)
+}
 const LandingPage: React.FC = () => {
   return (
     <div className="w-full pb-10 h-auto bg-black text-white">
       <div className="fixed top-0 left-0 w-full bg-black">
         <Carousel slides={slides} />
         <Modal />
+        <Band/>
+        <Gallery />
+        <Footer/>
       </div>
 
       {/* <div className="w-full grid grid-cols-1 md:grid-cols-2 py-10">

@@ -52,14 +52,14 @@ const Team = () => {
   return (
     <>
       <MainNav style={{backgroundColor:'black'}}/>
-      <div className="w-full flex justify-center bg-black text-white  ">
+      <div className="w-full flex justify-center bg-black text-white py-10 ">
         <motion.p
-          className="text-xl md:text-[9rem] flex justify-center relative items-center w-full h-auto py-10 uppercase"
+          className="text-xl md:text-[9rem] flex justify-center relative items-center w-full h-auto py-6 uppercase"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <p className="opacity-30 md:opacity-10 tracking-[1.3rem] text-center py-3 mx-4">Transformity</p>
+          <p className="opacity-20 md:opacity-10  tracking-tighter md:tracking-[1.3rem] text-center py-3 mx-4 normal-case font-island text-[10rem] md:text-[17rem]">Transformity</p>
           <motion.p
             className="text-3xl md:text-7xl absolute uppercase tracking-[0.5rem]  md:tracking-[1.5rem] font-extrabold"
             initial={{ opacity: 0, y: 20 }}

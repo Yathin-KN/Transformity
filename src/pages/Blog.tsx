@@ -17,6 +17,7 @@ import useUserStore from "@/store/authStore";
 import PTDeletePost from "@/apis/POST/deletePost";
 import { ToastContainer, toast } from "react-toastify";
 import DummyPic from "./../assets/dummy.png"
+import { motion } from "framer-motion";
 
 
 function randomCategories():string[]{
@@ -110,58 +111,83 @@ const Blog = () => {
 
   return (
     <>
+      <div className="w-full h-auto bg-black">
       <MainNav />
+      </div>
       <ToastContainer toastClassName={() => 
         " relative flex p-1 min-h-10 rounded-md justify-between overflow-hidden cursor-pointer bg-white text-gray-800 text-sm p-4 m-4"
       }/>
-      <div className="w-screen h-screen flex flex-col box-border">
-        <div className="flex flex-col-reverse md:grid md:grid-cols-4 w-max-full">
-          <div className="w-full flex flex-col-reverse md:justify-start   md:col-span-3">
-            <div className="w-full h-full grid md:grid-cols-3 gap-3 p-4 ">
+      <div className="w-full flex justify-center bg-black text-white  py-10">
+        <motion.p
+          className="text-xl md:text-[9rem] flex justify-center relative items-center w-full h-auto py-10 uppercase"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          <p className="opacity-20 md:opacity-10 tracking-tighter md:tracking-[1.3rem] text-center py-3 mx-4 font-island normal-case text-[10rem] md:text-[17rem]">Transformity</p>
+          <motion.p
+            className="text-3xl md:text-7xl absolute uppercase tracking-[0.5rem]  md:tracking-[1.5rem] font-extrabold"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 , spacing:2 }}
+            transition={{ duration: 0.5, delay: 0.5 }}
+          >
+            BLOGS
+          </motion.p>
+        </motion.p>
+      </div>
+
+      <div className="w-full h-fit flex flex-col min-h-screen box-border bg-black p-4">
+        <div className="flex flex-col-reverse md:grid md:grid-cols-4 w-max-full  md:px-20">
+          <div className="w-full flex flex-col-reverse md:justify-start md:col-span-4 ">
+            <div className="w-full h-full flex flex-wrap justify-around gap-10 items-center">
               {filteredblogs &&
                 filteredblogs.map((post, index) => {
                   return (
-                    <Card
+                      <motion.div
+                     
+                      whileHover={{width:"60%"}}
+                      
                       key={index.toString()}
-                      className="overflow-hidden cursor-pointer shadow-lg  col-span-1 rounded-md"
+                      className="overflow-hidden  hover:flex  cursor-pointer shadow-lg border-none h-[50vh]  rounded-lg w-[30%]"
+                      
                     >
                       <div>
                       <img
-                        className="brightness-100 hover:brightness-50 h-[200px]  w-full object-cover"
+                        className="brightness-100 h-fit w-full hover:w-[60%]  object-cover hover:h-full"
                         src={
                           post.postImage
                         }
                       ></img>
                       </div>
 
-                      <div className="p-3">
+                      <div className="p-3  bg-[#da0037]  h-full">
                         
-                        <div className="flex flex-nowrap pt-2">
+                        <div className="flex flex-nowrap pt-2 ">
                           <Avatar className="h-6 w-6 mr-3">
                           <AvatarImage src={post.user_info.profilePic || DummyPic} />
                           </Avatar>
                           <p className="flex items-center gap-2 w-full justify-between">
                             <p className="flex gap-2 flex-nowrap justify-between">
-                              <p className="text-sm text-blue-700 font-light">
+                              <p className="text-sm text-white font-light">
                                 {post.user_info.username}
                               </p>
                             </p>
 
                             <p className="flex gap-2">
-                              <p className="text-xs text-gray-700">
+                              <p className="text-xs text-white">
                                 {post.postDate.substring(0,10)}
                               </p>
-                              <p className="text-xs text-gray-700">
+                              <p className="text-xs text-white">
                                 {post.postTime}
                               </p>
                             </p>
                           </p>
                         </div>
-                        <p className="font-bold text-lg capitalize py-2">
+                        <p className="font-bold text-lg capitalize py-2 text-white">
                           {post.postDetails.postTitle}
                         </p>
-                        <div className="flex flex-col justify-between h-full">
-                          <p className="h-[6rem] text-sm overflow-hidden font-sans text-muted-foreground">
+                        <div className="flex flex-col  justify-end h-full">
+                          <p className="h-[6rem] text-sm  font-sans text-white">
                             {post.postDetails.postDescription}
                           </p>
                           <p className=" py-3">
@@ -176,7 +202,7 @@ const Blog = () => {
                               </Badge>
                             );
                           })}
-                        </p>
+                         </p>
                           <animated.div className="flex gap-2 items-center">
                             <Link to={`/blog/${post.post_id}`}>
                               <ArrowTopRightIcon className="text-3xl font-semibold w-6 h-6 cursor-pointer hover:bg-gray-100 m-2 rounded-md" />
@@ -191,12 +217,12 @@ const Blog = () => {
                           
                         </div>
                       </div>
-                    </Card>
+                      </motion.div>
                   );
                 })}
             </div>
           </div>
-          <div className="h-full col-span-1 p-4 py-6  border-gray-300 border-l-[1px] flex flex-col">
+          {/* <div className="h-full col-span-1 p-4 py-6  border-gray-300 border-l-[1px] flex flex-col bg-purple-500">
           <Input
             className="w-full px-4 mx-auto  text-md py-4 shadow-none rounded-sm bg-gray-100 border-none "
             placeholder="Search by category ...."
@@ -221,7 +247,7 @@ const Blog = () => {
               })
             }
           </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </>

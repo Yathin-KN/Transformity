@@ -28,7 +28,7 @@ export function MainNav({
       {...props}
     >
       <h1 className="font-saira uppercase text-2xl md:text-4xl  tracking-widest text-white flex items-center gap-1">
-      <img src={Img} className="w-20 h-20 brightness-125 "></img>
+      <img src={Img} className="w-20 h-20 brightness-125 ml-4 md:ml-0"></img>
         Transformity
       </h1>
       <div className="hidden font-saira uppercase sm:flex  w-full md:space-x-10  text-white justify-end">
