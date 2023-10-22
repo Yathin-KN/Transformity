@@ -36,15 +36,16 @@ const slides = [
       "https://humanity-summit.com/assets/images/post-photos-square-humanity-summit-ai06.jpeg",
     text: "Slide 2 Text",
   },
- 
 ];
 
 const Modal = () => {
   return (
-    <div className="w-full grid grid-cols-2 gap-10 p-4 min-h-[50vh] h-auto px-10">
-      <div className="col-span-1 w-full h-full bg-red-500 rounded-lg  shadow-inner flex justify-center items-center">
+    <div className="w-full grid md:grid-cols-2 gap-10 md:p-4 min-h-[50vh] h-auto md:px-10">
+      <div className="col-span-1 w-full h-full md:bg-red-500 md:rounded-lg  shadow-inner flex justify-center items-center">
         <motion.div
-          whileHover={{ scale: 1.1 }}
+          whileHover={{ scale: 1.3 }}
+          whileFocus={{ scale: 1.3 }}
+          tabIndex={0} 
         >
           <motion.img
             src="https://i0.wp.com/transformity.info/wp-content/uploads/2021/12/pallapa_3D_01.png?resize=229%2C300&ssl=1"
@@ -63,15 +64,19 @@ const Modal = () => {
           the button below to purchase it. The audiobook should come out
           sometime in January 2022.
           <br />
+          <br />
           A large portion of royalties received from this book will be donated
           to nonprofit organizations supporting the underprivileged,
           underrepresented minorities, and the homeless.
           <br />
+          <br />
           By purchasing this book, you will make a difference in someone’s life,
           perform a randtom act of kindness, and positively impact humanity.
           Thank you for helping.
+          <br />
+          <br />– Dr. Gautham Pallapa
         </p>
-        <Button className="rounded-full py-1 px-6 border bg-red-600 border-white text-lg font-saira font-semibold uppercase hover:bg-white hover:text-red-500 hover-border-red-500 w-72">
+        <Button className="rounded-full py-1 px-6 border bg-red-600 border-white text-lg font-saira font-semibold uppercase hover:bg-white hover:text-red-500 hover-border-red-500 w-fit">
           Buy now
         </Button>
       </div>

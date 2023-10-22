@@ -88,7 +88,7 @@ export function MainNav({
         <div className="sm:hidden">
           <DropdownMenu>
             <DropdownMenuTrigger className="focus:border-none focus:outline-none ">
-              <Menu className="text-white" />
+              <Menu className="text-white m-4" />
             </DropdownMenuTrigger>
             <DropdownMenuContent className="mt-6">
               {/* <DropdownMenuLabel>My Account</DropdownMenuLabel> */}

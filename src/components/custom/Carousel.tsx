@@ -34,7 +34,7 @@ const Carousel = ({ slides }: { slides: any }) => {
          
           >
             <div className="h-full w-full absolute inset-0">
-              <div className="h-full w-full bg-transparent text-5xl font-semibold flex flex-col uppercase justify justify-center pl-[12%]">
+              <div className="h-full w-full bg-transparent text-4xl md:text-5xl font-semibold flex flex-col uppercase justify justify-center pl-[12%]">
              
                 <div className="font-kanit">
                 <div className="h-full w-full absolute inset-0"
@@ -43,7 +43,7 @@ const Carousel = ({ slides }: { slides: any }) => {
                }}
               >
                 </div>
-                  <div className="relative z-30 flex flex-col">
+                  <div className="relative z-30 flex flex-col gap-2">
                   <motion.span
                     className="font-saira"
                     initial={{ opacity: 0, y: 20 }}
