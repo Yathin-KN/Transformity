@@ -92,7 +92,9 @@ const Modal = () => {
 };
 
 const Band=()=>{
-  return (<div className="w-full h-auto py-10 bg-orange-400 md:bg-orange-500 my-10 flex flex-col md:flex-row justify-around items-center relative">
+  return (<div className="w-full h-auto py-10 bg-orange-400 md:bg-orange-500 my-10 flex flex-col md:flex-row justify-around items-center relative" style={{
+    clipPath: "ellipse(140% 100% at 50% 0%)"
+  }}>
     {/* <div className="w-[80%] h-full inset-0 absolute bg-orange-300 opacity-40 z-20"></div> */}
 
     {

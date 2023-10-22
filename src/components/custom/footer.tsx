@@ -5,13 +5,13 @@ import { Link } from "react-router-dom"
 const Footer = () => {
   return (
    <div>
-     <div className="w-full flex justify-between px-10 py-6 bg-black">
-      <div className="flex flex-col flex-nowrap">
+     <div className="w-full flex  flex-col md:flex-row justify-between px-10 py-6 bg-black">
+      <div className="flex flex-col flex-nowrap text-center md:text-left">
         <div className="text-3xl font-saira tracking-wide">
-           <p  className="text-5xl font-saira tracking-wide uppercase" >ready for your <br/> <span className="text-5xl font-saira tracking-wide uppercase text-red-500">next</span>  lesson ?</p>
+           <p  className="text-4xl md:text-5xl font-saira tracking-wide uppercase" >ready for your <br/> <span className="text-5xl font-saira tracking-wide uppercase text-red-500">next</span>  lesson ?</p>
            <p></p>
         </div>
-        <p className="flex flex-nowrap justify-start items-center w-full py-3 space-x-4"><Mail size={24} strokeWidth={1} />
+        <p className="flex flex-nowrap md:justify-start items-center w-full md:py-3 space-x-4 py-4  justify-center"><Mail size={24} strokeWidth={1} />
           <Link to="">transformity@gmail.com</Link>
         </p>
       </div>
@@ -19,7 +19,7 @@ const Footer = () => {
          <div className="text-center pb-6 text-2xl font-saira uppercase tracking-widest">
             Socials
          </div>
-         <li className="flex gap-6">
+         <li className="flex gap-6 justify-evenly py-6">
             <ul className="text-2xl"><FaWhatsapp  /></ul>
             <ul><LucideLinkedin/></ul>
             <ul><Instagram/></ul>
