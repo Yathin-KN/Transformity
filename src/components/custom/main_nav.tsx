@@ -20,7 +20,7 @@ export function MainNav({
         background: `linear-gradient(180deg, rgba(5,5,4,1) 0%, rgba(10,10,10,1) 1%, rgba(0,212,255,0) 100%)`
       }}
       className={cn(
-        "flex items-center z-50 justify-between space-x-4 lg:space-x-6 py-3 md:py-3  md:px-10 sticky top-0 shadow-inner font-saira h-full w-full bg-black bg-opacity-0 overflow-hidden",
+        "flex items-center z-50 justify-between space-x-4 lg:space-x-6 py-3 md:py-3  md:px-10 sticky top-0 shadow-inner font-saira h-full w-full bg-black bg-opacity-0 ",
         className
       )
       
@@ -38,20 +38,20 @@ export function MainNav({
         >
           Home
         </Link>
-        <a
+        {/* <a
           href="/about"
           className="text-xl font-saira uppercase font-medium text-muted-foreground transition-colors hover:text-primary "
         >
           About
-        </a>
+        </a> */}
         <div className="group relative">
           <Link
             to="/blog"
             className="text-xl font-saira uppercase font-medium text-muted-foreground transition-colors hover:text-primary relative"
           >
             Blog
-            <div className="absolute hidden group-hover:block h-auto py-3 bg-white px-2 border rounded-md">
-              <Link to="/blog/write" className="hover:underline">
+            <div className="absolute hidden group-hover:block h-auto  bg-black px-2 border rounded-md z-50">
+              <Link to="/blog/write" className="hover:underline text-md font-saira z-50">
                 compose blog
               </Link>
             </div>
@@ -69,8 +69,8 @@ export function MainNav({
             className="text-xl font-saira uppercase font-medium text-muted-foreground transition-colors hover:text-primary"
           >
             Events
-            <div className="absolute hidden group-hover:block h-auto py-3 bg-black px-2 border rounded-md">
-              <Link to="/eventCompose" className="hover:underline">
+            <div className="absolute hidden group-hover:block h-auto bg-black px-2 border rounded-md">
+              <Link to="/eventCompose" className="hover:underline text-md font-saira z-50">
                 compose event
               </Link>
             </div>
@@ -101,14 +101,14 @@ export function MainNav({
                   Home
                 </Link>
               </DropdownMenuItem>
-              <DropdownMenuItem>
+              {/* <DropdownMenuItem>
                 <Link
                   to="/about"
                   className="text-md font-medium text-muted-foreground transition-colors hover:text-primary"
                 >
                   About
                 </Link>
-              </DropdownMenuItem>
+              </DropdownMenuItem> */}
 
               <DropdownMenuItem>
                 <Link
@@ -155,7 +155,16 @@ export function MainNav({
                   Event Compose
                 </Link>
               </DropdownMenuItem>
+              <DropdownMenuItem>
+                <Link
+                  to="/podcast"
+                  className="text-md font-medium text-muted-foreground transition-colors hover:text-primary"
+                >
+                  Podcast
+                </Link>
+              </DropdownMenuItem>
             </DropdownMenuContent>
+            
           </DropdownMenu>
         </div>
       </div>

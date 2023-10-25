@@ -4,12 +4,13 @@ import { Avatar, AvatarImage } from "@radix-ui/react-avatar";
 import { BlogItemProps } from "@/lib/types";
 
 const BlogItem: React.FC<BlogItemProps> = ({ item }) => {
+  console.log(item)
   switch (item.type) {
     case "Title":
       return (
         <>
           <p
-            className="outline-none text-4xl font-extrabold py-6 capitalize border-none focus:outline-none w-full pl-2 focus:border-2"
+            className="outline-none font-saira text-white text-4xl font-extrabold py-6 capitalize border-none focus:outline-none w-full pl-2 focus:border-2"
             placeholder="Enter title . . ."
           >
             {item.content}
@@ -19,7 +20,7 @@ const BlogItem: React.FC<BlogItemProps> = ({ item }) => {
     case "Subtitle":
       return (
         <h2
-          className="w-full text-2xl text-gray-800 font-extrabold py-2 focus:outline-none pl-2 focus:border-l-2 border-gray-400"
+          className="w-full text-2xl font-saira text-white  font-extrabold py-2 focus:outline-none pl-2 focus:border-l-2 border-gray-400"
           placeholder="Enter heading"
         >
           {item.content}
@@ -30,7 +31,7 @@ const BlogItem: React.FC<BlogItemProps> = ({ item }) => {
         <>
           <div className="flex w-full">
             <p
-              className="text-md w-full border-transparent border-l-2 focus:outline-none resize-none focus:border-l-2 focus:border-gray-400 pl-2 h-auto py-4"
+              className="text-md w-full font-saira text-white border-transparent border-l-2 focus:outline-none resize-none focus:border-l-2 focus:border-gray-400 pl-2 h-auto py-4"
               draggable={false}
               style={{ whiteSpace: 'pre-wrap' }}
             >
@@ -40,6 +41,7 @@ const BlogItem: React.FC<BlogItemProps> = ({ item }) => {
         </>
       );
     case "Blog Info":
+      console.log("hello from blog")
       return (
         <>
           <Separator className="md:mb-4" />
@@ -54,10 +56,10 @@ const BlogItem: React.FC<BlogItemProps> = ({ item }) => {
                 />
               </Avatar>
               <div>
-                <p className="text-md text-black">
+                <p className="text-md font-saira text-white">
                   {(item.content.author && item.content.author.name) || ""}
                 </p>
-                <p className="text-xs text-gray-600">{item.content.date}</p>
+                <p className="text-xs font-saira text-white">{item.content.date}</p>
               </div>
             </div>
           </div>
@@ -66,14 +68,14 @@ const BlogItem: React.FC<BlogItemProps> = ({ item }) => {
       );
     case "Image":
       return (
-        <div className="w-full flex flex-col justify-center py-3">
+        <div className="w-full flex flex-col justify-center py-3 ">
           <div className="flex flex-col w-full">
             <img
               src={item.content.imageUrl || ""}
               alt={item.content.imageCaption}
               className="object-fit w-full md:max-w-[70%] mx-auto px-2"
             />
-            <p className="text-sm text-gray-600 hover:underline text-center py-2 underline-offset-2 focus:outline-none">
+            <p className="text-sm font-saira text-white hover:underline text-center py-2 underline-offset-2 focus:outline-none">
               {item.content.imageCaption || "Enter image caption"}
             </p>
           </div>
@@ -90,7 +92,7 @@ const BlogItem: React.FC<BlogItemProps> = ({ item }) => {
               />
               Your browser does not support the video tag.
             </video>
-            <p className="text-sm text-gray-600 hover:underline text-center py-2 underline-offset-2 focus:outline-none">
+            <p className="text-sm font-saira text-white hover:underline text-center py-2 underline-offset-2 focus:outline-none">
               {item.content.videoCaption}
             </p>
           </div>

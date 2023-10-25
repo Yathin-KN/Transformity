@@ -2,9 +2,9 @@ import AliceCarousel from "react-alice-carousel";
 import "react-alice-carousel/lib/alice-carousel.css";
 import { useEffect, useState } from "react";
 import getAllPosts from "@/apis/POST/getAllPosts";
-import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
-
+// import { Link } from "react-router-dom";
+// import { motion } from "framer-motion";
+import LandingCard from "../custom/LandingCard";
 const responsive = {
   0: { items: 1 },
   568: { items: 2 },
@@ -12,37 +12,40 @@ const responsive = {
 };
 
 const Card=({blogItem}:{blogItem:any})=>{
-   return (<div className="">
-    <Link to={`/blog/${blogItem.post_id}`} className="bg-red-500">
-      <motion.div className="bg-green-500 mx-4 relative"
-        whileHover={{ scale: 1.05 }}
-      >
-        <motion.img src={blogItem.postImage} className=""
-          initial={{ opacity: 1 }}
-          whileHover={{ opacity: 0.7 }}
-        />
+   return (
+    <LandingCard title={blogItem.postDetails.postTitle} description={blogItem.postDetails.postDescription} image={blogItem.postImage} id={blogItem.post_id}/>
+  //  <div className="">
+  //   <Link to={`/blog/${blogItem.post_id}`} className="bg-red-500">
+  //     <motion.div className="bg-green-500 mx-4 relative"
+  //       whileHover={{ scale: 1.05 }}
+  //     >
+  //       <motion.img src={blogItem.postImage} className=""
+  //         initial={{ opacity: 1 }}
+  //         whileHover={{ opacity: 0.7 }}
+  //       />
   
-        <motion.div className="absolute inset-0 hover:bg-black flex justify-center flex-col text-center"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 0.9 }}
-        >
-          <motion.h3
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-          >
-            {blogItem.postDetails.postTitle}
-          </motion.h3>
+  //       <motion.div className="absolute inset-0 hover:bg-black flex justify-center flex-col text-center"
+  //         initial={{ opacity: 0 }}
+  //         animate={{ opacity: 0.9 }}
+  //       >
+  //         <motion.h3
+  //           initial={{ opacity: 0, y: 20 }}
+  //           animate={{ opacity: 1, y: 0 }}
+  //         >
+  //           {blogItem.postDetails.postTitle}
+  //         </motion.h3>
   
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-          >
-            {blogItem.postDetails.postDescription}
-          </motion.p>
-        </motion.div>
-      </motion.div>
-    </Link>
-  </div>)
+  //         <motion.p
+  //           initial={{ opacity: 0, y: 20 }}
+  //           animate={{ opacity: 1, y: 0 }}
+  //         >
+  //           {blogItem.postDetails.postDescription}
+  //         </motion.p>
+  //       </motion.div>
+  //     </motion.div>
+  //   </Link>
+  // </div>
+  )
 }
 const Gallery = () => {
   const [cards, setCards] = useState<any[]>([]);
@@ -118,7 +121,9 @@ const Gallery = () => {
   useEffect(() => {
     fetch();
   }, []);
-  return <AliceCarousel mouseTracking items={cards} responsive={responsive} />;
+  return <div className="w-full bg-red-500 flex justify-center items-center pt-10 px-10">
+    <AliceCarousel mouseTracking items={cards} responsive={responsive} />
+  </div>;
 };
 
 export default Gallery;

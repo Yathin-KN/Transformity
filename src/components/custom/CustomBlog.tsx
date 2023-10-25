@@ -6,6 +6,7 @@ import BlogItemDisplay from "./blogItemDisplay";
 import getPostById from "@/apis/POST/getPostByPostId";
 import { BlogItem } from "@/lib/types";
 import DummyPic from "./../../assets/dummy.png"
+import Footer from "./footer";
 // import BlogItem from "./blogItem";
 interface PostDetail {
   type: "Blog Info";
@@ -49,15 +50,21 @@ const BlogCustom = () => {
   }, []);
   return (
     <>
+      <div className="bg-black">
       <MainNav />
+      </div>
       {console.log(blogId)}
-      <div className="w-[94%] lg:w-[80%] mx-auto">
+      {console.log("8888-",content)}
+      <div className="w-full min-h-screen h-auto bg-black">
+      <div className="w-[94%] lg:w-[80%] mx-auto ">
         {content &&
           content.map((blogItem, index) => {
+            console.log("hehehehe")
             if (blogItem !== null)
               return (
                 <>
-                  {(index === 1 && postDetails) && (
+                
+                  {(index === 0 && postDetails) && (
                     <BlogItemDisplay item={postDetails} key={index.toString()} />
                   )}
                   <BlogItemDisplay item={blogItem} key={index.toString()} />
@@ -65,6 +72,8 @@ const BlogCustom = () => {
               );
           })}
       </div>
+      </div>
+      <Footer/>
     </>
   );
 };

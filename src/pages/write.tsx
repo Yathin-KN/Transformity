@@ -168,28 +168,30 @@ const Write = () => {
   };
   return (
     <>
+      <div className="bg-black">
       <MainNav />
+      </div>
       <ToastContainer toastClassName={() => 
         " relative flex p-1 min-h-10 rounded-md justify-between overflow-hidden cursor-pointer bg-white text-gray-800 text-sm p-4 m-4"
       }/>
-      <div className="w-full h-auto bg-slate-200  flex justify-center">
-        <div className="md:w-[80%] w-[95%] h-auto min-h-[100vh] bg-white md:px-10 py-10 mt-[50px] mb-[100px] flex flex-col relative rounded-md px-2">
+      <div className="w-full h-auto bg-gray-900  flex justify-center">
+        <div className="md:w-[80%] w-[95%] h-auto min-h-[100vh] bg-black md:px-10 py-10 mt-[50px] mb-[100px] flex flex-col relative rounded-md px-2">
           <AlertDialog>
             <AlertDialogTrigger>
               <Badge
-                className="absolute text-xs top-4 right-4 md:text-sm"
+                className="absolute text-xs font-saira tracking-wider top-4 right-4 md:text-sm"
                 variant="publish"
               >
                 Publish
               </Badge>
             </AlertDialogTrigger>
             <AlertDialogContent>
-              <div className="flex justify-end">
-                <AlertDialogCancel>X</AlertDialogCancel>
+              <div className="flex justify-end bg-black text-white rounded-none">
+                <AlertDialogCancel className="rounded-none">X</AlertDialogCancel>
               </div>
               <PublishDialog handler={handlePostChange} details={post} />
               <AlertDialogFooter>
-                <div className="flex flex-col gap-4 w-full">
+                <div className="flex flex-col gap-4 w-full bg-black text-white font-saira">
                   <Button
                     onClick={handleSubmit}
                     type="submit"
@@ -202,9 +204,9 @@ const Write = () => {
                     Publish
                   </Button>
                   <div className="flex flex-col">
-                    {selectedCategories && (
-                      <p className="text-sm">Selected Categories :</p>
-                    )}
+                    {selectedCategories ? (
+                      <p className="text-md font-saira text-white uppercase">Selected Categories :</p>
+                    ):(<div className="text-md font-saira text-white uppercase">No Categories selected</div>)}
                     <div className="flex gap-2">
                       {selectedCategories &&
                         selectedCategories.map((category) => {
@@ -221,7 +223,7 @@ const Write = () => {
                       categories.map((category) => {
                         return (
                           <Badge
-                            className="text-xs font-light mx-1 my-1 py-1 cursor-pointer"
+                            className="text-xs font-light font-saira text-white uppercase tracking-wider mx-1 my-1 py-1 cursor-pointer"
                             variant="outline"
                             onClick={() => handelCategoryClick(category)}
                           >
@@ -241,9 +243,9 @@ const Write = () => {
                     <Button
                       onClick={() => handleAddCategory()}
                       value="outline"
-                      className="text-xs ml-4"
+                      className="text-xs ml-4 rounded-none font-saira tracking-wide border border-t-white"
                     >
-                      <span className="flex">Category +</span>
+                      <span className="font-saira break-normal">Category +</span>
                     </Button>
                   </div>
                 </div>
@@ -257,7 +259,7 @@ const Write = () => {
               })}
           </div>
 
-          <div className="sm:hidden fixed bottom-0 left-0 w-full py-3 bg-white flex justify-evenly md:flex md:justify-around items-center">
+          <div className="sm:hidden fixed bottom-0 left-0 w-full py-2  border border-white bg-black text-white flex justify-evenly md:flex md:justify-around items-center">
             <Button
               onClick={() => handleClick("title")}
               className="border-none shadow-none p-2"

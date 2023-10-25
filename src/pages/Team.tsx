@@ -1,3 +1,4 @@
+import Footer from "@/components/custom/footer";
 import { MainNav } from "@/components/custom/main_nav";
 import { Button } from "@/components/ui/button";
 import { useInView } from "@react-spring/web";
@@ -141,7 +142,7 @@ const Team = () => {
                 src="https://i0.wp.com/transformity.info/wp-content/uploads/2021/04/Gautham.jpg?w=1200&ssl=1"
                 alt="Dr. Gautham Pallapa"
               />
-              <OpacityParagraphs numParagraphs={5} name={"Gautham Pallapa"} />
+              <OpacityParagraphs numParagraphs={5} name={"Gautham___Pallapa"} />
             </div>
           </div>
           <div className="col-span-2 py-3">
@@ -185,6 +186,7 @@ const Team = () => {
           </div>
         </div>
       </div>
+      <Footer/>
     </>
   );
 };

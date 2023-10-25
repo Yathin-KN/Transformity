@@ -10,7 +10,7 @@ const BlogItem: React.FC<BlogItemProps> = ({ item, handlers }) => {
         <>
           {console.log("---",item.content)}
           <p
-            className="outline-none text-4xl text-gray-800 font-extrabold  capitalize border-none focus:outline-none w-full pl-2 focus:border-2 hover:bg-gray-100 py-4"
+            className="outline-none text-6xl text-white font-extrabold  capitalize border-none focus:outline-none w-full pl-2 focus:border-2 hover:bg-gray-800 font-saira py-4"
             placeholder="Enter title . . ."
             contentEditable={true}
             onBlur={(e) => handlers?.onChangeHandler(e)}
@@ -21,7 +21,7 @@ const BlogItem: React.FC<BlogItemProps> = ({ item, handlers }) => {
     case "Subtitle":
       return (
         <h2
-          className="w-full text-2xl text-gray-800 font-extrabold focus:outline-none pl-2 focus:border-l-2 border-gray-400 hover:bg-gray-100 py-4"
+          className="w-full text-3xl  font-saira text-white font-extrabold focus:outline-none pl-2 focus:border-l-2 border-gray-400 hover:bg-gray-800 py-4"
           placeholder="Enter heading"
           contentEditable={true}
           onBlur={(e) => handlers?.onChangeHandler(e.target.innerText)}
@@ -32,9 +32,9 @@ const BlogItem: React.FC<BlogItemProps> = ({ item, handlers }) => {
     case "Description":
       return (
         <>
-          <div className="flex w-full hover:bg-gray-100 py-4">
+          <div className="flex w-full text-white font-saira hover:bg-gray-800 py-4">
             <p
-              className="text-md w-full border-transparent border-l-2 focus:outline-none resize-none focus:border-l-2 focus:border-gray-400 pl-2 h-auto"
+              className="text-md w-full border-transparent border-l-2 focus:outline-none resize-none focus:border-l-2 focus:border-gray-400 pl-2 h-auto font-saira text-xl tracking-wide"
               draggable={false}
               contentEditable={true}
               onBlur={(e) => handlers?.onChangeHandler(e)}
@@ -58,10 +58,10 @@ const BlogItem: React.FC<BlogItemProps> = ({ item, handlers }) => {
                 />
               </Avatar>
               <div>
-                <p className="text-md text-black">
+                <p className="text-md text-white font-saira text-xl">
                   {(item.content.author && item.content.author.name) || ""}
                 </p>
-                <p className="text-xs text-gray-600">{item.content.date}</p>
+                <p className=" text-white font-saira text-lg">{item.content.date}</p>
               </div>
             </div>
           </div>
@@ -70,7 +70,7 @@ const BlogItem: React.FC<BlogItemProps> = ({ item, handlers }) => {
       );
     case "Image":
       return (
-        <div className="w-full flex  flex-col justify-center hover:bg-gray-100 py-4">
+        <div className="w-full flex  flex-col justify-center hover:bg-gray-800 py-4">
           <div className="flex flex-col w-full">
             <img
               src={item.content.imageUrl || ""}
@@ -78,7 +78,7 @@ const BlogItem: React.FC<BlogItemProps> = ({ item, handlers }) => {
               className="object-fit max-w-[70%] mx-auto"
             />
             <input
-              className="outline-none text-sm py-2 text-center border-none focus:outline-none w-full pl-2 focus:border-2"
+              className="outline-none text-sm py-2 text-center border-none focus:outline-none w-full pl-2 focus:border-2 text-white font-saira tracking-wider"
               accept="image/*"
               type="file"
               placeholder="Enter a valid image url"
@@ -88,7 +88,7 @@ const BlogItem: React.FC<BlogItemProps> = ({ item, handlers }) => {
             ></input>
 
             <p
-              className="text-sm text-gray-600 hover:underline text-center py-2 underline-offset-2 focus:outline-none"
+              className=" text-white font-saira text-lg hover:underline text-center py-2 underline-offset-2 focus:outline-none "
               contentEditable={true}
               onBlur={(e) => handlers?.onChangeHandler(e.target.innerText)}
             >
@@ -99,7 +99,7 @@ const BlogItem: React.FC<BlogItemProps> = ({ item, handlers }) => {
       );
     case "Video":
       return (
-        <div className="w-full flex justify-center py-6 hover:bg-gray-100">
+        <div className="w-full flex justify-center py-6 hover:bg-gray-800">
           <div className="flex flex-col gap-3 justify-between items-center">
             <video controls className="bg-gray-700 w-[80%] h-auto">
               <source
@@ -109,7 +109,7 @@ const BlogItem: React.FC<BlogItemProps> = ({ item, handlers }) => {
               Your browser does not support the video tag.
             </video>
             <input
-              className="outline-none text-sm  text-center border-none focus:outline-none w-full focus:border-2"
+              className="outline-none text-sm tracking-wider font-saira text-white  text-center border-none focus:outline-none w-full focus:border-2"
               type="file"
               accept="video/*"
               onChange={(e) => {
@@ -117,7 +117,7 @@ const BlogItem: React.FC<BlogItemProps> = ({ item, handlers }) => {
               }}
             ></input>
             <p
-              className="text-sm text-gray-600 hover:underline text-center  underline-offset-2 focus:outline-none"
+              className=" text-white font-saira text-lg hover:underline text-center  underline-offset-2 focus:outline-none"
               contentEditable={true}
               onBlur={(e) => handlers?.onChangeHandler(e.target.innerText)}
             >
