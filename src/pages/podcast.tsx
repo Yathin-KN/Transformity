@@ -196,18 +196,18 @@ export const Card = ({
 };
 const Podcast = () => {
   return (
-    <>
+    <div className="bg-black w-full">
       <div className="bg-black">
         <MainNav />
       </div>
-      <div className="w-full flex justify-center bg-black text-white  md:py-10  ">
+      <div className="w-full flex justify-center py-10 text-white  md:py-10 overflow-hidden  ">
           <motion.p
             className="text-xl md:text-[9rem] flex justify-center relative items-center w-full h-auto md:py-10 uppercase"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <p className="opacity-20 md:opacity-10 tracking-tighter md:tracking-[1.3rem] text-center py-3 mx-4 font-island normal-case text-[10rem] md:text-[17rem]">
+            <p className="opacity-20 md:opacity-10 tracking-tighter md:tracking-[1.3rem] text-center py-3 mx-4 font-island normal-case text-[8rem] md:text-[17rem]">
               Transformity
             </p>
             <motion.p
@@ -234,7 +234,7 @@ const Podcast = () => {
         </div>
       </div>
       <Footer/>
-    </>
+    </div>
   );
 };
 

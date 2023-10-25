@@ -51,26 +51,28 @@ const OpacityParagraphs = ({
 
 const Team = () => {
   return (
-    <>
+    <div className="bg-black">
       <MainNav style={{backgroundColor:'black'}}/>
-      <div className="w-full flex justify-center bg-black text-white py-10 ">
-        <motion.p
-          className="text-xl md:text-[9rem] flex justify-center relative items-center w-full h-auto py-6 uppercase"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-        >
-          <p className="opacity-20 md:opacity-10  tracking-tighter md:tracking-[1.3rem] text-center py-3 mx-4 normal-case font-island text-[10rem] md:text-[17rem]">Transformity</p>
+      <div className="w-full flex justify-center py-10 text-white  md:py-10 overflow-hidden  ">
           <motion.p
-            className="text-3xl md:text-7xl absolute uppercase tracking-[0.5rem]  md:tracking-[1.5rem] font-extrabold"
+            className="text-xl md:text-[9rem] flex justify-center relative items-center w-full h-auto md:py-10 uppercase"
             initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 , spacing:2 }}
-            transition={{ duration: 0.5, delay: 0.5 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
           >
-            Leading team
+            <p className="opacity-20 md:opacity-10 tracking-tighter md:tracking-[1.3rem] text-center py-3 mx-4 font-island normal-case text-[8rem] md:text-[17rem]">
+              Transformity
+            </p>
+            <motion.p
+              className="text-3xl md:text-7xl absolute uppercase tracking-[0.5rem]  md:tracking-[1.5rem] font-extrabold"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0, spacing: 2 }}
+              transition={{ duration: 0.5, delay: 0.5 }}
+            >
+              LEADING TEAM
+            </motion.p>
           </motion.p>
-        </motion.p>
-      </div>
+        </div>
 
       <div className="w-full h-auto px-6 md:px-8 grid md:grid-rows-2 text-white bg-black">
         <div className="flex flex-col">
@@ -187,7 +189,7 @@ const Team = () => {
         </div>
       </div>
       <Footer/>
-    </>
+    </div>
   );
 };
 

@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const axiosClient = axios.create({
-  baseURL: 'http://localhost:2000/api/',
+  baseURL: 'https://vcw4zbgl-2000.inc1.devtunnels.ms/api/',
 });
 
 

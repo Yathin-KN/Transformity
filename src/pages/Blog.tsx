@@ -100,31 +100,33 @@ const Blog = () => {
   }, [category]);
 
   return (
-    <>
+    <div className="bg-black">
       <div className="w-full h-auto bg-black">
       <MainNav />
       </div>
       <ToastContainer toastClassName={() => 
         " relative flex p-1 min-h-10 rounded-md justify-between overflow-hidden cursor-pointer bg-white text-gray-800 text-sm p-4 m-4"
       }/>
-      <div className="w-full flex justify-center bg-black text-white  py-10">
-        <motion.p
-          className="text-xl md:text-[9rem] flex justify-center relative items-center w-full h-auto py-10 uppercase"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-        >
-          <p className="opacity-20 md:opacity-10 tracking-tighter md:tracking-[1.3rem] text-center py-3 mx-4 font-island normal-case text-[10rem] md:text-[17rem]">Transformity</p>
+      <div className="w-full flex justify-center py-10 text-white  md:py-10 overflow-hidden  ">
           <motion.p
-            className="text-3xl md:text-7xl absolute uppercase tracking-[0.5rem]  md:tracking-[1.5rem] font-extrabold"
+            className="text-xl md:text-[9rem] flex justify-center relative items-center w-full h-auto md:py-10 uppercase"
             initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 , spacing:2 }}
-            transition={{ duration: 0.5, delay: 0.5 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
           >
-            BLOGS
+            <p className="opacity-20 md:opacity-10 tracking-tighter md:tracking-[1.3rem] text-center py-3 mx-4 font-island normal-case text-[8rem] md:text-[17rem]">
+              Transformity
+            </p>
+            <motion.p
+              className="text-3xl md:text-7xl absolute uppercase tracking-[0.5rem]  md:tracking-[1.5rem] font-extrabold"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0, spacing: 2 }}
+              transition={{ duration: 0.5, delay: 0.5 }}
+            >
+              BLOGS
+            </motion.p>
           </motion.p>
-        </motion.p>
-      </div>
+        </div>
 
       <div className="w-full h-fit flex flex-col min-h-screen box-border bg-black p-4">
         <div className="flex flex-col-reverse md:grid md:grid-cols-4 w-max-full">
@@ -133,7 +135,7 @@ const Blog = () => {
               {filteredblogs &&
                 filteredblogs.map((post, index) => {
                   return (
-                 <div className="text-white relative">
+                 <div className="text-white relative w-full md:w-fit">
                   
                       <BlogCard title={post.postDetails.postTitle} description={post.postDetails.postDescription} image={post.postImage?post.postImage:""} author={post.user_info.username} date={post.postDate.substring(0,10)} categories={post.postDetails.categories} id={post.post_id} key={index.toString()}/>
                       {(user_id === post.user_id)?<div className="absolute top-4 right-4 font-saira py-1 px-3"><button className="bg-red-500 py-1 px-2 " style={{
@@ -255,7 +257,7 @@ const Blog = () => {
       <Footer/>
 
       </div>
-    </>
+    </div>
   );
 };
 

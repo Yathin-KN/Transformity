@@ -116,15 +116,15 @@ const Events = () => {
           " relative flex p-1 min-h-10 rounded-md justify-between overflow-hidden cursor-pointer bg-white text-gray-800 text-sm p-4 m-4"
         }
       />
-      <div className="w-full min-h-screen h-auto bg-black p-4">
-        <div className="w-full flex justify-center bg-black text-white  py-10 ">
+      <div className="w-full min-h-screen h-auto bg-black p-4 ">
+      <div className="w-full flex justify-center py-10 text-white  md:py-10 overflow-hidden">
           <motion.p
-            className="text-xl md:text-[9rem] flex justify-center relative items-center w-full h-auto py-10 uppercase"
+            className="text-xl md:text-[9rem] flex justify-center relative items-center w-full h-auto md:py-10 uppercase"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <p className="opacity-20 md:opacity-10 tracking-tighter md:tracking-[1.3rem] text-center py-3 mx-4 font-island normal-case text-[10rem] md:text-[17rem]">
+            <p className="opacity-20 md:opacity-10 tracking-tighter md:tracking-[1.3rem] text-center py-3 mx-4 font-island normal-case text-[8rem] md:text-[17rem]">
               Transformity
             </p>
             <motion.p
@@ -137,8 +137,8 @@ const Events = () => {
             </motion.p>
           </motion.p>
         </div>
-        <div className="p-4  flex">
-          <div className=" w-full flex">
+        <div className="flex  flex-col md:flex-row">
+          <div className=" w-full flex flex-col md:flex-row">
             <div className="w-fit h-full flex flex-col gap-10 ">
               <p className="text-black">{dateEvent}</p>
               <div>
@@ -189,7 +189,7 @@ const Events = () => {
                     <div
                       onClick={() => navigate(`/events/${event.eventId}`)}
                       key={index.toString()}
-                      className=" relative flex cursor-pointer shadow-sm flex-col w-full md:flex-row text-white border rounded-none bg-red-600"
+                      className=" relative flex cursor-pointer shadow-sm flex-col w-full md:flex-row text-white border rounded-none bg-red-500 md:bg-red-600"
                     >
                       {user_id == event.user_id && (
                         <div className="absolute  bottom-4 right-4 ">
@@ -229,8 +229,8 @@ const Events = () => {
                         </p>
                         <div className="flex flex-col justify-between h-full">
                           <p className="h-[6rem] text-md text-white font-saira text-left">
-                            {limitWords(event.desc, 100)}
-                            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsa dolores ea at necessitatibus aliquam, qui pariatur nisi corporis magnam vel sint consectetur vero tempora temporibus dolore ratione repellendus deserunt enim.
+                 
+                            {limitWords(event.desc+"  Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsa dolores ea at necessitatibus aliquam, qui pariatur nisi corporis magnam vel sint consectetur vero tempora temporibus dolore ratione repellendus deserunt enim.", 100)}
                           </p>
                           {/* <p className="space-x-2">
                       {event.categories &&

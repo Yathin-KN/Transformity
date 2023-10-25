@@ -39,7 +39,8 @@ const SignIn = () => {
     <ToastContainer toastClassName={() => 
         " relative flex p-1 min-h-10 rounded-md justify-between overflow-hidden cursor-pointer bg-white text-gray-800 text-sm p-4 m-4"
       }/>
-    <MainNav /><div className="max-w-md mx-auto bg-white p-6 rounded-md shadow-md m-10">
+   <div className='bg-black'> <MainNav />
+    </div><div className="max-w-md mx-auto bg-white p-6 rounded-md shadow-md m-10">
       <h1 className="text-2xl font-bold mb-6">Sign In</h1>
       <Formik
         initialValues={{
