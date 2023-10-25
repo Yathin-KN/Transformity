@@ -174,7 +174,7 @@ const Write = () => {
       <ToastContainer toastClassName={() => 
         " relative flex p-1 min-h-10 rounded-md justify-between overflow-hidden cursor-pointer bg-white text-gray-800 text-sm p-4 m-4"
       }/>
-      <div className="w-full h-auto bg-gray-900  flex justify-center">
+      <div className="w-full h-auto bg-black bg-opacity-90  flex justify-center">
         <div className="md:w-[80%] w-[95%] h-auto min-h-[100vh] bg-black md:px-10 py-10 mt-[50px] mb-[100px] flex flex-col relative rounded-md px-2">
           <AlertDialog>
             <AlertDialogTrigger>

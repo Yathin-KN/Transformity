@@ -35,7 +35,9 @@ const VerifyWrite: React.FC<VerifyWriteProps> = ({ type }) => {
   }, [setUser]);
 
   if (loading) {
-    return <div>Authentication in Progress...</div>;
+    return <div className="font-white flex w-screen h-screen text-center items-center bg-black justify-center">
+      <p className="text-white text-2xl font-saira">Authentication in Progress...</p>
+    </div>;
   }
 
   if (authenticated) {

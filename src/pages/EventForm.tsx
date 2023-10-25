@@ -95,22 +95,26 @@ const EventForm: React.FC<EventFormProps> = () => {
     postEvent(formData)
   };
   return (
-    <><MainNav /><div className="py-4 px-4">
+    <>
+    <div className="bg-black">
+    <MainNav />
+    </div>
+    <div className="py-4 px-4 w-full min-h-screen h-auto bg-black">
       <ToastContainer toastClassName={() => 
         " relative flex p-1 min-h-10 rounded-md justify-between overflow-hidden cursor-pointer bg-white text-gray-800 text-sm p-4 m-4"
       }/>
-      <h1 className="text-2xl font-bold">Compose Events</h1>
+      <h1 className="text-5xl font-bold font-saira text-white">Compose Events</h1>
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={onSubmit}
       >
         {({ setFieldValue, errors, touched }) => (
-          <Form className="max-w-md mx-auto mt-8">
+          <Form className="max-w-md mx-auto mt-8 bg-black p-4 rounded shadow-md">
             <div className="mb-4">
               <label
                 htmlFor="title"
-                className="block text-gray-700 text-sm font-bold mb-2"
+                className="block font-saira text-white text-md font-bold mb-2"
               >
                 Title
               </label>
@@ -118,13 +122,13 @@ const EventForm: React.FC<EventFormProps> = () => {
                 type="text"
                 id="title"
                 name="title"
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+                className="bg-black border-x-0 border-t-0 border-b-white shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
               {errors.title && touched.title ? (<div className="text-red-500 text-sm mt-1">{errors.title}</div>) : null}
             </div>
             <div className="mb-4">
               <label
                 htmlFor="desc"
-                className="block text-gray-700 text-sm font-bold mb-2"
+                className="block font-saira text-white text-md font-bold mb-2"
               >
                 Short Description
               </label>
@@ -132,7 +136,7 @@ const EventForm: React.FC<EventFormProps> = () => {
                 as="textarea"
                 id="desc"
                 name="desc"
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+                className="bg-black border-x-0 border-t-0 border-b-white shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
               <ErrorMessage
                 name="desc"
                 component="div"
@@ -142,7 +146,7 @@ const EventForm: React.FC<EventFormProps> = () => {
             <div className="mb-4">
               <label
                 htmlFor="photo"
-                className="block text-gray-700 text-sm font-bold mb-2"
+                className="block font-saira text-white text-md font-bold mb-2"
               >
                 Photo
               </label>
@@ -151,7 +155,7 @@ const EventForm: React.FC<EventFormProps> = () => {
                 id="photo"
                 name="photo"
                 accept="image/*"
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                className="bg-black font-saira  border-x-0 border-t-0 border-b-white shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 onChange={(event: any) => {
 
                   if (event.target.files && event.target.files.length > 0) {
@@ -170,7 +174,7 @@ const EventForm: React.FC<EventFormProps> = () => {
             <div className="mb-4">
               <label
                 htmlFor="startDate"
-                className="block text-gray-700 text-sm font-bold mb-2"
+                className="block font-saira text-white text-md font-bold mb-2"
               >
                 Start Date
               </label>
@@ -178,7 +182,7 @@ const EventForm: React.FC<EventFormProps> = () => {
                 type="date"
                 id="startDate"
                 name="startDate"
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+                className="bg-black border-x-0 border-t-0 border-b-white shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
               <ErrorMessage
                 name="startDate"
                 component="div"
@@ -188,7 +192,7 @@ const EventForm: React.FC<EventFormProps> = () => {
             <div className="mb-4">
               <label
                 htmlFor="endDate"
-                className="block text-gray-700 text-sm font-bold mb-2"
+                className="block font-saira text-white text-md font-bold mb-2"
               >
                 End Date (Optional)
               </label>
@@ -196,7 +200,7 @@ const EventForm: React.FC<EventFormProps> = () => {
                 type="date"
                 id="endDate"
                 name="endDate"
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+                className="bg-black border-x-0 border-t-0 border-b-white shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
               <ErrorMessage
                 name="endDate"
                 component="div"
@@ -206,7 +210,7 @@ const EventForm: React.FC<EventFormProps> = () => {
             <div className="mb-4">
               <label
                 htmlFor="eventTime"
-                className="block text-gray-700 text-sm font-bold mb-2"
+                className="block font-saira text-white text-md font-bold mb-2"
               >
                 Event Time
               </label>
@@ -214,7 +218,7 @@ const EventForm: React.FC<EventFormProps> = () => {
                 type="time"
                 id="eventTime"
                 name="eventTime"
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+                className="bg-black border-x-0 border-t-0 border-b-white shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
               <ErrorMessage
                 name="eventTime"
                 component="div"
@@ -224,7 +228,7 @@ const EventForm: React.FC<EventFormProps> = () => {
             <div className="mb-4">
               <label
                 htmlFor="eventLocation"
-                className="block text-gray-700 text-sm font-bold mb-2"
+                className="block font-saira text-white text-md font-bold mb-2"
               >
                 Event Location
               </label>
@@ -232,7 +236,7 @@ const EventForm: React.FC<EventFormProps> = () => {
                 type="text"
                 id="eventLocation"
                 name="eventLocation"
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+                className="bg-black border-x-0 border-t-0 border-b-white shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
               <ErrorMessage
                 name="eventLocation"
                 component="div"
@@ -242,7 +246,7 @@ const EventForm: React.FC<EventFormProps> = () => {
             <div className="mb-4">
               <label
                 htmlFor="eventDescription"
-                className="block text-gray-700 text-sm font-bold mb-2"
+                className="block font-saira text-white text-md font-bold mb-2"
               >
                 Event Description
               </label>
@@ -250,7 +254,7 @@ const EventForm: React.FC<EventFormProps> = () => {
                 as="textarea"
                 id="eventDescription"
                 name="eventDescription"
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+                className="bg-black border-x-0 border-t-0 border-b-white shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
               <ErrorMessage
                 name="eventDescription"
                 component="div"
@@ -258,7 +262,7 @@ const EventForm: React.FC<EventFormProps> = () => {
             </div>
             <button
               type="submit"
-              className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline flex gap-1 justify-center items-center"
+              className="bg-blue-500 font-saira border border-white rounded-sm hover:bg-blue-600 text-white font-bold py-2 px-4  focus:outline-none focus:shadow-outline flex gap-1 justify-center items-center"
               disabled={isLoading}
             >
                     {isLoading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null} submit
