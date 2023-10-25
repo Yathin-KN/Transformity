@@ -27,23 +27,26 @@ const LandingCard = ({
           onHoverEnd={() => {
             setHovered(false);
           }}>
-              <motion.img src={image} className="w-full"></motion.img>
-              {!hovered && (
-                <p className="text-xl py-1 text-center font-saira font-semibold text-white bg-red-500">
+              <motion.img src={image} className="w-full object-cover h-[250px]"></motion.img>
+              {(
+                <p className="text-xl py-1 text-center font-saira font-semibold  break-words text-white bg-red-500" style={{
+                  display:(hovered)?"hidden":"",
+                  color:(hovered)?'transparent':""
+                }}>
                   {title}
                 </p>
               )}
               <div
-                className="absolute inset-0  p-4 flex justify-center items-center bg-red-500"
+                className="absolute inset-0  p-4 flex justify-center items-center bg-red-500 h-[250px] w-full"
                 style={{
                   background: hovered
                     ? `linear-gradient(0deg, rgba(0,0,1,1) 0%, rgba(0,212,255,0) 100%)`
                     : "",
-                  display: hovered ? "flex" : "none",
+                  display: hovered ? "" : "none",
                 }}
               >
                  
-                <div className="flex justify-center items-center flex-col my-auto">
+                <div className="flex justify-center  w-full items-center flex-col my-auto">
                   <p className="text-2xl font-saira font-semibold text-white text-center">
                     {title}
                   </p>

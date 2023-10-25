@@ -1,4 +1,13 @@
 
+export interface PodcastData {
+  category: string;
+  description: string;
+  image: string;
+  link: string;
+  userId:string;
+  podcastId?:string;
+  
+};
 export interface Event  {
   title: string;
   desc: string;

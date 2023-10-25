@@ -76,27 +76,35 @@ export function MainNav({
             </div>
           </Link>
         </div>
+        <div className="group relative">
         <Link
           to="/podcast"
           className="text-xl font-saira uppercase font-medium transition-colors hover:text-primary"
         >
           Podcast
+          <div className="absolute hidden group-hover:block h-auto bg-black px-2 border rounded-md">
+              <Link to="/podcastCompose" className="hover:underline text-md font-saira z-50">
+                compose podcast
+              </Link>
+            </div>
         </Link>
+        </div>
+        
       </div>
 
       <div className="flex items-center space-x-2 sm:space-x-6  sm:pl-10  ">
         <div className="sm:hidden">
           <DropdownMenu>
             <DropdownMenuTrigger className="focus:border-none focus:outline-none ">
-              <Menu className="text-white m-4" />
+              <Menu className="text-white m-4 " />
             </DropdownMenuTrigger>
-            <DropdownMenuContent className="mt-6">
+            <DropdownMenuContent className="mt-6 bg-black text-white">
               {/* <DropdownMenuLabel>My Account</DropdownMenuLabel> */}
               {/* <DropdownMenuSeparator /> */}
               <DropdownMenuItem>
                 <Link
                   to="/"
-                  className="text-md font-medium text-muted-foreground transition-colors hover:text-primary"
+                  className="text-lg  font-saira  font-light text-muted-foreground transition-colors hover:text-primary"
                 >
                   Home
                 </Link>
@@ -113,17 +121,17 @@ export function MainNav({
               <DropdownMenuItem>
                 <Link
                   to="/team"
-                  className="text-md font-medium text-muted-foreground transition-colors hover:text-primary"
+                  className="text-lg  font-saira  font-light transition-colors hover:text-primary"
                 >
                   Team
                 </Link>
               </DropdownMenuItem>
-              <DropdownMenuLabel>Blog</DropdownMenuLabel>
-              <DropdownMenuSeparator />
+              <DropdownMenuLabel className="bg-gray-600 font-saira text-xl">Blog</DropdownMenuLabel>
+              {/* <DropdownMenuSeparator /> */}
               <DropdownMenuItem>
                 <Link
                   to="/blog/write"
-                  className="text-md font-medium text-muted-foreground transition-colors hover:text-primary"
+                  className="text-lg font-saira  font-light transition-colors hover:text-primary"
                 >
                   Write
                 </Link>
@@ -132,17 +140,17 @@ export function MainNav({
               <DropdownMenuItem>
                 <Link
                   to="/blog"
-                  className="text-md font-medium text-muted-foreground transition-colors hover:text-primary"
+                  className="text-lg font-saira text-muted-foreground transition-colors hover:text-primary"
                 >
                   Blog
                 </Link>
               </DropdownMenuItem>
-              <DropdownMenuLabel>Events</DropdownMenuLabel>
+              <DropdownMenuLabel className="bg-gray-600 font-saira text-xl">Events</DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuItem>
                 <Link
                   to="/events"
-                  className="text-md font-medium text-muted-foreground transition-colors hover:text-primary"
+                  className="text-lg font-saira text-muted-foreground transition-colors hover:text-primary"
                 >
                   Events
                 </Link>
@@ -150,19 +158,33 @@ export function MainNav({
               <DropdownMenuItem>
                 <Link
                   to="/eventCompose"
-                  className="text-md font-medium text-muted-foreground transition-colors hover:text-primary"
+                  className="text-lg font-saira text-muted-foreground transition-colors hover:text-primary"
                 >
                   Event Compose
                 </Link>
               </DropdownMenuItem>
+              <DropdownMenuLabel className="bg-gray-600 font-saira text-xl">Podcast</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              
               <DropdownMenuItem>
                 <Link
                   to="/podcast"
-                  className="text-md font-medium text-muted-foreground transition-colors hover:text-primary"
+                  className="text-lg font-saira text-muted-foreground transition-colors hover:text-primary"
                 >
                   Podcast
                 </Link>
+               
               </DropdownMenuItem>
+              <DropdownMenuItem>
+                <Link
+                  to="/podcast"
+                  className="text-lg font-saira text-muted-foreground transition-colors hover:text-primary"
+                >
+                  Podcast Compose
+                </Link>
+               
+              </DropdownMenuItem>
+              
             </DropdownMenuContent>
             
           </DropdownMenu>

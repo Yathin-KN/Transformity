@@ -10,7 +10,7 @@ const BlogItem: React.FC<BlogItemProps> = ({ item, handlers }) => {
         <>
           {console.log("---",item.content)}
           <p
-            className="outline-none text-6xl text-white font-extrabold  capitalize border-none focus:outline-none w-full pl-2 focus:border-2 hover:bg-gray-800 font-saira py-4"
+            className="outline-none  text-5xl md:text-6xl text-white font-extrabold  capitalize border-none focus:outline-none w-full pl-2 focus:border-2 hover:bg-gray-800 font-saira py-4"
             placeholder="Enter title . . ."
             contentEditable={true}
             onBlur={(e) => handlers?.onChangeHandler(e)}
@@ -21,7 +21,7 @@ const BlogItem: React.FC<BlogItemProps> = ({ item, handlers }) => {
     case "Subtitle":
       return (
         <h2
-          className="w-full text-3xl  font-saira text-white font-extrabold focus:outline-none pl-2 focus:border-l-2 border-gray-400 hover:bg-gray-800 py-4"
+          className="w-full text-3xl  font-saira text-white font-bold md:font-extrabold focus:outline-none pl-2 focus:border-l-2 border-gray-400 hover:bg-gray-800 py-4"
           placeholder="Enter heading"
           contentEditable={true}
           onBlur={(e) => handlers?.onChangeHandler(e.target.innerText)}
@@ -75,7 +75,7 @@ const BlogItem: React.FC<BlogItemProps> = ({ item, handlers }) => {
             <img
               src={item.content.imageUrl || ""}
               alt={item.content.imageCaption}
-              className="object-fit max-w-[70%] mx-auto"
+              className="object-fit max-w-[100%] md:max-w-[70%] mx-auto "
             />
             <input
               className="outline-none text-sm py-2 text-center border-none focus:outline-none w-full pl-2 focus:border-2 text-white font-saira tracking-wider"

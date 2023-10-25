@@ -96,7 +96,7 @@ const Modal = ({ value }: { value: boolean }) => {
   if (value) {
     return (
       <div className="w-full grid md:grid-cols-2 gap-10 md:p-4 min-h-[50vh] h-auto md:px-10 py-3">
-        <div className="col-span-1 w-full h-full md:bg-red-500 md:rounded-lg  shadow-inner flex justify-center items-center">
+        <div className="col-span-1 w-full h-full md:bg-indigo-500 md:rounded-lg  shadow-inner flex justify-center items-center">
           <motion.div
             whileHover={{ scale: 1.3 }}
             whileFocus={{ scale: 1.3 }}
@@ -233,7 +233,9 @@ const LandingPage: React.FC = () => {
         <Modal value={true} />
         <Band />
         <Modal value={false} />
+        <div className="w-full h-fit py-4">
         <Gallery />
+        </div>
         <Footer />
       </div>
 

@@ -10,7 +10,7 @@ const BlogItem: React.FC<BlogItemProps> = ({ item }) => {
       return (
         <>
           <p
-            className="outline-none font-saira text-white text-4xl font-extrabold py-6 capitalize border-none focus:outline-none w-full pl-2 focus:border-2"
+            className="outline-none font-saira text-white text-3xl md:text-4xl font-extrabold py-6 capitalize border-none focus:outline-none w-full pl-2 focus:border-2"
             placeholder="Enter title . . ."
           >
             {item.content}
@@ -20,9 +20,10 @@ const BlogItem: React.FC<BlogItemProps> = ({ item }) => {
     case "Subtitle":
       return (
         <h2
-          className="w-full text-2xl font-saira text-white  font-extrabold py-2 focus:outline-none pl-2 focus:border-l-2 border-gray-400"
+          className="w-full text-3xl font-saira text-white py-2 focus:outline-none pl-2 focus:border-l-2 border-gray-400"
           placeholder="Enter heading"
         >
+          
           {item.content}
         </h2>
       );
@@ -31,7 +32,7 @@ const BlogItem: React.FC<BlogItemProps> = ({ item }) => {
         <>
           <div className="flex w-full">
             <p
-              className="text-md w-full font-saira text-white border-transparent border-l-2 focus:outline-none resize-none focus:border-l-2 focus:border-gray-400 pl-2 h-auto py-4"
+              className="text-lg md:text-lg font-light w-full font-saira text-white border-transparent border-l-2 focus:outline-none resize-none focus:border-l-2 focus:border-gray-400 pl-2 h-auto py-4"
               draggable={false}
               style={{ whiteSpace: 'pre-wrap' }}
             >
@@ -52,14 +53,30 @@ const BlogItem: React.FC<BlogItemProps> = ({ item }) => {
                   src={
                     (item.content.author && item.content.author.avatarUrl) || ""
                   }
-                  className="w-10 h-10 rounded-full"
+                  className="w-10 h-10 rounded-full aspect-square"
                 />
               </Avatar>
-              <div>
-                <p className="text-md font-saira text-white">
-                  {(item.content.author && item.content.author.name) || ""}
+              <div className="flex justify-between  w-full">
+                <div>
+                <p className="text-md font-saira text-white uppercase flex">
+                  <p className="text-md font-saira text-gray-500 uppercase ">Author :</p>
+                 <p className="text-md font-saira text-white uppercase ml-1"> {" "+(item.content.author && item.content.author.name) || ""}</p>
                 </p>
-                <p className="text-xs font-saira text-white">{item.content.date}</p>
+                <p className="text-xs font-saira text-white flex">
+                  <p className="text-md font-saira text-gray-500 uppercase">Date :</p>
+                  <p className="text-md font-saira text-white uppercase">{item.content.date}</p>
+                </p>
+                </div>
+                <div className="text-white">
+                  <p className="flex">
+                    <p className="text-md font-saira text-gray-500 uppercase">
+                     Time :
+                    </p>
+                    <p className="text-md font-saira text-white uppercase">
+                      {item.content.time}
+                    </p>
+                  </p>
+                </div>
               </div>
             </div>
           </div>
@@ -76,7 +93,7 @@ const BlogItem: React.FC<BlogItemProps> = ({ item }) => {
               className="object-fit w-full md:max-w-[70%] mx-auto px-2"
             />
             <p className="text-sm font-saira text-white hover:underline text-center py-2 underline-offset-2 focus:outline-none">
-              {item.content.imageCaption || "Enter image caption"}
+              {item.content.imageCaption || ""}
             </p>
           </div>
         </div>
