@@ -35,7 +35,7 @@ export function MainNav({
         "text-white":(mode=="dark"),
         "text-black":(mode=="light")
       })} onClick={()=>toggleMode()}>
-           {<div className="fixed top-9 md:top-10 md:right-8">{(mode=="light"?<Sun/>:<Moon/>)}</div>}
+           {<div className="fixed top-7  md:top-8 md:right-8">{(mode=="light"?<div className="h-fit w-fit bg-white p-2 rounded-full bg-opacity-70 border border-gray-200 "><Sun/></div>:<div className="h-fit w-fit bg-gray-100 bg-opacity-20 p-2 rounded-full border border-gray-200 "><Moon/></div>)}</div>}
       </button>
       <Link to="/">
       <h1 className={clsx("font-saira uppercase text-2xl md:text-4xl  tracking-widest flex items-center gap-1",{

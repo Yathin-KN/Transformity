@@ -1,8 +1,84 @@
-import React, { useState, useEffect } from "react";
+import  { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import useModeStore from "@/store/mode";
 import clsx from "clsx";
+const Content2=()=>{
+  return <div className="relative z-30 flex flex-col gap-2">
+  <motion.span
+    className="font-saira"
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ delay: 0.5, duration: 1 }}
+  >
+    transforming
+  </motion.span>
+  <motion.span
+    className="text-red-600 text-7xl font-saira"
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ delay: 0.8, duration: 1 }}
+  >
+    humanity
+  </motion.span>
+  <motion.span
+    className="font-saira"
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ delay: 1.1, duration: 1 }}
+  >
+    through empathy and
+  </motion.span>
+  <motion.span
+    className="font-saira"
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ delay: 1.2, duration: 1 }}
+  >
+    technology
+  </motion.span>
+  </div>
+}
 
+const Content1=()=>{
+  return <div className="relative z-30 flex flex-col gap-2">
+  <motion.span
+    className="font-saira"
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ delay: 0.5, duration: 1 }}
+  >
+    transforming
+  </motion.span>
+  <motion.span
+    className="text-red-600 text-7xl font-saira"
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ delay: 0.8, duration: 1 }}
+  >
+    humanity
+  </motion.span>
+  <motion.span
+    className="font-saira"
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ delay: 1.1, duration: 1 }}
+  >
+    through empathy and
+  </motion.span>
+  <motion.span
+    className="font-saira"
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ delay: 1.2, duration: 1 }}
+  >
+    technology
+  </motion.span>
+  </div>
+}
+const content={
+  "0": <Content1/>,
+  "1":<Content2/>
+}
 const Carousel = ({ slides }: { slides: any }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const {mode}=useModeStore();
@@ -16,7 +92,7 @@ const Carousel = ({ slides }: { slides: any }) => {
 
   return (
     <div className="carousel w-full h-[80vh]">
-      {slides.map((slide: { image: any; }, index: React.Key | null | undefined) => (
+      {slides.map((slide: { image: any; }, index: number) => (
         <div
           key={index}
           className={clsx("h-full w-full relative",{
@@ -49,41 +125,7 @@ const Carousel = ({ slides }: { slides: any }) => {
                }}
               >
                 </div>
-                  <div className="relative z-30 flex flex-col gap-2">
-                  <motion.span
-                    className="font-saira"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.5, duration: 1 }}
-                  >
-                    transforming
-                  </motion.span>
-                  <motion.span
-                    className="text-red-600 text-7xl font-saira"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.8, duration: 1 }}
-                  >
-                    humanity
-                  </motion.span>
-                  <motion.span
-                    className="font-saira"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 1.1, duration: 1 }}
-                  >
-                    through empathy and
-                  </motion.span>
-                  <motion.span
-                    className="font-saira"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 1.2, duration: 1 }}
-                  >
-                    technology
-                  </motion.span>
-                  </div>
-                  
+                 {content[(index%2==0)?"0":"1"]}
                 </div>
               </div>
             </div>

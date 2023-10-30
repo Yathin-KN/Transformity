@@ -45,9 +45,9 @@ const BlogCard = ({
           height: "320px",
         }}
       >
-        <p className="text-md font-saira bg-gray-950 py-1 px-2 rounded-sm tracking-wide flex items-center gap-2 hover:underline underline-offset-4 absolute bottom-4 right-4">
+        <Link to={`/blog/${id}`} className="text-md font-saira bg-gray-950 py-1 px-2 rounded-sm tracking-wide flex items-center gap-2 hover:underline underline-offset-4 absolute bottom-4 right-4">
           Continue reading <MoveRightIcon size={18} />
-        </p>
+        </Link>
       </div>
       <div className="bg-indigo-600 p-4">
         <div className="flex justify-between">

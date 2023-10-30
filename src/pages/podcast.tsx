@@ -1,7 +1,7 @@
 import Footer from "@/components/custom/footer";
 import { MainNav } from "@/components/custom/main_nav";
 import { motion } from "framer-motion";
-import { CalendarClock, MoveRightIcon, Play, User } from "lucide-react";
+import { CalendarClock, Loader2, MoveRightIcon, Play, User } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import getAllPodcasts from "@/apis/POST/getAllPodcasts";
@@ -11,24 +11,6 @@ import deletPodcast from "@/apis/POST/deletePodcast"
 import { toast } from "react-toastify";
 import clsx from "clsx";
 import useModeStore from "@/store/mode";
-// const podCastData = [
-//   {
-//     category: "Motivational",
-//     description:
-//       "Believe in yourself and all that you are. Know that there is something inside you that is greater than any obstacle.",
-//     image:
-//       "https://open.spotify.com/embed/episode/5QYeXrAviv0jDT1YaCyD2y?utm_source=generator",
-//     link: "https://example.com/motivational_quote_1",
-//   },
-//   {
-//     category: "Joe biden",
-//     description:
-//       "Believe in yourself and all that you are. Know that there is something inside you that is greater than any obstacle.",
-//     image: "https://www.youtube.com/embed/p3fwj3PBORU?si=J-kOMKZpKh8SUSJc",
-//     link: "https://example.com/motivational_quote_1",
-//   },
-
-// ];
 
 const PodcastCard = ({
   category,
@@ -51,17 +33,21 @@ const PodcastCard = ({
   const user_info = useUserStore(state=>state.getUserInfo)
   const {user_id} = user_info();
 
+  const [isDeleteLoading,setIsDeleteLoading]=useState<boolean>(false);
   const deletePodcast=async ()=>{
     try{
+      setIsDeleteLoading(true)
       const resp=await deletPodcast(postId)
       console.log(resp.ok)
       toast.success("Sucessfully deleted",{
-        delay:1000
+        autoClose:1000
       })
     }catch(error){
       toast.error("Something went wrong !!",{
-        delay:1000,
+        autoClose:1000,
       })
+    }finally{
+      setIsDeleteLoading(false)
     }
   }
   const {mode}=useModeStore();
@@ -74,8 +60,6 @@ const PodcastCard = ({
       }}
     >
       <div className="px-1 md:px-6 py-4 flex items-center relative z-0  md:w-[40%] ">
-        {/* <img src={image} className="relative w-full h-full object-cover">
-       </img> */}
         <div className="flex justify-center items-center  w-full">
           <iframe
             className="h-[200px] w-full md:h-[352px] mt-10 md:mt-0 "
@@ -100,17 +84,17 @@ const PodcastCard = ({
           />
         </div>
       </div>
-      <div className="py-4 px-4   w-full md:px-10">
+      <div className="py-4 px-4 w-full md:px-10">
         <div className="w-full flex justify-between items-center">
-          <h1 className={clsx("md:text-2xl font-saira  py-4 uppercase tracking-widest",{
+          <h1 className={clsx("text-2xl md:text-2xl font-saira py-3 md:py-4 uppercase tracking-widest",{
             "text-white":(mode=="dark"),
              "text-black":(mode=="light"),
           })}>
             {category}
           </h1>
-         {(userId === user_id ) && <div onClick={()=>deletePodcast()} className={clsx("text-xs text-white py-1 px-3 rounded-sm bg-red-600 font-bold bg-opacity-80 border border-white")}>
-            Delete
-          </div>}
+         {(userId === user_id ) && <button disabled={isDeleteLoading} onClick={()=>deletePodcast()} className={clsx("text-xs text-white py-1 px-3 items-center justify-center gap-3 rounded-sm bg-red-600 font-bold bg-opacity-80 flex border border-white")}>
+          {(isDeleteLoading) && <Loader2 className="text-xs animate-spin"/> }<span>Delete</span>
+          </button>}
         </div>
         <p className={clsx("md:text-3xl font-poppins tracking-wider ",{
             "text-white":(mode=="dark"),
@@ -122,65 +106,6 @@ const PodcastCard = ({
     </div>
   );
 };
-// const cardData = [
-//   {
-//     title: "Painkillers vs Vitamins",
-//     author: "Asanka Abeysinghe",
-//     date: "October 17, 2022",
-//     categories: ["Leadership"],
-//     description:
-//       " we focused a lot on people and work-life balance. Our discussions on talent attraction and retention were well received, and they spurred several insightful and influential conversations…",
-//     image:
-//       "https://i0.wp.com/transformity.info/wp-content/uploads/2022/10/Painkillers_Vs_Vitamins_.png?fit=768%2C534&ssl=1",
-//     id:"1"
-//   },
-//   {
-//     title: "Painkillers vs Vitamins",
-//     author: "Asanka Abeysinghe",
-//     date: "October 17, 2022",
-//     categories: ["Leadership"],
-//     description:
-//       " we focused a lot on people and work-life balance. Our discussions on talent attraction and retention were well received, and they spurred several insightful and influential conversations…",
-//     image:
-//       "https://i0.wp.com/transformity.info/wp-content/uploads/2022/10/Painkillers_Vs_Vitamins_.png?fit=768%2C534&ssl=1",
-//     id:"1"
-//   },
-//   {
-//     title: "Painkillers vs Vitamins",
-//     author: "Asanka Abeysinghe",
-//     date: "October 17, 2022",
-//     categories: ["Leadership"],
-//     description:
-//       " we focused a lot on people and work-life balance. Our discussions on talent attraction and retention were well received, and they spurred several insightful and influential conversations…",
-//     image:
-//       "https://i0.wp.com/transformity.info/wp-content/uploads/2022/10/Painkillers_Vs_Vitamins_.png?fit=768%2C534&ssl=1",
-//     id:"1"
-//   },
-//   {
-//     title: "Painkillers vs Vitamins",
-//     author: "Asanka Abeysinghe",
-//     date: "October 17, 2022",
-//     categories: ["Leadership"],
-//     description:
-//       " we focused a lot on people and work-life balance. Our discussions on talent attraction and retention were well received, and they spurred several insightful and influential conversations…",
-//     image:
-//       "https://i0.wp.com/transformity.info/wp-content/uploads/2022/10/Painkillers_Vs_Vitamins_.png?fit=768%2C534&ssl=1",
-//     id:"1"
-//   },
-//   {
-//     title: "Painkillers vs Vitamins",
-//     author: "Asanka Abeysinghe",
-//     date: "October 17, 2022",
-//     categories: ["Leadership"],
-//     description:
-//       " we focused a lot on people and work-life balance. Our discussions on talent attraction and retention were well received, and they spurred several insightful and influential conversations…",
-//     image:
-//       "https://i0.wp.com/transformity.info/wp-content/uploads/2022/10/Painkillers_Vs_Vitamins_.png?fit=768%2C534&ssl=1",
-//     id:"1"
-//   },
-
-// ];
-
 const Tab = ({ category }: { category: string }) => {
   return (
     <span className=" border rounded-full bg-indigo-500 border-white text-xs font-saira tracking-normal text-white py-1 px-2 h-fit w-fit">
@@ -311,7 +236,7 @@ const Podcast = () => {
               transition={{ duration: 0.5, delay: 0.5 }}
             >
              
-              BLOGS
+              PODCASTS
             </motion.p>
           </motion.p>
         </div>
@@ -319,7 +244,10 @@ const Podcast = () => {
         "bg-white":(mode=="light"),
         "bg-black":(mode=="dark"),
       })}>
-        <div className="w-full flex  flex-wrap md:gap-10  h-auto justify-center items-center bg-black">
+        <div className={clsx("w-full flex  flex-wrap md:gap-10  h-auto justify-center items-center ",{
+        "bg-white":(mode=="light"),
+        "bg-black":(mode=="dark"),
+      })}>
           {podCastData.map((card, index) => {
             return (
               <PodcastCard

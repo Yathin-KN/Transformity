@@ -13,6 +13,7 @@ import Footer from "@/components/custom/footer";
 import { motion } from "framer-motion";
 import clsx from "clsx";
 import useModeStore from "@/store/mode";
+import { BlogCardSkeleton} from "@/components/custom/blogCardSkeleton";
 
 
 function randomCategories():string[]{
@@ -148,8 +149,8 @@ const Blog = () => {
         <div className="flex flex-col-reverse md:grid md:grid-cols-4 w-max-full">
           <div className="w-full flex flex-col-reverse md:justify-start md:col-span-4 ">
             <div className="w-full h-full flex flex-wrap justify-around items-center gap-4">
-              {filteredblogs &&
-                filteredblogs.map((post, index) => {
+              {(filteredblogs) ?
+                filteredblogs?.map((post, index) => {
                   return (
                  <div className="text-white relative w-full md:w-fit">
                   
@@ -164,111 +165,10 @@ const Blog = () => {
                         Deleting ..
                       </div></div>:null}
                  </div>
-                    //   <motion.div
-                     
-                    //   whileHover={{width:"60%"}}
-                      
-                    //   key={index.toString()}
-                    //   className="overflow-hidden  hover:flex  cursor-pointer shadow-lg border-none h-[50vh]  rounded-lg w-[30%]"
-                      
-                    // >
-                    //   <div>
-                    //   <img
-                    //     className="brightness-100 h-fit w-full hover:w-[60%]  object-cover hover:h-full"
-                    //     src={
-                    //       post.postImage
-                    //     }
-                    //   ></img>
-                    //   </div>
-
-                    //   <div className="p-3  bg-[#da0037]  h-full">
-                        
-                    //     <div className="flex flex-nowrap pt-2 ">
-                    //       <Avatar className="h-6 w-6 mr-3">
-                    //       <AvatarImage src={post.user_info.profilePic || DummyPic} />
-                    //       </Avatar>
-                    //       <p className="flex items-center gap-2 w-full justify-between">
-                    //         <p className="flex gap-2 flex-nowrap justify-between">
-                    //           <p className="text-sm text-white font-light">
-                    //             {post.user_info.username}
-                    //           </p>
-                    //         </p>
-
-                    //         <p className="flex gap-2">
-                    //           <p className="text-xs text-white">
-                    //             {post.postDate.substring(0,10)}
-                    //           </p>
-                    //           <p className="text-xs text-white">
-                    //             {post.postTime}
-                    //           </p>
-                    //         </p>
-                    //       </p>
-                    //     </div>
-                    //     <p className="font-bold text-lg capitalize py-2 text-white">
-                    //       {post.postDetails.postTitle}
-                    //     </p>
-                    //     <div className="flex flex-col  justify-end h-full">
-                    //       <p className="h-[6rem] text-sm  font-sans text-white">
-                    //         {post.postDetails.postDescription}
-                    //       </p>
-                    //       <p className=" py-3">
-                    //       {post.postDetails.categories.map((category, index) => {
-                    //         return (
-                    //           <Badge
-                    //             key={index.toString()}
-                    //             variant="outline"
-                    //             className="rounded-full font-chivo my-1 mx-1 text-black capitalize bg-gray-200 shadow-inner font-light"
-                    //           >
-                    //             {category}
-                    //           </Badge>
-                    //         );
-                    //       })}
-                    //      </p>
-                    //       <animated.div className="flex gap-2 items-center">
-                    //         <Link to={`/blog/${post.post_id}`}>
-                    //           <ArrowTopRightIcon className="text-3xl font-semibold w-6 h-6 cursor-pointer hover:bg-gray-100 m-2 rounded-md" />
-                    //         </Link>
-                    //         <div className="flex justify-between w-full">
-                    //         <p className="text-muted-foreground text-sm text-black ">
-                    //           Read more ...
-                    //         </p>
-                    //         {(user_id === post.user_id)?<Trash2 strokeWidth={1} onClick={()=>handleRemovePost(post.post_id)} />:<Loader2 visibility={!isDeleteLoading?"hidden":"visible"} strokeWidth={1} className="mr-2 h-4 w-4 animate-spin text-red-500"/>}
-                    //         </div>
-                    //       </animated.div>
-                          
-                    //     </div>
-                    //   </div>
-                    //   </motion.div>
                   );
-                })}
+                }):<><BlogCardSkeleton/>  <BlogCardSkeleton/> <BlogCardSkeleton/> </>}
             </div>
           </div>
-          {/* <div className="h-full col-span-1 p-4 py-6  border-gray-300 border-l-[1px] flex flex-col bg-purple-500">
-          <Input
-            className="w-full px-4 mx-auto  text-md py-4 shadow-none rounded-sm bg-gray-100 border-none "
-            placeholder="Search by category ...."
-            onChange={(event) => {
-              handleChange(event.target.value);
-            }}
-            value={category}
-            
-          />
-          <Separator className="my-6"/>
-          <h3 className="text-gray-800 font-semibold font-sans">Recommended Topics</h3>
-          <div className="justify-start">
-            {
-              categories && categories.map((category,index)=>{
-                return  <Badge
-                key={index.toString()}
-                variant="outline"
-                className="rounded-full text-sm font-poppins my-1  text-black capitalize bg-gray-100  border-none font-light py-1 px-2 mx-1"
-              >
-                {category}
-              </Badge>
-              })
-            }
-          </div>
-          </div> */}
         </div>
       <Footer/>
 

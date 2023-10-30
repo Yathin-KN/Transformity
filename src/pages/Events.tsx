@@ -18,6 +18,7 @@ import { motion } from "framer-motion";
 import Footer from "@/components/custom/footer";
 import clsx from "clsx";
 import useModeStore from "@/store/mode";
+import EventCardSkeleton from "@/components/custom/EventCardSkeleton";
 
 const limitWords = (text: string, limit: number) => {
   const words = text.split(" ");
@@ -45,7 +46,7 @@ const Events = () => {
   const info = useUserStore((state) => state.getUserInfo);
   const [dateEvent, setDateEvent] = React.useState<string>();
   const [isDeleteLoading, setIsDeleteLoading] = useState<boolean>(false);
-
+  const [isLoading,setIsLoading]=useState<boolean>(false);
   useEffect(() => {
     console.log("000000000 ", dateEvent);
     if (dateEvent) {
@@ -60,10 +61,13 @@ const Events = () => {
 
   const fetch = async () => {
     try {
+      setIsLoading(true)
       const resp = await getAllEvents();
       setEvents(resp);
     } catch (err) {
       console.log(err);
+    }finally{
+      setIsLoading(false)
     }
   };
   useEffect(() => {
@@ -211,7 +215,7 @@ const Events = () => {
             </div>
 
             <div className="w-full text-center items-center p-4">
-              {filteredEvents.length > 0 ? (
+              {(filteredEvents.length > 0 )? (
                 filteredEvents.map((event, index) => {
                   return (
                     <div
@@ -260,37 +264,15 @@ const Events = () => {
                  
                             {limitWords(event.desc+"  Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsa dolores ea at necessitatibus aliquam, qui pariatur nisi corporis magnam vel sint consectetur vero tempora temporibus dolore ratione repellendus deserunt enim.", 100)}
                           </p>
-                          {/* <p className="space-x-2">
-                      {event.categories &&
-                        event.categories.map((category, index) => {
-                          return (
-                            <Badge
-                              key={index.toString()}
-                              variant="outline"
-                              className="rounded-full font-chivo my-3 text-black capitalize bg-gray-200 shadow-inner font-light"
-                            >
-                              {category}
-                            </Badge>
-                          );
-                        })}
-                    </p> */}
-                          {/* <animated.div className="md:flex gap-2 items-center hidden">
-                    <Link to={`/blog/${index}`}>
-                      <ArrowTopRightIcon className="text-3xl font-semibold w-6 h-6 cursor-pointer hover:bg-gray-100 m-2 rounded-md" />
-                    </Link>
-                    <p className="text-muted-foreground text-sm text-black ">
-                      Read more ...
-                    </p>
-                  </animated.div> */}
                         </div>
                       </div>
                     </div>
                   );
                 })
               ) : (
-                <div className="text-center text-white text-lg font-saira ">
-                  No events found.
-                </div>
+                (isLoading)?<><EventCardSkeleton/></>:<div className="text-center text-white text-lg font-saira ">
+                No events found.
+              </div>
               )}
             </div>
           </div>
