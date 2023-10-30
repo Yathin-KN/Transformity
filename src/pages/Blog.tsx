@@ -11,6 +11,8 @@ import { ToastContainer, toast } from "react-toastify";
 import BlogCard from "@/components/custom/BlogCard";
 import Footer from "@/components/custom/footer";
 import { motion } from "framer-motion";
+import clsx from "clsx";
+import useModeStore from "@/store/mode";
 
 
 function randomCategories():string[]{
@@ -99,15 +101,25 @@ const Blog = () => {
     filter(category);
   }, [category]);
 
+  const {mode}=useModeStore();
   return (
-    <div className="bg-black">
-      <div className="w-full h-auto bg-black">
+    <div className={clsx({
+      "bg-white":(mode=="light"),
+      "bg-black":(mode=="dark"),
+    })}>
+      <div className={clsx("w-full h-auto ",{
+      "bg-white":(mode=="light"),
+      "bg-black":(mode=="dark"),
+    })}>
       <MainNav />
       </div>
       <ToastContainer toastClassName={() => 
         " relative flex p-1 min-h-10 rounded-md justify-between overflow-hidden cursor-pointer bg-white text-gray-800 text-sm p-4 m-4"
       }/>
-      <div className="w-full flex justify-center py-10 text-white  md:py-10 overflow-hidden  ">
+      <div className={clsx("w-full flex justify-center py-10   md:py-10 overflow-hidden  ",{
+         "text-black":(mode=="light"),
+         "text-white":(mode=="dark"),
+      })}>
           <motion.p
             className="text-xl md:text-[9rem] flex justify-center relative items-center w-full h-auto md:py-10 uppercase"
             initial={{ opacity: 0, y: 20 }}
@@ -123,12 +135,16 @@ const Blog = () => {
               animate={{ opacity: 1, y: 0, spacing: 2 }}
               transition={{ duration: 0.5, delay: 0.5 }}
             >
+             
               BLOGS
             </motion.p>
           </motion.p>
         </div>
 
-      <div className="w-full h-fit flex flex-col min-h-screen box-border bg-black p-4">
+      <div className={clsx("w-full h-fit flex flex-col min-h-screen box-border p-4",{
+      "bg-white":(mode=="light"),
+      "bg-black":(mode=="dark"),
+    })}>
         <div className="flex flex-col-reverse md:grid md:grid-cols-4 w-max-full">
           <div className="w-full flex flex-col-reverse md:justify-start md:col-span-4 ">
             <div className="w-full h-full flex flex-wrap justify-around items-center gap-4">

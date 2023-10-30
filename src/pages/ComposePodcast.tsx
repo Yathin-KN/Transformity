@@ -7,6 +7,8 @@ import * as Yup from "yup";
 import createPodcast from "@/apis/POST/addPodcast";
 import { ToastContainer, toast } from "react-toastify";
 import useUserStore from "@/store/authStore";
+import clsx from "clsx";
+import useModeStore from "@/store/mode";
 interface FormValues {
   category: string;
   description: string;
@@ -51,7 +53,7 @@ const PodcastForm: React.FC = () => {
       console.error("Error creating podcast:", error);
     }
   };
-
+ 
   return (
     <div className="max-w-md mx-auto bg-black p-6 rounded-md shadow-md m-10 text-white">
       <ToastContainer
@@ -150,9 +152,13 @@ const PodcastForm: React.FC = () => {
 };
 
 const ComposePodcast = () => {
+  const {mode}=useModeStore();
   return (
-    <div className="w-full h-auto bg-black min-h-screen">
-      <div className="bg-black">
+    <div className="w-full h-auto  min-h-screen">
+      <div className={clsx({
+            "bg-white":(mode==="light"),
+             "bg-black":(mode==="dark"),
+        })}>
         <MainNav />
       </div>
       <div className="w-full bg-black min-h-full h-auto py-10">

@@ -7,6 +7,8 @@ import { Event } from "@/lib/types";
 import { Calendar, Globe } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import Footer from "@/components/custom/footer";
+import clsx from "clsx";
+import useModeStore from "@/store/mode";
 const EventComponent = () => {
   const event_info = useParams();
   const [event, setEvent] = useState<Event>();
@@ -25,15 +27,24 @@ const EventComponent = () => {
   useEffect(() => {
     fetch();
   }, []);
+  const {mode}=useModeStore();
   return (
     <>
-     <div className="bg-black">
+     <div className={clsx({
+       "bg-black":(mode=="dark"),
+       "bg-white":(mode=="light")
+     })}>
      <MainNav />
      </div>
-     
-      <div className="w-full flex flex-col justify-center p-4 items-center h-auto pb-10 bg-black">
+      <div className={clsx("w-full flex flex-col justify-center p-4 items-center h-auto pb-10 ",{
+       "bg-black":(mode=="dark"),
+       "bg-white":(mode=="light")
+     })}>
         <div className="w-full md:w-[80%]">
-          <h1 className=" text-3xl md:text-4xl font-bold py-3 font-saira text-white tracking-wider">{event?.title}</h1>
+          <h1 className={clsx(" text-3xl md:text-4xl font-bold py-3 font-saira tracking-wider",{
+            "text-white":(mode==="dark"),
+             "text-black":(mode==="light"),
+        })}>{event?.title}</h1>
           <Separator className="border border-b-white my-4" orientation="horizontal"/>
           <div className="w-full">
             <img
@@ -45,22 +56,52 @@ const EventComponent = () => {
           <div className="grid grid-cols-1 md:grid-cols-4 w-full">
           <p className="col-span-1 justify-center flex flex-col py-6">
                   <div className="flex items-center gap-2">
-                    <Calendar className="w-6 h-6 text-white" />
+                    <Calendar className={clsx("w-6 h-6",{
+            "text-white":(mode==="dark"),
+             "text-black":(mode==="light"),
+        })} />
                     <div className="my-4 flex flex-col justify-normal text-white font-saira">
-                      <p className="text-white font-saira text-xl">Event dates :</p>
-                      <p className="text-md inline-flex justify-center items-center text-white font-saira">Start Date : <span className="text-sm text-white font-saira mx-3">{event?.startDate.toString().substring(0,10)}</span> to</p>
-                      <p className="text-md inline-flex justify-normal items-center text-white font-saira">End Date : <span className="text-sm text-white font-saira mx-3">{event?.endDate.toString().substring(0,10)}</span></p>
+                      <p className={clsx(" font-saira text-xl",{
+            "text-white":(mode==="dark"),
+             "text-black":(mode==="light"),
+        })}>Event dates :</p>
+                      <p className={clsx("text-md inline-flex justify-center items-center  font-saira",{
+            "text-white":(mode==="dark"),
+             "text-black":(mode==="light"),
+        })}>Start Date : <span className={clsx("text-sm  font-saira mx-3",{
+          "text-white":(mode==="dark"),
+           "text-black":(mode==="light"),
+      })}>{event?.startDate.toString().substring(0,10)}</span> to</p>
+                      <p className={clsx("text-md inline-flex justify-normal items-center  font-saira",{
+            "text-white":(mode==="dark"),
+             "text-black":(mode==="light"),
+        })}>End Date : <span className={clsx("text-sm  font-saira mx-3",{
+          "text-white":(mode==="dark"),
+           "text-black":(mode==="light"),
+      })}>{event?.endDate.toString().substring(0,10)}</span></p>
                     </div>
                   </div>
                   <div className="flex items-center gap-2">
-                    <Globe className="w-6 h-6 text-white" />
+                    <Globe className={clsx("w-6 h-6 ",{
+            "text-white":(mode==="dark"),
+             "text-black":(mode==="light"),
+        })} />
                     <div>
-                      <p className=" text-white font-saira text-xl">Location :</p>
-                      <p className="text-white font-saira uppercase tracking-wider text-xl">{event?.eventLocation}</p>
+                      <p className={clsx("  font-saira text-xl",{
+            "text-white":(mode==="dark"),
+             "text-black":(mode==="light"),
+        })}>Location :</p>
+                      <p className={clsx("font-saira uppercase tracking-wider text-xl",{
+            "text-white":(mode==="dark"),
+             "text-black":(mode==="light"),
+        })}>{event?.eventLocation}</p>
                     </div>
                   </div>
               </p>
-              <p className="col-span-3 py-6 text-white font-saira tracking-wide text-xl">
+              <p className={clsx("col-span-3 py-6 font-saira tracking-wide text-xl",{
+            "text-white":(mode==="dark"),
+             "text-black":(mode==="light"),
+        })}>
                 {event?.eventDescription}</p>
               
             </div>

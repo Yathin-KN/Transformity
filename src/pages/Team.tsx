@@ -1,7 +1,9 @@
 import Footer from "@/components/custom/footer";
 import { MainNav } from "@/components/custom/main_nav";
 import { Button } from "@/components/ui/button";
+import useModeStore from "@/store/mode";
 import { useInView } from "@react-spring/web";
+import clsx from "clsx";
 import { motion } from "framer-motion";
 import { Linkedin } from "lucide-react";
 import { FaXTwitter } from "react-icons/fa6";
@@ -50,10 +52,17 @@ const OpacityParagraphs = ({
 
 
 const Team = () => {
+  const {mode}=useModeStore();
   return (
-    <div className="bg-black">
-      <MainNav style={{backgroundColor:'black'}}/>
-      <div className="w-full flex justify-center py-10 text-white  md:py-10 overflow-hidden  ">
+    <div className={clsx({
+            "text-white":(mode==="dark"),
+             "text-black":(mode==="light"),
+        })}>
+      <MainNav className=""/>
+      <div className={clsx("w-full flex justify-center py-10   md:py-10 overflow-hidden  ",{
+         "text-black":(mode=="light"),
+         "text-white":(mode=="dark"),
+      })}>
           <motion.p
             className="text-xl md:text-[9rem] flex justify-center relative items-center w-full h-auto md:py-10 uppercase"
             initial={{ opacity: 0, y: 20 }}
@@ -74,7 +83,12 @@ const Team = () => {
           </motion.p>
         </div>
 
-      <div className="w-full h-auto px-6 md:px-8 grid md:grid-rows-2 text-white bg-black">
+      <div className={clsx("w-full h-auto px-6 md:px-8 grid md:grid-rows-2  ",{
+         "bg-white":(mode=="light"),
+         "bg-black":(mode=="dark"),
+         "text-black":(mode=="light"),
+         "text-white":(mode=="dark"),
+      })}>
         <div className="flex flex-col">
         <div className="w-full  flex flex-col col-span-3 md:col-span-1 justify-center p-6">
       <motion.div
@@ -96,7 +110,10 @@ const Team = () => {
             <h2 className="text-3xl font-bold mb-2 my-3 text-center underline underline-offset-4 decoration-wavy decoration-slate-700 decoration-slice">
               Asanka Abeysinghe
             </h2>
-            <div className="text-gray-400 mb-8">
+            <div className={clsx(" mb-8",{
+               "text-black":(mode=="light"),
+               "text-gray-400":(mode=="dark"),
+            })}>
               <p className="mb-4 ">
                 Asanka’s goal is to connect humans and technology by helping
                 organizations implement digital transformation programs that
@@ -151,7 +168,10 @@ const Team = () => {
             <h2 className="text-3xl font-bold mb-2 my-3 text-center underline underline-offset-4 decoration-wavy decoration-slate-700 decoration-slice">
               Dr. Gautham Pallapa
             </h2>
-            <div className="text-gray-400 mb-8">
+            <div className={clsx(" mb-8",{
+               "text-black":(mode=="light"),
+               "text-gray-400":(mode=="dark"),
+            })}>
               <p className="mb-4 py-3">
                 Dr. Gautham Pallapa is an Executive Advisor for VMware. He works
                 with C-Suite and executives at Global 2000 enterprise customers

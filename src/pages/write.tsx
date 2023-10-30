@@ -31,6 +31,8 @@ import { ToastContainer, toast } from "react-toastify";
 import { Input } from "@/components/ui/input";
 import getAllCategories from "@/apis/POST/getAllCategories";
 import { Category } from "@/lib/types";
+import useModeStore from "@/store/mode";
+import clsx from "clsx";
 
 const Write = () => {
   const [compoenent, setComponenet] = useState<any[]>([]);
@@ -166,16 +168,26 @@ const Write = () => {
       }
     });
   };
+  const {mode}=useModeStore();
   return (
     <>
-      <div className="bg-black">
+      <div className={clsx({
+            "bg-white":(mode==="light"),
+             "bg-black":(mode==="dark"),
+        })}>
       <MainNav />
       </div>
       <ToastContainer toastClassName={() => 
         " relative flex p-1 min-h-10 rounded-md justify-between overflow-hidden cursor-pointer bg-white text-gray-800 text-sm p-4 m-4"
       }/>
-      <div className="w-full h-auto bg-black bg-opacity-90  flex justify-center">
-        <div className="md:w-[80%] w-[95%] h-auto min-h-[100vh] bg-black md:px-10 py-10 mt-[50px] mb-[100px] flex flex-col relative rounded-md px-2">
+      <div className={clsx("w-full h-auto  min-h-screen  bg-opacity-90  flex justify-center",{
+            "bg-white":(mode==="light"),
+             "bg-black":(mode==="dark"),
+        })}>
+        <div className={clsx("md:w-[80%] w-[95%] h-auto min-h-[100vh]md:px-10 py-10 mt-[50px] mb-[100px] flex flex-col relative rounded-md px-2 border-x-[1px] border-gray-800",{
+            "bg-white":(mode==="light"),
+             "bg-black":(mode==="dark"),
+        })}>
           <AlertDialog>
             <AlertDialogTrigger>
               <Badge
@@ -259,7 +271,12 @@ const Write = () => {
               })}
           </div>
 
-          <div className="sm:hidden fixed bottom-0 left-0 w-full py-2  border border-white bg-black text-white flex justify-evenly md:flex md:justify-around items-center">
+          <div className={clsx("sm:hidden fixed bottom-0 left-0 w-full py-2  border border-white  flex justify-evenly md:flex md:justify-around items-center",{
+            "bg-white":(mode==="light"),
+             "bg-black":(mode==="dark"),
+             "text-white":(mode==="dark"),
+             "text-black":(mode==="light")
+        })}>
             <Button
               onClick={() => handleClick("title")}
               className="border-none shadow-none p-2"

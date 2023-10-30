@@ -2,15 +2,21 @@ import React from "react";
 import { Separator } from "../ui/separator";
 import { Avatar, AvatarImage } from "@radix-ui/react-avatar";
 import { BlogItemProps } from "@/lib/types";
+import useModeStore from "@/store/mode";
+import clsx from "clsx";
 
 const BlogItem: React.FC<BlogItemProps> = ({ item }) => {
   console.log(item)
+  const {mode}=useModeStore();
   switch (item.type) {
     case "Title":
       return (
         <>
           <p
-            className="outline-none font-saira text-white text-3xl md:text-4xl font-extrabold py-6 capitalize border-none focus:outline-none w-full pl-2 focus:border-2"
+            className={clsx("outline-none font-saira text-3xl md:text-4xl font-extrabold py-6 capitalize border-none focus:outline-none w-full pl-2 focus:border-2",{
+              "text-white":(mode==="dark"),
+               "text-black":(mode==="light"),
+          })}
             placeholder="Enter title . . ."
           >
             {item.content}
@@ -20,7 +26,10 @@ const BlogItem: React.FC<BlogItemProps> = ({ item }) => {
     case "Subtitle":
       return (
         <h2
-          className="w-full text-3xl font-saira text-white py-2 focus:outline-none pl-2 focus:border-l-2 border-gray-400"
+          className={clsx("w-full text-3xl font-saira  py-2 focus:outline-none pl-2 focus:border-l-2 border-gray-400",{
+            "text-white":(mode==="dark"),
+             "text-black":(mode==="light"),
+        })}
           placeholder="Enter heading"
         >
           
@@ -32,7 +41,10 @@ const BlogItem: React.FC<BlogItemProps> = ({ item }) => {
         <>
           <div className="flex w-full">
             <p
-              className="text-lg md:text-lg font-light w-full font-saira text-white border-transparent border-l-2 focus:outline-none resize-none focus:border-l-2 focus:border-gray-400 pl-2 h-auto py-4"
+              className={clsx("text-lg md:text-lg font-light w-full font-saira  border-transparent border-l-2 focus:outline-none resize-none focus:border-l-2 focus:border-gray-400 pl-2 h-auto py-4",{
+                "text-white":(mode==="dark"),
+                 "text-black":(mode==="light"),
+            })}
               draggable={false}
               style={{ whiteSpace: 'pre-wrap' }}
             >
@@ -58,21 +70,33 @@ const BlogItem: React.FC<BlogItemProps> = ({ item }) => {
               </Avatar>
               <div className="flex justify-between  w-full">
                 <div>
-                <p className="text-md font-saira text-white uppercase flex">
+                <p className={clsx("text-md font-saira  uppercase flex",{
+            "text-white":(mode==="dark"),
+             "text-black":(mode==="light"),
+        })}>
                   <p className="text-md font-saira text-gray-500 uppercase ">Author :</p>
-                 <p className="text-md font-saira text-white uppercase ml-1"> {" "+(item.content.author && item.content.author.name) || ""}</p>
+                 <p className={clsx("text-md font-saira  uppercase ml-1",{
+            "text-white":(mode==="dark"),
+             "text-black":(mode==="light"),
+        })}> {" "+(item.content.author && item.content.author.name) || ""}</p>
                 </p>
-                <p className="text-xs font-saira text-white flex">
+                <p className="text-xs font-saira flex">
                   <p className="text-md font-saira text-gray-500 uppercase">Date :</p>
-                  <p className="text-md font-saira text-white uppercase">{item.content.date}</p>
+                  <p className={clsx("text-md font-saira  uppercase",{
+            "text-white":(mode==="dark"),
+             "text-black":(mode==="light"),
+        })}>{item.content.date}</p>
                 </p>
                 </div>
-                <div className="text-white">
+                <div className="">
                   <p className="flex">
                     <p className="text-md font-saira text-gray-500 uppercase">
                      Time :
                     </p>
-                    <p className="text-md font-saira text-white uppercase">
+                    <p className={clsx("text-md font-saira uppercase",{
+            "text-white":(mode==="dark"),
+             "text-black":(mode==="light"),
+        })}>
                       {item.content.time}
                     </p>
                   </p>
@@ -92,7 +116,10 @@ const BlogItem: React.FC<BlogItemProps> = ({ item }) => {
               alt={item.content.imageCaption}
               className="object-fit w-full md:max-w-[70%] mx-auto px-2"
             />
-            <p className="text-sm font-saira text-white hover:underline text-center py-2 underline-offset-2 focus:outline-none">
+            <p className={clsx("text-sm font-sairahover:underline text-center py-2 underline-offset-2 focus:outline-none",{
+            "text-white":(mode==="dark"),
+             "text-black":(mode==="light"),
+        })}>
               {item.content.imageCaption || ""}
             </p>
           </div>
@@ -109,7 +136,10 @@ const BlogItem: React.FC<BlogItemProps> = ({ item }) => {
               />
               Your browser does not support the video tag.
             </video>
-            <p className="text-sm font-saira text-white hover:underline text-center py-2 underline-offset-2 focus:outline-none">
+            <p className={clsx("text-sm font-sairahover:underline text-center py-2 underline-offset-2 focus:outline-none",{
+            "text-white":(mode==="dark"),
+             "text-black":(mode==="light"),
+        })}>
               {item.content.videoCaption}
             </p>
           </div>

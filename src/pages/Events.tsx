@@ -16,6 +16,8 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import Footer from "@/components/custom/footer";
+import clsx from "clsx";
+import useModeStore from "@/store/mode";
 
 const limitWords = (text: string, limit: number) => {
   const words = text.split(" ");
@@ -105,10 +107,14 @@ const Events = () => {
     console.log(event_id);
     deleteEvent(event_id, user_id);
   };
+  const {mode}=useModeStore();
   const navigate = useNavigate();
   return (
     <>
-      <div className="bg-black">
+      <div className={clsx({
+         "bg-white":(mode=="light"),
+         "bg-black":(mode=="dark"),
+      })}>
         <MainNav />
       </div>
       <ToastContainer
@@ -116,8 +122,14 @@ const Events = () => {
           " relative flex p-1 min-h-10 rounded-md justify-between overflow-hidden cursor-pointer bg-white text-gray-800 text-sm p-4 m-4"
         }
       />
-      <div className="w-full min-h-screen h-auto bg-black p-4 ">
-      <div className="w-full flex justify-center py-10 text-white  md:py-10 overflow-hidden">
+      <div className={clsx("w-full min-h-screen h-auto p-4 ",{
+         "bg-white":(mode=="light"),
+         "bg-black":(mode=="dark"),
+      })}>
+      <div className={clsx("w-full flex justify-center py-10   md:py-10 overflow-hidden  ",{
+         "text-black":(mode=="light"),
+         "text-white":(mode=="dark"),
+      })}>
           <motion.p
             className="text-xl md:text-[9rem] flex justify-center relative items-center w-full h-auto md:py-10 uppercase"
             initial={{ opacity: 0, y: 20 }}
@@ -133,23 +145,33 @@ const Events = () => {
               animate={{ opacity: 1, y: 0, spacing: 2 }}
               transition={{ duration: 0.5, delay: 0.5 }}
             >
-              EVENTS
+             
+              BLOGS
             </motion.p>
           </motion.p>
         </div>
         <div className="flex  flex-col md:flex-row">
           <div className=" w-full flex flex-col md:flex-row">
             <div className="w-fit h-full flex flex-col gap-10 ">
-              <p className="text-black">{dateEvent}</p>
+              <p className={clsx({
+         "text-white":(mode=="dark"),
+         "text-black":(mode=="light"),
+      })}>{dateEvent}</p>
               <div>
                 <Label
                   htmlFor="keywords"
-                  className="text-white font-saira text-lg tracking-wide"
+                  className={clsx("font-saira text-lg tracking-wide",{
+                    "text-white":(mode=="dark"),
+                    "text-black":(mode=="light"),
+                 })}
                 >
                   Keywords
                 </Label>
                 <Input
-                  className="w-full md:w-72 text-lg text-white font-saira tracking-wider border-b-1 rounded-none border-white border-t-0 border-x-transparent"
+                  className={clsx("w-full md:w-72 text-lg  font-saira tracking-wider border-b-1 rounded-none border-white border-t-0 border-x-transparent",{
+                    "text-white":(mode=="dark"),
+                    "text-black":(mode=="light")
+                  })}
                   id="keywords"
                   value={keywords}
                   onChange={(e) => setKeywords(e.target.value)}
@@ -159,19 +181,25 @@ const Events = () => {
               <div>
                 <Label
                   htmlFor="location"
-                  className="text-white font-saira text-lg tracking-wide"
+                  className={clsx("font-saira text-lg tracking-wide",{
+                    "text-white":(mode=="dark"),
+                    "text-black":(mode=="light"),
+                 })}
                 >
                   Location
                 </Label>
                 <Input
-                  className="w-full md:w-72 text-lg text-white font-saira tracking-wider border-b-1 rounded-none border-white border-t-0 border-x-transparent"
+                  className={clsx("w-full md:w-72 text-lg  font-saira tracking-wider border-b-1 rounded-none border-white border-t-0 border-x-transparent",{
+                    "text-white":(mode=="dark"),
+                    "text-black":(mode=="light")
+                  })}
                   id="location"
                   placeholder="location"
                   value={location}
                   onChange={(e) => setLocation(e.target.value)}
                 />
               </div>
-              <div className="w-full md:w-auto flex justify-between gap-3 font-saira text-white">
+              <div className="w-full md:w-auto hidden justify-between gap-3 font-saira text-white">
                 <DatePickerWithPresets setEventDate={setDateEvent} />
                 <Button
                   variant="outline"

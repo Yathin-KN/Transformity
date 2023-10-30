@@ -9,6 +9,8 @@ import { PodcastData } from "@/lib/types";
 import useUserStore from "@/store/authStore";
 import deletPodcast from "@/apis/POST/deletePodcast"
 import { toast } from "react-toastify";
+import clsx from "clsx";
+import useModeStore from "@/store/mode";
 // const podCastData = [
 //   {
 //     category: "Motivational",
@@ -62,11 +64,13 @@ const PodcastCard = ({
       })
     }
   }
+  const {mode}=useModeStore();
   return (
     <div
       className="border border-x-0 border-t-0 border-dashed pb-2 border-gray-500 flex w-full flex-col md:flex-row flex-wrap md:flex-nowrap "
       style={{
         flexDirection: reverse ? "row" : "row-reverse",
+        backgroundColor:mode==="dark"?"black":"white"
       }}
     >
       <div className="px-1 md:px-6 py-4 flex items-center relative z-0  md:w-[40%] ">
@@ -98,14 +102,20 @@ const PodcastCard = ({
       </div>
       <div className="py-4 px-4   w-full md:px-10">
         <div className="w-full flex justify-between items-center">
-          <h1 className="text-white md:text-2xl font-saira  py-4 uppercase tracking-widest">
+          <h1 className={clsx("md:text-2xl font-saira  py-4 uppercase tracking-widest",{
+            "text-white":(mode=="dark"),
+             "text-black":(mode=="light"),
+          })}>
             {category}
           </h1>
-         {(userId === user_id ) && <div onClick={()=>deletePodcast()} className="text-xs text-white py-1 px-3 rounded-sm bg-red-600 font-bold bg-opacity-80 border border-white">
+         {(userId === user_id ) && <div onClick={()=>deletePodcast()} className={clsx("text-xs text-white py-1 px-3 rounded-sm bg-red-600 font-bold bg-opacity-80 border border-white")}>
             Delete
           </div>}
         </div>
-        <p className="text-white md:text-3xl font-poppins tracking-wider ">
+        <p className={clsx("md:text-3xl font-poppins tracking-wider ",{
+            "text-white":(mode=="dark"),
+             "text-black":(mode=="light"),
+          })}>
           {description}
         </p>
       </div>
@@ -269,33 +279,46 @@ const Podcast = () => {
 
     getAllPodcasts1();
   }, []);
-
+ const {mode}=useModeStore();
   return (
-    <div className="bg-black w-full">
-      <div className="bg-black">
+    <div className={clsx(" w-full",{
+      "bg-white":(mode=="light"),
+         "bg-black":(mode=="dark"),
+    })}>
+      <div className={clsx({
+      "bg-white":(mode=="light"),
+         "bg-black":(mode=="dark"),
+    })}>
         <MainNav />
       </div>
-      <div className="w-full flex justify-center py-10 text-white  md:py-10 overflow-hidden  ">
-        <motion.p
-          className="text-xl md:text-[9rem] flex justify-center relative items-center w-full h-auto md:py-10 uppercase"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-        >
-          <p className="opacity-20 md:opacity-10 tracking-tighter md:tracking-[1.3rem] text-center py-3 mx-4 font-island normal-case text-[8rem] md:text-[17rem]">
-            Transformity
-          </p>
+      <div className={clsx("w-full flex justify-center py-10   md:py-10 overflow-hidden  ",{
+         "text-black":(mode=="light"),
+         "text-white":(mode=="dark"),
+      })}>
           <motion.p
-            className="text-3xl md:text-7xl absolute uppercase tracking-[0.5rem]  md:tracking-[1.5rem] font-extrabold"
+            className="text-xl md:text-[9rem] flex justify-center relative items-center w-full h-auto md:py-10 uppercase"
             initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0, spacing: 2 }}
-            transition={{ duration: 0.5, delay: 0.5 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
           >
-            PODCASTS
+            <p className="opacity-20 md:opacity-10 tracking-tighter md:tracking-[1.3rem] text-center py-3 mx-4 font-island normal-case text-[8rem] md:text-[17rem]">
+              Transformity
+            </p>
+            <motion.p
+              className="text-3xl md:text-7xl absolute uppercase tracking-[0.5rem]  md:tracking-[1.5rem] font-extrabold"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0, spacing: 2 }}
+              transition={{ duration: 0.5, delay: 0.5 }}
+            >
+             
+              BLOGS
+            </motion.p>
           </motion.p>
-        </motion.p>
-      </div>
-      <div className="w-full min-h-screen  h-auto p-4 md:px-10 bg-black ">
+        </div>
+      <div className={clsx("w-full min-h-screen  h-auto p-4 md:px-10",{
+        "bg-white":(mode=="light"),
+        "bg-black":(mode=="dark"),
+      })}>
         <div className="w-full flex  flex-wrap md:gap-10  h-auto justify-center items-center bg-black">
           {podCastData.map((card, index) => {
             return (

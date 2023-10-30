@@ -7,6 +7,8 @@ import getPostById from "@/apis/POST/getPostByPostId";
 import { BlogItem } from "@/lib/types";
 import DummyPic from "./../../assets/dummy.png"
 import Footer from "./footer";
+import useModeStore from "@/store/mode";
+import clsx from "clsx";
 // import BlogItem from "./blogItem";
 interface PostDetail {
   type: "Blog Info";
@@ -21,6 +23,7 @@ interface PostDetail {
 }
 const BlogCustom = () => {
   const { blogId } = useParams();
+  const {mode}=useModeStore();
   const [content, setContent] = useState<BlogItem[]>([]);
   const [postDetails, setPostDetails] = useState<PostDetail>();
   const fetch = async () => {
@@ -50,12 +53,22 @@ const BlogCustom = () => {
   }, []);
   return (
     <>
-      <div className="bg-black">
+      <div className={clsx({
+        
+          "bg-white":(mode=="light"),
+           "bg-black":(mode=="dark"),
+        
+      })}>
       <MainNav />
       </div>
       {console.log(blogId)}
       {console.log("8888-",content)}
-      <div className="w-full min-h-screen h-auto bg-black">
+      <div className={clsx("w-full min-h-screen h-auto bg-black",{
+        
+        "bg-white":(mode=="light"),
+         "bg-black":(mode=="dark"),
+      
+    })}>
       <div className="w-[94%] lg:w-[80%] mx-auto ">
         {content &&
           content.map((blogItem, index) => {

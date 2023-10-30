@@ -5,7 +5,9 @@ import { motion } from "framer-motion";
 import { Eye, Heart, Hourglass, Plus } from "lucide-react";
 import Footer from "@/components/custom/footer";
 import Gallery from "@/components/ReactSlick/landingSlides";
-import Img from "./../assets/favicon.png"
+import Img from "./../assets/favicon.png";
+import useModeStore from "@/store/mode";
+import clsx from "clsx";
 const bandData = [
   {
     title: (
@@ -93,41 +95,52 @@ const slides = [
 ];
 
 const Modal = ({ value }: { value: boolean }) => {
+  const { mode } = useModeStore();
+  // mode="light";
   if (value) {
     return (
-      <div className="w-full grid md:grid-cols-2 gap-10 md:p-4 min-h-[50vh] h-auto md:px-10 py-3">
+      <div
+        className={clsx(
+          "w-full grid md:grid-cols-2 gap-10 md:p-4 min-h-[50vh] h-auto md:px-10 py-3 ",
+          {
+            "bg-white": mode === "light",
+            "bg-black": mode === "dark",
+          }
+        )}
+      >
         <div className="col-span-1 w-full h-full md:bg-indigo-500 md:rounded-lg  shadow-inner flex justify-center items-center">
           <motion.div
             whileHover={{ scale: 1.3 }}
             whileFocus={{ scale: 1.3 }}
             tabIndex={0}
           >
-            <motion.img
-              src={Img}
-              alt="Your Image"
-              className="mt-6"
-            />
+            <motion.img src={Img} alt="Your Image" className="mt-6" />
           </motion.div>
         </div>
         <div className="col-span-1 w-full h-full bg-transparent flex flex-col gap-10 px-10 justify-between">
           <h1 className="font-saira uppercase text-5xl font-semibold border-l-4 px-4 border-red-600">
             About us <br />
           </h1>
-          <p className="font-kanit  text-white">
+          <p
+            className={clsx("font-kanit", {
+              "text-white": mode === "dark",
+              "text-black": mode === "light",
+            })}
+          >
             COVID-19 has been a compelling event for many organizations to
             rethink and reimagine their business models, transformation
             strategies, and customer experience. Leaders and transformation
             agents have been enduring considerable stress and anxiety over the
             last 14 months due to switching to a remote way of working—both with
             customers and with their workforce.
-            <br/>
-            <br/>
-           The goal of Transformity is to
-            help leaders and enterprises transform their organizations through
-            Empathy and Technology. We have been working with many Global 2000
-            corporations to help them on their strategies and execution and
-            Transformity is our approach to share our validated learning,
-            experiences, strategies, and thought leadership.
+            <br />
+            <br />
+            The goal of Transformity is to help leaders and enterprises
+            transform their organizations through Empathy and Technology. We
+            have been working with many Global 2000 corporations to help them on
+            their strategies and execution and Transformity is our approach to
+            share our validated learning, experiences, strategies, and thought
+            leadership.
             <br />
             <br />
             In 2022, we focused a lot on people and work-life balance. Our
@@ -145,7 +158,7 @@ const Modal = ({ value }: { value: boolean }) => {
             that.
             <br />
             <br />
-            -Asanka Abeysinghe and <br/> Dr. Gautham Pallapa
+            -Asanka Abeysinghe and <br /> Dr. Gautham Pallapa
           </p>
           {/* <Button className="rounded-full py-1 px-6 border bg-red-600 border-white text-lg font-saira font-semibold uppercase hover:bg-white hover:text-red-500 hover-border-red-500 w-fit">
             Buy now
@@ -155,12 +168,25 @@ const Modal = ({ value }: { value: boolean }) => {
     );
   }
   return (
-    <div className="w-full grid md:grid-cols-2 gap-10 md:p-4 min-h-[50vh] h-auto md:px-10">
+    <div
+      className={clsx(
+        "w-full grid md:grid-cols-2 gap-10 md:p-4 min-h-[50vh] h-auto md:px-10 py-3 ",
+        {
+          "bg-white": mode === "light",
+          "bg-black": mode === "dark",
+        }
+      )}
+    >
       <div className="col-span-1 w-full h-full bg-transparent flex flex-col gap-10 px-10 justify-between">
         <h1 className="font-saira uppercase text-5xl font-semibold border-l-4 px-4 border-red-600">
           How did we get started <br /> in this buisness
         </h1>
-        <p className="font-kanit  text-white">
+        <p
+          className={clsx("font-kanit", {
+            "text-white": mode == "dark",
+            "text-black": mode == "light",
+          })}
+        >
           My book launched on December 9, 2021 in both hardcover and eBook
           format, and is now available anywhere books can be purchased! Click
           the button below to purchase it. The audiobook should come out
@@ -226,15 +252,34 @@ const Band = () => {
   );
 };
 const LandingPage: React.FC = () => {
+  const { mode } = useModeStore();
+
   return (
-    <div className="w-full pb-10 h-auto bg-black text-white">
-      <div className="fixed top-0 left-0 w-full bg-black">
+    <div
+      className={clsx("w-full pb-10 h-auto  ", {
+        "bg-black": mode == "dark",
+        "bg-white": mode == "light",
+        "text-white": mode == "dark",
+        "text-black": mode == "dark",
+      })}
+    >
+      <div
+        className={clsx("fixed top-0 left-0 w-full bg-black", {
+          "bg-black": mode == "dark",
+          "bg-white": mode == "light",
+        })}
+      >
         <Carousel slides={slides} />
         <Modal value={true} />
         <Band />
         <Modal value={false} />
-        <div className="w-full h-fit py-4">
-        <Gallery />
+        <div
+          className={clsx("w-full h-fit py-4", {
+            "bg-white": mode == "light",
+            "bg-black": mode == "dark",
+          })}
+        >
+          <Gallery />
         </div>
         <Footer />
       </div>

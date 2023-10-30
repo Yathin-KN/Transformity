@@ -2,15 +2,21 @@ import React from "react";
 import { Separator } from "../ui/separator";
 import { Avatar, AvatarImage } from "@radix-ui/react-avatar";
 import { BlogItemProps } from "@/lib/types";
+import useModeStore from "@/store/mode";
+import clsx from "clsx";
 
 const BlogItem: React.FC<BlogItemProps> = ({ item, handlers }) => {
+  const {mode}=useModeStore();
   switch (item.type) {
     case "Title":
       return (
         <>
           {console.log("---",item.content)}
           <p
-            className="outline-none  text-5xl md:text-6xl text-white font-extrabold  capitalize border-none focus:outline-none w-full pl-2 focus:border-2 hover:bg-gray-800 font-saira py-4"
+            className={clsx(`outline-none  text-5xl md:text-6xl font-extrabold  capitalize border-y-0 focus:outline-none w-full pl-2 focus:border-2 ${(mode==="dark")?"hover:bg-gray-800":"hover:bg-gray-200"} font-saira py-4 border-l-[2px] border-l-white`,{
+              "text-white":(mode==="dark"),
+               "text-black":(mode==="light"),
+          })}
             placeholder="Enter title . . ."
             contentEditable={true}
             onBlur={(e) => handlers?.onChangeHandler(e)}
@@ -21,7 +27,10 @@ const BlogItem: React.FC<BlogItemProps> = ({ item, handlers }) => {
     case "Subtitle":
       return (
         <h2
-          className="w-full text-3xl  font-saira text-white font-bold md:font-extrabold focus:outline-none pl-2 focus:border-l-2 border-gray-400 hover:bg-gray-800 py-4"
+          className={clsx(`w-full text-3xl my-2  font-saira font-bold md:font-extrabold focus:outline-none pl-2 focus:border-l-2 border-gray-400 ${(mode==="dark")?"hover:bg-gray-800":"hover:bg-gray-200"} py-4 border-l-[2px] border-l-white`,{
+            "text-white":(mode==="dark"),
+             "text-black":(mode==="light"),
+        })}
           placeholder="Enter heading"
           contentEditable={true}
           onBlur={(e) => handlers?.onChangeHandler(e.target.innerText)}
@@ -32,9 +41,12 @@ const BlogItem: React.FC<BlogItemProps> = ({ item, handlers }) => {
     case "Description":
       return (
         <>
-          <div className="flex w-full text-white font-saira hover:bg-gray-800 py-4">
+          <div className={`flex w-full text-white font-saira hover:bg-gray-800 py-4 ${(mode==="dark")?"hover:bg-gray-800":"hover:bg-gray-200"}  `}>
             <p
-              className="text-md w-full border-transparent border-l-2 focus:outline-none resize-none focus:border-l-2 focus:border-gray-400 pl-2 h-auto font-saira text-xl tracking-wide"
+              className={clsx(`text-md w-full border-transparent  focus:outline-none resize-none focus:border-l-2 focus:border-gray-400 pl-2  h-auto font-saira text-xl tracking-wide border-l-[2px] border-l-white `,{
+                "text-white":(mode==="dark"),
+                 "text-black":(mode==="light"),
+            })}
               draggable={false}
               contentEditable={true}
               onBlur={(e) => handlers?.onChangeHandler(e)}
@@ -70,7 +82,7 @@ const BlogItem: React.FC<BlogItemProps> = ({ item, handlers }) => {
       );
     case "Image":
       return (
-        <div className="w-full flex  flex-col justify-center hover:bg-gray-800 py-4">
+        <div className={clsx(`w-full flex  flex-col justify-center  py-4 ${(mode==="dark")?"hover:bg-gray-800":"hover:bg-gray-200"}  `)}>
           <div className="flex flex-col w-full">
             <img
               src={item.content.imageUrl || ""}
@@ -78,7 +90,10 @@ const BlogItem: React.FC<BlogItemProps> = ({ item, handlers }) => {
               className="object-fit max-w-[100%] md:max-w-[70%] mx-auto "
             />
             <input
-              className="outline-none text-sm py-2 text-center border-none focus:outline-none w-full pl-2 focus:border-2 text-white font-saira tracking-wider"
+              className={clsx("outline-none text-sm py-2 text-center border-none focus:outline-none w-full pl-2 focus:border-2  font-saira tracking-wider",{
+                "text-white":(mode==="dark"),
+                 "text-black":(mode==="light"),
+            })}
               accept="image/*"
               type="file"
               placeholder="Enter a valid image url"
@@ -88,7 +103,10 @@ const BlogItem: React.FC<BlogItemProps> = ({ item, handlers }) => {
             ></input>
 
             <p
-              className=" text-white font-saira text-lg hover:underline text-center py-2 underline-offset-2 focus:outline-none "
+              className={clsx(" font-saira text-lg hover:underline text-center py-2 underline-offset-2 focus:outline-none ",{
+                "text-white":(mode==="dark"),
+             "text-black":(mode==="light"),
+              })}
               contentEditable={true}
               onBlur={(e) => handlers?.onChangeHandler(e.target.innerText)}
             >
@@ -99,7 +117,7 @@ const BlogItem: React.FC<BlogItemProps> = ({ item, handlers }) => {
       );
     case "Video":
       return (
-        <div className="w-full flex justify-center py-6 hover:bg-gray-800">
+        <div className={(`w-full flex justify-center py-6 ${(mode==="dark")?"hover:bg-gray-800":"hover:bg-gray-200"} `)}>
           <div className="flex flex-col gap-3 justify-between items-center">
             <video controls className="bg-gray-700 w-[80%] h-auto">
               <source
@@ -109,7 +127,10 @@ const BlogItem: React.FC<BlogItemProps> = ({ item, handlers }) => {
               Your browser does not support the video tag.
             </video>
             <input
-              className="outline-none text-sm tracking-wider font-saira text-white  text-center border-none focus:outline-none w-full focus:border-2"
+              className={clsx("outline-none text-sm tracking-wider font-saira   text-center border-none focus:outline-none w-full focus:border-2",{
+                "text-white":(mode==="dark"),
+                "text-black":(mode==="light"),
+              })}
               type="file"
               accept="video/*"
               onChange={(e) => {
@@ -117,7 +138,10 @@ const BlogItem: React.FC<BlogItemProps> = ({ item, handlers }) => {
               }}
             ></input>
             <p
-              className=" text-white font-saira text-lg hover:underline text-center  underline-offset-2 focus:outline-none"
+              className={clsx(" font-saira text-lg hover:underline text-center  underline-offset-2 focus:outline-none",{
+                "text-white":(mode==="dark"),
+                "text-black":(mode==="light"),
+              })}
               contentEditable={true}
               onBlur={(e) => handlers?.onChangeHandler(e.target.innerText)}
             >

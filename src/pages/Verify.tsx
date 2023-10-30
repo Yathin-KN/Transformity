@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from "react";
-import Write from "./write"; // Assuming this is the Write component
-import EventCompose from "./EventForm"; // Assuming this is the EventCompose component
-import SignIn from "./signIn"; // Assuming this is the SignIn component
+import Write from "./write"; 
+import EventCompose from "./EventForm"; 
+import SignIn from "./signIn"; 
 import useUserStore from '@/store/authStore';
-import authorize from "@/apis/POST/authorize"; // Assuming authorizeResponse type
-
+import authorize from "@/apis/POST/authorize"; 
+import ComposePodcast from "./ComposePodcast";
 interface VerifyWriteProps {
-  type: "write" | "EventCompose";
+  type: "write" | "EventCompose" | "podcast";
 }
 
 const VerifyWrite: React.FC<VerifyWriteProps> = ({ type }) => {
   const setUser = useUserStore((state) => state.setUser);
 
   const [authenticated, setAuthenticated] = useState<boolean>(false);
-  const [loading, setLoading] = useState<boolean>(true); // Add loading state
+  const [loading, setLoading] = useState<boolean>(true); 
 
   useEffect(() => {
     const checkAuthentication = async () => {
@@ -27,7 +27,7 @@ const VerifyWrite: React.FC<VerifyWriteProps> = ({ type }) => {
       } catch (error) {
         console.error(error);
       } finally {
-        setLoading(false); // Set loading to false after authentication check
+        setLoading(false); 
       }
     };
 
@@ -41,7 +41,13 @@ const VerifyWrite: React.FC<VerifyWriteProps> = ({ type }) => {
   }
 
   if (authenticated) {
-    return type === "write" ? <Write /> : <EventCompose />;
+    if (type === "write") {
+      return <Write />;
+    } else if (type === "EventCompose") {
+      return <EventCompose />;
+    } else if (type === "podcast") {
+      return <ComposePodcast/>;
+    }
   } else {
     return <SignIn />;
   }

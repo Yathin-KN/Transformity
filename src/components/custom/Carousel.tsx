@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import useModeStore from "@/store/mode";
+import clsx from "clsx";
 
 const Carousel = ({ slides }: { slides: any }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
-
+  const {mode}=useModeStore();
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentSlide(prev => (prev === slides.length - 1 ? 0 : prev + 1));
@@ -17,7 +19,10 @@ const Carousel = ({ slides }: { slides: any }) => {
       {slides.map((slide: { image: any; }, index: React.Key | null | undefined) => (
         <div
           key={index}
-          className="h-full w-full relative bg-transparent"
+          className={clsx("h-full w-full relative",{
+            "bg-white":(mode=='light'),
+            "bg-black":(mode=='dark'),
+          })}
           style={{
             display: index !== currentSlide ? "none" : "block",
           }}
@@ -39,7 +44,8 @@ const Carousel = ({ slides }: { slides: any }) => {
                 <div className="font-kanit">
                 <div className="h-full w-full absolute inset-0"
                style={{
-                background: `linear-gradient(90deg, rgba(0,0,1,1) 0%, rgba(0,0,1,1) 22%, rgba(0,212,255,0) 100%)`,
+                background:(mode=="dark")?`linear-gradient(90deg, rgba(0,0,1,1) 0%, rgba(0,0,1,1) 22%, rgba(0,212,255,0) 100%)`:`linear-gradient(90deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%)
+                `,
                }}
               >
                 </div>

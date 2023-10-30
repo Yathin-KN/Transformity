@@ -8,33 +8,53 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Menu } from "lucide-react";
+import { Menu, Moon, Sun } from "lucide-react";
 import Img from "./../../assets/favicon.png";
+import useModeStore from "@/store/mode";
+import clsx from "clsx";
 export function MainNav({
   className,
   ...props
 }: React.HTMLAttributes<HTMLElement>) {
+  const {mode , toggleMode} = useModeStore();
   return (
     <nav
       style={{
-        background: `linear-gradient(180deg, rgba(5,5,4,1) 0%, rgba(10,10,10,1) 1%, rgba(0,212,255,0) 100%)`
+        background: (mode=="dark")?`linear-gradient(180deg, rgba(5,5,4,1) 0%, rgba(10,10,10,1) 1%, rgba(0,212,255,0) 100%)`:`linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(250,250,250,1) 1%, rgba(255,255,255,0) 100%)
+        `
       }}
       className={cn(
-        "flex items-center z-50 justify-between space-x-4 lg:space-x-6 py-3 md:py-3  md:px-10 sticky top-0 shadow-inner font-saira h-full w-full bg-black bg-opacity-0 ",
+        "flex items-center z-50 justify-between space-x-4 lg:space-x-6 py-3 md:py-3  md:px-10 sticky top-0 shadow-inner font-saira h-full w-full bg- bg-opacity-0 ",
         className
       )
       
     }
       {...props}
     >
-      <h1 className="font-saira uppercase text-2xl md:text-4xl  tracking-widest text-white flex items-center gap-1">
-      <img src={Img} className="w-20 h-20 brightness-125 ml-4 md:ml-0"></img>
+      <button className={clsx("py-1 px-2",{
+        "text-white":(mode=="dark"),
+        "text-black":(mode=="light")
+      })} onClick={()=>toggleMode()}>
+           {<div className="fixed top-9 md:top-10 md:right-8">{(mode=="light"?<Sun/>:<Moon/>)}</div>}
+      </button>
+      <Link to="/">
+      <h1 className={clsx("font-saira uppercase text-2xl md:text-4xl  tracking-widest flex items-center gap-1",{
+        "text-white":!(mode=="light"),
+        "text-black":!(mode=="dark"),
+      })}>
+      <img src={Img} className={clsx("w-20 h-20 brightness-125 ml-4 md:ml-0",{
+        
+      })}></img>
         Transformity
       </h1>
+      </Link>
       <div className="hidden font-saira uppercase sm:flex  w-full md:space-x-10  text-white justify-end">
         <Link
           to="/"
-          className="text-xl font-saira uppercase font-medium transition-colors hover:text-primary "
+          className={clsx("text-xl font-saira uppercase font-medium transition-colors hover:text-primary ",{
+            "text-black":(mode=="light"),
+            "text-white":(mode=="dark"),
+          })}
         >
           Home
         </Link>
@@ -47,10 +67,16 @@ export function MainNav({
         <div className="group relative">
           <Link
             to="/blog"
-            className="text-xl font-saira uppercase font-medium text-muted-foreground transition-colors hover:text-primary relative"
+            className={clsx("text-xl font-saira uppercase font-medium text-muted-foreground transition-colors hover:text-primary relative",{
+              "text-black":(mode=="light"),
+              "text-white":(mode=="dark"),
+            })}
           >
             Blog
-            <div className="absolute hidden group-hover:block h-auto  bg-black px-2 border rounded-md z-50">
+            <div className={clsx("absolute hidden group-hover:block h-auto px-2 border rounded-md z-50",{
+            "bg-white":(mode=="light"),
+            "bg-black":(mode=="dark"),
+          })}>
               <Link to="/blog/write" className="hover:underline text-md font-saira z-50">
                 compose blog
               </Link>
@@ -59,17 +85,27 @@ export function MainNav({
         </div>
         <Link
           to="/team"
-          className="text-xl font-saira uppercase font-medium text-muted-foreground transition-colors hover:text-primary"
+          className={clsx("text-xl font-saira uppercase font-medium text-muted-foreground transition-colors hover:text-primary",{
+            "text-black":(mode=="light"),
+            "text-white":(mode=="dark"),
+          
+          })}
         >
           Team
         </Link>
         <div className="group relative">
           <Link
             to="/events"
-            className="text-xl font-saira uppercase font-medium text-muted-foreground transition-colors hover:text-primary"
+            className={clsx("text-xl font-saira uppercase font-medium transition-colors hover:text-primary",{
+              "text-black":(mode=="light"),
+              "text-white":(mode=="dark"),
+            })}
           >
             Events
-            <div className="absolute hidden group-hover:block h-auto bg-black px-2 border rounded-md">
+            <div className={clsx("absolute hidden group-hover:block h-auto  px-2 border rounded-md",{
+            "bg-white":(mode=="light"),
+            "bg-black":(mode=="dark"),
+          })}>
               <Link to="/eventCompose" className="hover:underline text-md font-saira z-50">
                 compose event
               </Link>
@@ -79,10 +115,14 @@ export function MainNav({
         <div className="group relative">
         <Link
           to="/podcast"
-          className="text-xl font-saira uppercase font-medium transition-colors hover:text-primary"
+          className={clsx("text-xl font-saira uppercase font-medium transition-colors hover:text-primary",{
+            "text-black":(mode=="light"),
+            "text-white":(mode=="dark"),
+          })}
         >
           Podcast
-          <div className="absolute hidden group-hover:block h-auto bg-black px-2 border rounded-md">
+          <div className={clsx("absolute hidden group-hover:block h-auto bg-black px-2 border rounded-md",{ "bg-white":(mode=="light"),
+              "bg-black":(mode=="dark"),})}>
               <Link to="/podcastCompose" className="hover:underline text-md font-saira z-50">
                 compose podcast
               </Link>
@@ -96,9 +136,17 @@ export function MainNav({
         <div className="sm:hidden">
           <DropdownMenu>
             <DropdownMenuTrigger className="focus:border-none focus:outline-none ">
-              <Menu className="text-white m-4 " />
+              <Menu className={clsx("m-4 ",{
+                "text-black":(mode=="light"),
+                "text-white":(mode=="dark")
+              })} />
             </DropdownMenuTrigger>
-            <DropdownMenuContent className="mt-6 bg-black text-white">
+            <DropdownMenuContent className={clsx("mt-6  ",{
+                "text-black":(mode=="light"),
+                "text-white":(mode=="dark"),
+                "bg-black":(mode=="dark"),
+                "bg-white":(mode=="light")
+              })}>
               {/* <DropdownMenuLabel>My Account</DropdownMenuLabel> */}
               {/* <DropdownMenuSeparator /> */}
               <DropdownMenuItem>
@@ -126,7 +174,10 @@ export function MainNav({
                   Team
                 </Link>
               </DropdownMenuItem>
-              <DropdownMenuLabel className="bg-gray-600 font-saira text-xl">Blog</DropdownMenuLabel>
+              <DropdownMenuLabel className={clsx("font-saira text-xl",{
+                "bg-gray-200":(mode=="light"),
+                "bg-gray-400":(mode=="dark"),
+              })}>Blog</DropdownMenuLabel>
               {/* <DropdownMenuSeparator /> */}
               <DropdownMenuItem>
                 <Link
@@ -145,7 +196,10 @@ export function MainNav({
                   Blog
                 </Link>
               </DropdownMenuItem>
-              <DropdownMenuLabel className="bg-gray-600 font-saira text-xl">Events</DropdownMenuLabel>
+              <DropdownMenuLabel  className={clsx("font-saira text-xl",{
+                "bg-gray-200":(mode=="light"),
+                "bg-gray-400":(mode=="dark"),
+              })}>Events</DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuItem>
                 <Link
@@ -163,7 +217,10 @@ export function MainNav({
                   Event Compose
                 </Link>
               </DropdownMenuItem>
-              <DropdownMenuLabel className="bg-gray-600 font-saira text-xl">Podcast</DropdownMenuLabel>
+              <DropdownMenuLabel  className={clsx("font-saira text-xl",{
+                "bg-gray-200":(mode=="light"),
+                "bg-gray-400":(mode=="dark"),
+              })}>Podcast</DropdownMenuLabel>
               <DropdownMenuSeparator />
               
               <DropdownMenuItem>
@@ -177,7 +234,7 @@ export function MainNav({
               </DropdownMenuItem>
               <DropdownMenuItem>
                 <Link
-                  to="/podcast"
+                  to="/podcastCompose"
                   className="text-lg font-saira text-muted-foreground transition-colors hover:text-primary"
                 >
                   Podcast Compose

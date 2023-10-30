@@ -7,6 +7,8 @@ import { ToastContainer, toast } from "react-toastify";
 import { Loader2 } from "lucide-react";
 import "react-toastify/ReactToastify.css"
 import axiosClient from "@/apis/axios";
+import clsx from "clsx";
+import useModeStore from "@/store/mode";
 interface EventFormProps {}
 interface EventFormData {
   title: string;
@@ -94,11 +96,15 @@ const EventForm: React.FC<EventFormProps> = () => {
     // console.log(response);
     postEvent(formData)
   };
+  const {mode}=useModeStore();
   return (
     <>
-    <div className="bg-black">
-    <MainNav />
-    </div>
+       <div className={clsx({
+            "bg-white":(mode==="light"),
+             "bg-black":(mode==="dark"),
+        })}>
+        <MainNav />
+      </div>
     <div className="py-4 px-4 w-full min-h-screen h-auto bg-black">
       <ToastContainer toastClassName={() => 
         " relative flex p-1 min-h-10 rounded-md justify-between overflow-hidden cursor-pointer bg-white text-gray-800 text-sm p-4 m-4"
