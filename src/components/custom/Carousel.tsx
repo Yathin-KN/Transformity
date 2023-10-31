@@ -104,12 +104,13 @@ const Carousel = ({ slides }: { slides: any }) => {
           }}
         >
           <motion.div
-            className="w-full h-full bg-gray-900 absolute inset-0 brightness-125"
+            className="w-full h-full bg-gray-900 absolute inset-0 brightness-125 object-cover object-center"
             initial={{ opacity: 0 }}
             animate={{ opacity: index === currentSlide ? 1 : 0 }}
             transition={{ duration: 1 }} // Adjust duration as needed
             style={{
               backgroundImage: `url(${slide.image})`,
+
               clipPath: `polygon(0 0, 100% 0, 100% 80%, 0% 100%)`,
             }}
          

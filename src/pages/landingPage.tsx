@@ -7,6 +7,8 @@ import Footer from "@/components/custom/footer";
 import Gallery from "@/components/ReactSlick/landingSlides";
 import Img from "./../assets/favicon.png";
 import useModeStore from "@/store/mode";
+import Img2 from"@/assets/work4.jpg";
+
 import clsx from "clsx";
 const bandData = [
   {
@@ -84,12 +86,12 @@ const bandData = [
 const slides = [
   {
     image:
-      "https://technicaeditorial.com/wordpress/wp-content/uploads/2021/02/iStock-1245226116-small-600x600.jpg",
+      Img2,
     text: "Slide 1 Text",
   },
   {
     image:
-      "https://humanity-summit.com/assets/images/post-photos-square-humanity-summit-ai06.jpeg",
+      Img2,
     text: "Slide 2 Text",
   },
 ];
