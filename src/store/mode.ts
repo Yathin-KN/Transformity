@@ -1,4 +1,4 @@
-import {create} from 'zustand';
+import { create } from 'zustand';
 
 interface DisplayModeStore {
   mode: 'light' | 'dark';
@@ -6,12 +6,25 @@ interface DisplayModeStore {
   toggleMode: () => void;
 }
 
-const useModeStore = create<DisplayModeStore>()((set) => ({
-  mode: 'light',
+const useModeStore = create<DisplayModeStore>((set) => {
+  const storedMode = localStorage.getItem('mode');
 
-  setMode: (mode) => set({ mode }),
+  return {
+    mode: (storedMode as 'light' | 'dark') || 'dark',
 
-  toggleMode: () => set((state) => ({ mode: state.mode === 'dark' ? 'light' : 'dark' })),
-}));
+    setMode: (mode) => {
+      set({ mode });
+      localStorage.setItem('mode', mode);
+    },
+
+    toggleMode: () => {
+      set((state) => {
+        const newMode = state.mode === 'dark' ? 'light' : 'dark';
+        localStorage.setItem('mode', newMode);
+        return { mode: newMode };
+      });
+    },
+  };
+});
 
 export default useModeStore;
