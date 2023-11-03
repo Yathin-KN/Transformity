@@ -34,7 +34,7 @@ const OpacityParagraphs = ({
         transition={{ duration: 0.5, delay: i * 0.2, ease: "easeInOut" }}
       >
         <p
-          className="tracking-[0.5rem] md:tracking-[1rem] font-semibold uppercase text-sm md:text-3xl bg-red-500 px-2 py-1 text-center rounded-sm"
+          className="tracking-[0.5rem] md:tracking-[1rem] font-semibold uppercase text-sm md:text-2xl bg-red-500 px-2 py-1 text-center rounded-sm"
           style={{ opacity }}
         >
           {name}
@@ -55,10 +55,15 @@ const Team = () => {
   const {mode}=useModeStore();
   return (
     <div className={clsx({
-            "text-white":(mode==="dark"),
-             "text-black":(mode==="light"),
+            "bg-white":(mode==="light"),
+             "bg-black":(mode==="dark"),
         })}>
-      <MainNav className=""/>
+      <div className={clsx({
+      "bg-white":(mode=="light"),
+         "bg-black":(mode=="dark"),
+    })}>
+        <MainNav />
+      </div>
       <div className={clsx("w-full flex justify-center py-10   md:py-10 overflow-hidden  ",{
          "text-black":(mode=="light"),
          "text-white":(mode=="dark"),
@@ -78,18 +83,19 @@ const Team = () => {
               animate={{ opacity: 1, y: 0, spacing: 2 }}
               transition={{ duration: 0.5, delay: 0.5 }}
             >
+             
               LEADING TEAM
             </motion.p>
           </motion.p>
         </div>
 
-      <div className={clsx("w-full h-auto px-6 md:px-8 grid md:grid-rows-2  ",{
+      <div className={clsx("w-full h-auto flex justify-center px-6 md:px-8  flex-col-reverse md:flex-row-reverse",{
          "bg-white":(mode=="light"),
          "bg-black":(mode=="dark"),
          "text-black":(mode=="light"),
          "text-white":(mode=="dark"),
       })}>
-        <div className="flex flex-col">
+        <div className="flex flex-col w-full md:max-w-[50%]">
         <div className="w-full  flex flex-col col-span-3 md:col-span-1 justify-center p-6">
       <motion.div
         className="relative flex justify-center items-center"
@@ -98,7 +104,7 @@ const Team = () => {
         transition={{ duration: 0.5 }}
       >
         <img
-          className="md:mb-0 col-span-1 object-cover mx-auto w-[80%] md:w-[30%] aspect-square relative z-20 py-1"
+          className="md:mb-0 col-span-1 object-cover mx-auto w-[80%] md:w-[230px] m-8 rounded-full  aspect-square relative z-20 "
           src="https://i0.wp.com/transformity.info/wp-content/uploads/2021/04/asanka-2018-scaled.jpg?w=1200&ssl=1"
           alt="Asanka Abeysinghe"
         />
@@ -153,15 +159,15 @@ const Team = () => {
             </div>
           </div>
         </div>
-        <div className="flex flex-col">
+        <div className="flex flex-col w-full md:max-w-[50%] ">
           <div className="w-full  flex flex-col col-span-3 md:col-span-1 justify-center p-6">
             <div className="relative flex justify-center items-center">
               <img
-                className="md:mb-0 col-span-1 object-cover mx-auto w-[80%] md:w-[30%] aspect-square relative z-20 py-1"
+                className="md:mb-0 col-span-1 object-cover rounded-full mx-auto w-[80%] md:w-[230px] aspect-square relative z-20 m-8"
                 src="https://i0.wp.com/transformity.info/wp-content/uploads/2021/04/Gautham.jpg?w=1200&ssl=1"
                 alt="Dr. Gautham Pallapa"
               />
-              <OpacityParagraphs numParagraphs={5} name={"Gautham___Pallapa"} />
+              <OpacityParagraphs numParagraphs={5} name={"Gautham Pallapa"} />
             </div>
           </div>
           <div className="col-span-2 py-3">
@@ -194,16 +200,16 @@ const Team = () => {
                 Gautham has an upcoming book called “Lead with Empathy” which
                 explores these topics in detail.
               </p>
-              <div className="w-full flex justify-around">
-                <Button variant="outline_custom_team" className="flex gap-3">
-                  <Linkedin size={18} />
-                  Linkedln
-                </Button>
-                <Button variant="outline_custom_team" className="flex gap-3">
-                  <FaXTwitter />
-                  Twitter
-                </Button>
-              </div>
+              <div className="w-full flex justify-around text-white">
+              <Button variant="outline_custom_team" className="flex gap-3">
+                <Linkedin size={18} />
+                Linkedln
+              </Button>
+              <Button variant="outline_custom_team" className="flex gap-3">
+                <FaXTwitter />
+                Twitter
+              </Button>
+            </div>
             </div>
           </div>
         </div>

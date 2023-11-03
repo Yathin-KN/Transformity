@@ -116,7 +116,7 @@ const Modal = ({ value }: { value: boolean }) => {
             whileFocus={{ scale: 1.3 }}
             tabIndex={0}
           >
-            <motion.img src={Img} alt="Your Image" className="mt-6" />
+            <motion.img src={Img} alt="Your Image" className="mt-6 md:bg-white rounded-full p-8" />
           </motion.div>
         </div>
         <div className="col-span-1 w-full h-full bg-transparent flex flex-col gap-10 px-10 justify-between">

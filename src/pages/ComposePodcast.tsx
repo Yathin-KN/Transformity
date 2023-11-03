@@ -26,20 +26,7 @@ const PodcastSchema = Yup.object().shape({
 const PodcastForm: React.FC = () => {
     const user_info = useUserStore(state=>state.getUserInfo)
     const {user_id} = user_info();
-  //   const [podcasts, setPodcasts] = useState<FormValues[]>([]);
-
-  //   useEffect(() => {
-  //     const getAllPodcasts = async () => {
-  //       try {
-  //         const response = await axiosClient.get<FormValues[]>('/path/to/getAllPodcasts'); // Adjust the path
-  //         setPodcasts(response.data);
-  //       } catch (error) {
-  //         console.error('Error fetching podcasts:', error);
-  //       }
-  //     };
-
-  //     getAllPodcasts();
-  //   }, []);
+  
 
   const handleSubmit = async (values: FormValues) => {
     try {

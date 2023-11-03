@@ -23,7 +23,7 @@ const PublishDialog = ({
           <Input
             className="rounded-none border border-gray-600 text-md focus:border-none"
             type="postTtitle"
-            required
+            required={true}
             value={details.postTitle}
             onChange={(e) => handler("postTitle", e.target.value)}
           ></Input>

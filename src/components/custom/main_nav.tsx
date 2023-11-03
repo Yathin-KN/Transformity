@@ -77,7 +77,7 @@ export function MainNav({
             "bg-white":(mode=="light"),
             "bg-black":(mode=="dark"),
           })}>
-              <Link to="/blog/write" className="hover:underline text-md font-saira z-50">
+              <Link to="/blog/write" className="hover:underline text-md font-saira z-50 whitespace-nowrap">
                 compose blog
               </Link>
             </div>
@@ -93,6 +93,15 @@ export function MainNav({
         >
           Team
         </Link>
+        <Link
+          to="/contact"
+          className={clsx("text-xl font-saira uppercase font-medium transition-colors hover:text-primary ",{
+            "text-black":(mode=="light"),
+            "text-white":(mode=="dark"),
+          })}
+        >
+          Contact us
+        </Link>
         <div className="group relative">
           <Link
             to="/events"
@@ -106,7 +115,7 @@ export function MainNav({
             "bg-white":(mode=="light"),
             "bg-black":(mode=="dark"),
           })}>
-              <Link to="/eventCompose" className="hover:underline text-md font-saira z-50">
+              <Link to="/eventCompose" className="hover:underline text-md font-saira z-50 whitespace-nowrap">
                 compose event
               </Link>
             </div>
@@ -123,7 +132,7 @@ export function MainNav({
           Podcast
           <div className={clsx("absolute hidden group-hover:block h-auto bg-black px-2 border rounded-md",{ "bg-white":(mode=="light"),
               "bg-black":(mode=="dark"),})}>
-              <Link to="/podcastCompose" className="hover:underline text-md font-saira z-50">
+              <Link to="/podcastCompose" className="hover:underline text-md font-saira z-50 whitespace-nowrap">
                 compose podcast
               </Link>
             </div>

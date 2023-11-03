@@ -16,6 +16,7 @@ import SignIn from './pages/signIn.tsx';
 import Team from './pages/Team.tsx';
 import Event from "./pages/Event.tsx"
 import Podcast from './pages/podcast.tsx';
+import Contact_us from './pages/Contact_us.tsx';
 // import EventForm from './pages/EventForm.tsx';
 // import EventForm from './pages/CreateEvent.tsx';
 
@@ -61,6 +62,9 @@ const router = createBrowserRouter([
   },{
     path:"/podcastCompose",
     element:<VerifyWrite type={'podcast'}/>
+  },{
+    path:"/contact",
+    element:<Contact_us/>
   }
 ]);
 

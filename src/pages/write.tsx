@@ -215,11 +215,11 @@ const Write = () => {
                     ) : null}{" "}
                     Publish
                   </Button>
-                  <div className="flex flex-col">
+                  <div className="flex flex-col flex-wrap">
                     {selectedCategories ? (
                       <p className="text-md font-saira text-white uppercase">Selected Categories :</p>
                     ):(<div className="text-md font-saira text-white uppercase">No Categories selected</div>)}
-                    <div className="flex gap-2">
+                    <div className="flex gap-2 flex-wrap">
                       {selectedCategories &&
                         selectedCategories.map((category) => {
                           return (
