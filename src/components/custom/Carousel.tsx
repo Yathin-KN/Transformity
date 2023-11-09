@@ -91,11 +91,12 @@ const Carousel = ({ slides }: { slides: any }) => {
   }, [slides.length]);
 
   return (
-    <div className="carousel w-full h-[80vh]">
+    <div className="carousel-container w-full h-[80vh]">
+      <div className="w-full h-full">
       {slides.map((slide: { image: any; }, index: number) => (
         <div
           key={index}
-          className={clsx("h-full w-full relative",{
+          className={clsx("h-full w-full relative overflow-x-auto",{
             "bg-white":(mode=='light'),
             "bg-black":(mode=='dark'),
           })}
@@ -107,7 +108,7 @@ const Carousel = ({ slides }: { slides: any }) => {
             className="w-full h-full bg-gray-900 absolute inset-0 brightness-125 object-center  object-fill"
             initial={{ opacity: 0 }}
             animate={{ opacity: index === currentSlide ? 1 : 0 }}
-            transition={{ duration: 1 }} // Adjust duration as needed
+            transition={{ duration: 1 }} 
             style={{
               backgroundImage: `url(${slide.image})`,
 
@@ -133,6 +134,7 @@ const Carousel = ({ slides }: { slides: any }) => {
           </motion.div>
         </div>
       ))}
+      </div>
     </div>
   );
 };

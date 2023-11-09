@@ -95,7 +95,7 @@ const Team = () => {
          "text-black":(mode=="light"),
          "text-white":(mode=="dark"),
       })}>
-        <div className="flex flex-col w-full md:max-w-[50%]">
+        <div className="flex flex-col w-full md:max-w-[50%]  relative">
         <div className="w-full  flex flex-col col-span-3 md:col-span-1 justify-center p-6">
       <motion.div
         className="relative flex justify-center items-center"
@@ -147,7 +147,7 @@ const Team = () => {
                 tech meetups in San Francisco Bay Area.
               </p>
             </div>
-            <div className="w-full flex justify-around">
+            <div className="w-full flex justify-around absolute bottom-0">
               <Button variant="outline_custom_team" className="flex gap-3">
                 <Linkedin size={18} />
                 Linkedln
@@ -159,7 +159,7 @@ const Team = () => {
             </div>
           </div>
         </div>
-        <div className="flex flex-col w-full md:max-w-[50%] ">
+        <div className="flex flex-col w-full md:max-w-[50%] relative">
           <div className="w-full  flex flex-col col-span-3 md:col-span-1 justify-center p-6">
             <div className="relative flex justify-center items-center">
               <img
@@ -200,7 +200,7 @@ const Team = () => {
                 Gautham has an upcoming book called “Lead with Empathy” which
                 explores these topics in detail.
               </p>
-              <div className="w-full flex justify-around text-white">
+              <div className="w-full flex justify-around text-white absolute bottom-0">
               <Button variant="outline_custom_team" className="flex gap-3">
                 <Linkedin size={18} />
                 Linkedln

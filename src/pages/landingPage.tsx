@@ -1,8 +1,8 @@
 import React from "react";
-import Carousel from "@/components/custom/Carousel";
+// import Carousel from "@/components/custom/Carousel";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
-import { Eye, Heart, Hourglass, Plus } from "lucide-react";
+import { Eye, Heart, Hourglass, Plus,} from "lucide-react";
 import Footer from "@/components/custom/footer";
 import Gallery from "@/components/ReactSlick/landingSlides";
 import Img from "./../assets/favicon.png";
@@ -10,6 +10,7 @@ import useModeStore from "@/store/mode";
 import Img2 from"@/assets/work4.jpg";
 
 import clsx from "clsx";
+import Carousel2 from "@/components/check/Carousl";
 const bandData = [
   {
     title: (
@@ -110,13 +111,13 @@ const Modal = ({ value }: { value: boolean }) => {
           }
         )}
       >
-        <div className="col-span-1 w-full h-full md:bg-indigo-500 md:rounded-lg  shadow-inner flex justify-center items-center">
+        <div className="col-span-1 w-[90vw]  mx-auto rounded-md md:w-full h-full bg-[#f07ac9] md:mx-0   md:rounded-lg  shadow-inner flex justify-center items-center">
           <motion.div
             whileHover={{ scale: 1.3 }}
             whileFocus={{ scale: 1.3 }}
             tabIndex={0}
           >
-            <motion.img src={Img} alt="Your Image" className="mt-6 md:bg-white rounded-full p-8" />
+            <motion.img src={Img} alt="Your Image" className="mt-6  md:p-8 brightness-125" />
           </motion.div>
         </div>
         <div className="col-span-1 w-full h-full bg-transparent flex flex-col gap-10 px-10 justify-between">
@@ -230,7 +231,7 @@ const Modal = ({ value }: { value: boolean }) => {
 const Band = () => {
   return (
     <div
-      className="w-full h-auto py-10 bg-orange-400 md:bg-orange-500 my-10 flex flex-col md:flex-row justify-around items-center relative"
+      className="w-full h-auto py-10 bg-[#ff3dbe] md:bg-[#ff3dbe] my-10 flex flex-col md:flex-row justify-around items-center relative"
       style={{
         clipPath: "ellipse(140% 100% at 50% 0%)",
       }}
@@ -271,7 +272,8 @@ const LandingPage: React.FC = () => {
           "bg-white": mode == "light",
         })}
       >
-        <Carousel slides={slides} />
+        {/* <Carousel slides={slides} /> */}
+        <Carousel2 slides={slides}/>
         <Modal value={true} />
         <Band />
         <Modal value={false} />
