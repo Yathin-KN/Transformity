@@ -111,7 +111,7 @@ const Modal = ({ value }: { value: boolean }) => {
           }
         )}
       >
-        <div className="col-span-1 w-[90vw]  mx-auto rounded-md md:w-full h-full bg-[#f07ac9] md:mx-0   md:rounded-lg  shadow-inner flex justify-center items-center">
+        <div className="col-span-1 w-[90vw]  mx-auto rounded-md md:w-full h-full bg-[#4c4cff] md:mx-0   md:rounded-lg  shadow-inner flex justify-center items-center">
           <motion.div
             whileHover={{ scale: 1.3 }}
             whileFocus={{ scale: 1.3 }}

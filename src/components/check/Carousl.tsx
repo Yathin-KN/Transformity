@@ -100,8 +100,10 @@ const Content2=()=>{
 const Carousel2 = ({ slides }:{slides:any}) => {
 const {mode}=useModeStore();
   return (
-  <div className="bg-transparent relative">
-      <div className="text-7xl  absolute inset-0 z-40 bg-black "  style={{
+  <div className="bg-transparent relative mb-5">
+      <div className={`text-7xl  absolute inset-0 z-40 ${
+               (mode==="light")?"bg-white" : "bg-black"
+            }`}  style={{
                clipPath: `polygon(100% 80%, 0% 100%, 100% 100%)`,
             }}>
             hello
