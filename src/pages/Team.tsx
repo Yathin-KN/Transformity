@@ -200,7 +200,7 @@ const Team = () => {
                 Gautham has an upcoming book called “Lead with Empathy” which
                 explores these topics in detail.
               </p>
-              <div className="w-full flex justify-around text-white absolute bottom-0">
+              <div className="w-full flex justify-around  absolute bottom-0">
               <Button variant="outline_custom_team" className="flex gap-3">
                 <Linkedin size={18} />
                 Linkedln
