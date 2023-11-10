@@ -4,7 +4,6 @@ import "slick-carousel/slick/slick-theme.css";
 import useModeStore from "@/store/mode";
 import { motion } from "framer-motion";
 const settings = {
-  dots: true,
   infinite: true,
   speed: 500,
   slidesToShow: 1,
@@ -100,7 +99,7 @@ const Content2=()=>{
 const Carousel2 = ({ slides }:{slides:any}) => {
 const {mode}=useModeStore();
   return (
-  <div className="bg-transparent relative mb-5">
+  <div className=" relative mb-5 overflow-hidden">
       <div className={`text-7xl  absolute inset-0 z-40 ${
                (mode==="light")?"bg-white" : "bg-black"
             }`}  style={{
@@ -110,7 +109,7 @@ const {mode}=useModeStore();
       </div>
       <Slider {...settings}>
       {slides.map((slide: { image: string | undefined; text: any; }, index: number) => (
-        <div key={index} className="w-full h-[80vh]">
+        <div key={index} className="w-full h-[80vh] overflow-hidden">
           <div
             className={`h-full w-full relative ${
                (mode==="light")?"bg-white" : "bg-black"

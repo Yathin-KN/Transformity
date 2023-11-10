@@ -111,7 +111,7 @@ const Modal = ({ value }: { value: boolean }) => {
           }
         )}
       >
-        <div className="col-span-1 w-[90vw]  mx-auto rounded-md md:w-full h-full bg-[#4c4cff] md:mx-0   md:rounded-lg  shadow-inner flex justify-center items-center">
+        <div className="col-span-1 w-[90vw]  mx-auto rounded-md md:w-full h-full bg-slate-50 md:mx-0   md:rounded-lg  shadow-inner flex justify-center items-center">
           <motion.div
             whileHover={{ scale: 1.3 }}
             whileFocus={{ scale: 1.3 }}
@@ -163,9 +163,7 @@ const Modal = ({ value }: { value: boolean }) => {
             <br />
             -Asanka Abeysinghe and <br /> Dr. Gautham Pallapa
           </p>
-          {/* <Button className="rounded-full py-1 px-6 border bg-red-600 border-white text-lg font-saira font-semibold uppercase hover:bg-white hover:text-red-500 hover-border-red-500 w-fit">
-            Buy now
-          </Button> */}
+    
         </div>
       </div>
     );
@@ -211,7 +209,7 @@ const Modal = ({ value }: { value: boolean }) => {
           Buy now
         </Button>
       </div>
-      <div className="col-span-1 w-full h-full md:bg-red-500 md:rounded-lg  shadow-inner flex justify-center items-center">
+      <div className="col-span-1 md:w-full h-full w-[90%] mx-auto rounded-md bg-slate-50 md:bg-slate-50 md:rounded-lg  shadow-inner flex justify-center items-center">
         <motion.div
           whileHover={{ scale: 1.3 }}
           whileFocus={{ scale: 1.3 }}
@@ -231,7 +229,7 @@ const Modal = ({ value }: { value: boolean }) => {
 const Band = () => {
   return (
     <div
-      className="w-full h-auto py-10 bg-[#ff3dbe] md:bg-[#ff3dbe] my-10 flex flex-col md:flex-row justify-around items-center relative"
+      className="w-full h-auto py-10 bg-orange-400 md:bg-orange-400 my-10 flex flex-col md:flex-row justify-around items-center relative"
       style={{
         clipPath: "ellipse(140% 100% at 50% 0%)",
       }}

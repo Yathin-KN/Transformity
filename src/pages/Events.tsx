@@ -34,11 +34,7 @@ const limitWords = (text: string, limit: number) => {
   return text;
 };
 
-// const EventCard=({imgUrl,title,eventId,user_id,eventLocation,description,startDate,endDate}:{
-//   imgUrl:string,title:string,eventId:string,user_id:string,eventLocation:string,description:string,startDate:string,endDate:string
-// })=>{
-  
-// }
+
 const Events = () => {
   const [events, setEvents] = useState<EventData[]>([]);
   const [keywords, setKeywords] = useState("");
@@ -150,7 +146,7 @@ const Events = () => {
               transition={{ duration: 0.5, delay: 0.5 }}
             >
              
-              BLOGS
+              EVENTS
             </motion.p>
           </motion.p>
         </div>
