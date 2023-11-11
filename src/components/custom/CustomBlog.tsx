@@ -12,6 +12,7 @@ import clsx from "clsx";
 // import BlogItem from "./blogItem";
 interface PostDetail {
   type: "Blog Info";
+  categories:string[],
   content: {
     date: string;
     time: string;
@@ -29,9 +30,9 @@ const BlogCustom = () => {
   const fetch = async () => {
     try {
       const resp = await getPostById(blogId || "");
-      console.log(resp);
       setPostDetails({
         type: "Blog Info",
+        categories:resp.postDetails.categories,
         content: {
           date: resp.postDate.substring(0,10),
           time: resp.postTime,
@@ -61,8 +62,6 @@ const BlogCustom = () => {
       })}>
       <MainNav />
       </div>
-      {console.log(blogId)}
-      {console.log("8888-",content)}
       <div className={clsx("w-full min-h-screen h-auto bg-black",{
         
         "bg-white":(mode=="light"),
@@ -72,7 +71,6 @@ const BlogCustom = () => {
       <div className="w-[94%] lg:w-[80%] mx-auto ">
         {content &&
           content.map((blogItem, index) => {
-            console.log("hehehehe")
             if (blogItem !== null)
               return (
                 <>
@@ -81,9 +79,19 @@ const BlogCustom = () => {
                     <BlogItemDisplay item={postDetails} key={index.toString()} />
                   )}
                   <BlogItemDisplay item={blogItem} key={index.toString()} />
+                  {
+                   ( index ===content.length-1) && (<div className="space-x-4 text-sm font-kanit px-3 flex flex-wrap">
+                    {
+                     postDetails?.categories.map((category)=>{
+                       return <span className="font-saira bg-gray-400 border px-3 py-1 rounded-full text-sm">{category}</span>
+                     })
+                    }
+                   </div>)
+                  }
                 </>
               );
-          })}
+          })
+          }
       </div>
       </div>
       <Footer/>

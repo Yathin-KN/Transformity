@@ -10,6 +10,13 @@ const Tab = ({ category }: { category: string }) => {
   );
 };
 
+
+function limitDescription(description: string, maxWords: number): string {
+  const words = description.split(' ');
+  const truncatedDescription = words.slice(0, maxWords).join(' ');
+  return truncatedDescription;
+}
+
 const BlogCard = ({
   title,
   description,
@@ -59,9 +66,6 @@ const BlogCard = ({
               <p className="font-saira text-xl font-semibold tracking-wide text-white">
                 {title}
               </p>
-              {/* <p className="text-sm font-saira tracking-wide flex items-center gap-2 hover:underline underline-offset-4">
-                Continue reading <MoveRightIcon size={18} />
-              </p> */}
             </Link>
             <div className="flex w-full  gap-1 flex-col flex-nowrap py-1">
               <p className="font-saira text-md   tracking-wide text-white flex items-center gap-2">
@@ -76,7 +80,7 @@ const BlogCard = ({
           </div>
         </div>
         <p className="font-saira tracking-normal text-white text-md">
-          {description}
+          {limitDescription(description,20)+' ...'}
         </p>
         <div className="flex flex-wrap space-x-2 my-2">
           {categories.map((category, index) => {

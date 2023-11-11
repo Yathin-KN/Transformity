@@ -62,6 +62,7 @@ export type BlogItem =
   | { type: 'Title'; content: string }
   | { type: 'Subtitle'; content: string }
   | { type: 'Description'; content: string }
+  | { type: 'Bullet'; content: string }
   | {
       // author: string; 
       type: 'Blog Info'; 

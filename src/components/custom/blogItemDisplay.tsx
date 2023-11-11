@@ -53,6 +53,23 @@ const BlogItem: React.FC<BlogItemProps> = ({ item }) => {
           </div>
         </>
       );
+    case "Bullet":
+      return (
+        <>
+          <div className="flex w-full">
+            <p
+              className={clsx("text-xl md:text-xl font-light w-full font-saira  border-transparent border-l-2 focus:outline-none resize-none focus:border-l-2 focus:border-gray-400 pl-2 h-auto py-4",{
+                "text-white":(mode==="dark"),
+                 "text-black":(mode==="light"),
+            })}
+              draggable={false}
+              style={{ whiteSpace: 'pre-wrap' }}
+            >
+              {item.content}
+            </p>
+          </div>
+        </>
+      );
     case "Blog Info":
       console.log("hello from blog")
       return (

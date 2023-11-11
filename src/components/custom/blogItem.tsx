@@ -51,6 +51,7 @@ const BlogItem: React.FC<BlogItemProps> = ({ item, handlers }) => {
               contentEditable={true}
               onBlur={(e) => handlers?.onChangeHandler(e)}
               dangerouslySetInnerHTML={{ __html: item.content }}
+              // {makeBold(item.content)}
               style={{ whiteSpace: 'pre-wrap' }}
             />
           </div>
@@ -149,6 +150,25 @@ const BlogItem: React.FC<BlogItemProps> = ({ item, handlers }) => {
             </p>
           </div>
         </div>
+      );
+    case "Bullet":
+     
+      return (
+        <>
+        <div className={`flex w-full text-white font-saira hover:bg-gray-800 py-4 ${(mode==="dark")?"hover:bg-gray-800":"hover:bg-gray-200"}  `}>
+          <p
+            className={clsx(`text-md w-full border-transparent list-disc  focus:outline-none resize-none focus:border-l-2 focus:border-gray-400 pl-2  h-auto font-saira text-xl tracking-wide border-l-[2px] border-l-white `,{
+              "text-white":(mode==="dark"),
+               "text-black":(mode==="light"),
+          })}
+            draggable={false}
+            contentEditable={true}
+            onBlur={(e) => handlers?.onChangeHandler(e)}
+            dangerouslySetInnerHTML={{ __html: item.content }}
+            style={{ whiteSpace: 'pre-wrap' }}
+          />
+        </div>
+      </>
       );
     default:
       return null;

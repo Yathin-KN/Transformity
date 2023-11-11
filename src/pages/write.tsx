@@ -21,6 +21,7 @@ import {
   AlignJustify,
   HeadingIcon,
   ImageIcon,
+  List,
   Loader2,
   PlaySquare,
   Type,
@@ -33,6 +34,7 @@ import getAllCategories from "@/apis/POST/getAllCategories";
 import { Category } from "@/lib/types";
 import useModeStore from "@/store/mode";
 import clsx from "clsx";
+import Bullet from "@/components/custom/bullet";
 
 const Write = () => {
   const [compoenent, setComponenet] = useState<any[]>([]);
@@ -108,7 +110,11 @@ const Write = () => {
       });
     } else if (name === "save") {
       console.log(blogItems);
-    } else {
+    } else if(name==="Bullet"){
+      setComponenet((prev: any) => {
+        return [...prev, <Bullet index={length}/>];
+      });
+    }else{
       setComponenet((prev: any) => prev.slice(0, -1));
       removeLastBlogItem();
     }
@@ -285,6 +291,7 @@ const Write = () => {
             >
               <Type size={28} strokeWidth={1} />
             </Button>
+           
             <Button
               onClick={() => handleClick("subtitle")}
               name="subtitle"
@@ -292,6 +299,14 @@ const Write = () => {
               variant="outline"
             >
               <HeadingIcon size={28} strokeWidth={1} />
+            </Button>
+            <Button
+              onClick={() => handleClick("Bullet")}
+              className="border-none shadow-none p-2"
+              name="Bullet"
+              variant="outline"
+            >
+              <List size={28} strokeWidth={1} />
             </Button>
             <Button
               onClick={() => handleClick("paragraph")}
@@ -318,14 +333,7 @@ const Write = () => {
             >
               <PlaySquare size={28} strokeWidth={1} />
             </Button>
-            {/* <Button
-              onClick={() => handleClick("save")}
-              className="border-none shadow-none p-2"
-              name="save"
-              variant="outline"
-            >
-              <Save size={28} strokeWidth={1} />
-            </Button> */}
+
             <Button
               onClick={() => handleClick("subtitl")}
               name="ttle"
